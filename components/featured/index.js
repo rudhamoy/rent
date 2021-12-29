@@ -2,7 +2,7 @@ import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import RoomCard from '../layout/room-card';
 import { useSelector } from 'react-redux';
 
-const index = () => {
+const Featured = () => {
     const { rooms, error } = useSelector(state => state.allRooms)
 
     return (
@@ -18,4 +18,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Featured

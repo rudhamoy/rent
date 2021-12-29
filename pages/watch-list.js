@@ -5,7 +5,7 @@ import { getWatchList } from '../redux/actions/watchListActions';
 import RoomCard from '../components/layout/room-card';
 import Modal from '../components/layout/modal';
 
-const watchListPage = () => {
+const WatchListPage = () => {
     const [clicked, setClicked] = useState(true)
     const [showModal, setShowModal] = useState(false);
     const [showRoom, setShowRoom] = useState(true)
@@ -42,4 +42,4 @@ const watchListPage = () => {
     )
 }
 
-export default watchListPage
+export default WatchListPage

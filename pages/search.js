@@ -75,7 +75,7 @@ const SearchPage = () => {
             </div>
             <div className="px-[12px] sm:px-32 flex flex-wrap justify-between">
                 {rooms && rooms.filter(room => room.pricePerMonth <= filteredPrice).filter(room => !filteredTenants ? room : filteredTenants === room.tenants).map(room => (
-                    <div className="my-3">
+                    <div key={room._id} className="my-3">
                         <RoomCard room={room} id={room._id} />
                     </div>
                 ))}
