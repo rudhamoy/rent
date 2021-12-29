@@ -31,7 +31,7 @@ const CreateRoom = () => {
         if (success) {
             router.push('/')
         }
-    }, [dispatch, success, error])
+    }, [dispatch, success, error, router])
 
     const submitHandler = (e) => {
         e.preventDefault();
