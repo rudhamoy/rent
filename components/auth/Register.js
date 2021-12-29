@@ -34,7 +34,7 @@ const Register = () => {
             toast.error(error)
             dispatch(clearErrors())
         }
-    }, [dispatch, success, error])
+    }, [dispatch, success, error, router])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -131,7 +131,7 @@ const Register = () => {
                                 src={avatarPreview}
                                 className='h-[60px]'
                                 alt='image'
-                                className="rounded-full"
+                            // className="rounded-full"
                             />
                         </figure>
                     </div>
