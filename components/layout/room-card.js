@@ -111,3 +111,5 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
 }
 
 export default RoomCard
+
+// Edited
