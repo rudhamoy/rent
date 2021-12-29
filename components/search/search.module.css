@@ -1,0 +1,21 @@
+.search_container {
+border-top-left-radius: 45px;
+border-top-right-radius: 45px;
+border-bottom-left-radius: 45px;
+border-bottom-right-radius: 45px;
+box-shadow: 0px 1px 7px 2px rgba(43,43,43,0.44);
+-webkit-box-shadow: 0px 1px 7px 2px rgba(43,43,43,0.44);
+-moz-box-shadow: 0px 1px 7px 2px rgba(43,43,43,0.44);
+}
+
+.search__filter {
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.search__filter::-webkit-scrollbar {
+  display: none;
+}
+
