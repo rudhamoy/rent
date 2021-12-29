@@ -77,10 +77,10 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
     // }
 
     return (
-        <div className="flex flex-col  gap-x-2 sm:flex-row bg-white w-[340px] sm:w-[520px] h-[240px] sm:h-[174px] p-1 shadow-md rounded-md">
+        <div className="flex flex-col gap-y-2 sm:gap-x-2 sm:flex-row bg-white w-[100%] sm:w-[520px] h-[240px] sm:h-[174px] p-1 shadow-md rounded-md">
             {/**left */}
-            <div className="w-[340px] sm:w-[260px] relative">
-                <img src={images[0].url} alt="" className="rounded-sm h-[130px] sm:h-[165px] w-[330px]" />
+            <div className="w-[100%] sm:w-[260px] relative">
+                <img src={images[0].url} alt="" className="rounded-sm h-[130px] sm:h-[165px] w-[100%]" />
                 {clicked === true && <BsFillBookmarkFill className="absolute top-1 left-1 text-lg cursor-pointer" />}
                 <BsBookmark className={`${pathname === "/owner/room" && 'hidden'} absolute top-1 left-1 text-lg cursor-pointer`} onClick={handleAddToWatchlist} />
             </div>
@@ -99,7 +99,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
                 <div className="flex justify-between absolute bottom-1 w-full">
                     <p className="flex items-center"><FaRupeeSign className="font-thin" />{pricePerMonth}/mo</p>
                     {pathname === '/' ? (
-                        <button className="p-1 px-2 text-[#eee] bg-[#512d6d] rounded-lg mr-3" onClick={() => router.push(`/room/${room._id}`)}>View Details</button>
+                        <button className="p-1 px-2 w-[45%] text-[#eee] bg-[#512d6d] rounded-lg mr-3" onClick={() => router.push(`/room/${room._id}`)}>View Details</button>
                     ) : (
 
                         <button className="p-1 px-3 text-[#eee] bg-[#512d6d] rounded-lg mr-3" onClick={showModalHandler}>Book Now</button>
