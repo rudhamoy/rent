@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 
-const Modal = ({ setShowModal, setShowRoom, room }) => {
+const Modal = ({ setShowModal, setShowRoom }) => {
 
     const router = useRouter()
+
+    const { isAuthenticated } = useSelector(state => state.loadedUser)
 
     const close = () => {
         setShowModal(false);
@@ -45,7 +48,12 @@ const Modal = ({ setShowModal, setShowRoom, room }) => {
             <div className="my-6 bg-gray-100 rounded-md p-2">
                 <h1>Click on Cofirm to Complete Your Bookings</h1>
             </div>
-            <button className="p-1 px-3 text-[#eee] bg-[#512d6d] rounded-md" onClick={newBooking}>Confirm</button>
+            {isAuthenticated === false ? (
+                <button className="p-1 px-2 text-[#eee] bg-[#512d6d] rounded-md">Please Login to Continue</button>
+            ) : (
+
+                <button className="p-1 px-3 text-[#eee] bg-[#512d6d] rounded-md" onClick={newBooking}>Confirm</button>
+            )}
         </div>
     )
 }

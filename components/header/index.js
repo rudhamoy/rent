@@ -108,7 +108,7 @@ const Header = () => {
 
                             </ul>
                             <ul className="border-t-[1px] py-1 flex flex-col gap-y-2">
-                                {user.role !== 'user' && (
+                                {user?.role !== 'user' && (
 
                                     <li>
                                         <Link href="/owner/room">

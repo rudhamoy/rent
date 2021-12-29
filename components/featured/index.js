@@ -6,7 +6,7 @@ const Featured = () => {
     const { rooms, error } = useSelector(state => state.allRooms)
 
     return (
-        <div className="px-6 sm:px-32 bg-gray-200 py-8">
+        <div className="px-[3%] sm:px-32 bg-gray-200 py-8">
             <h1 className="flex items-center gap-x-5 font-semibold">Featured home <span><HiOutlineArrowNarrowRight /></span></h1>
 
             <div className="flex justify-between flex-wrap gap-y-4 pt-5">
