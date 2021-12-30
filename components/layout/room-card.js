@@ -43,7 +43,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
             //     type: WATCHLIST_ADD_ROOM,
             //     payload: unique
             // })
-            toast.success("Added to watchlist")
+            toast.success("Added to Bookmarks")
         }
     }
 
