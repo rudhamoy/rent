@@ -102,7 +102,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
                         <button className="p-1 px-2 w-[45%] text-[#eee] bg-[#512d6d] rounded-lg mr-3" onClick={() => router.push(`/room/${room._id}`)}>View Details</button>
                     ) : (
 
-                        <button className="p-1 px-3 text-[#eee] bg-[#512d6d] rounded-lg mr-3" onClick={showModalHandler}>Book now</button>
+                        <button className="p-1 px-2 w-[45%] text-[#eee] bg-[#512d6d] rounded-lg mr-3" onClick={showModalHandler}>Book now</button>
                     )}
                 </div>
             </div>
