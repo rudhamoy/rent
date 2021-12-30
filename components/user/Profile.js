@@ -10,21 +10,21 @@ const Profile = () => {
             <h1 className="font-semibold">My Profile</h1>
             <div className="flex justify-center">
                 <div className="flex flex-col items-center w-full">
-                    <img src={user.avatar.url} alt={user.name} className="h-[120px] w-[120px] rounded-full" />
+                    <img src={user?.avatar.url} alt={user?.name} className="h-[120px] w-[120px] rounded-full" />
                     <div>
-                        <h1 className="text-3xl font-semibold text-center">{user.name}</h1>
+                        <h1 className="text-3xl font-semibold text-center">{user?.name}</h1>
                         <div className="flex justify-between gap-x-10 py-10">
                             <div className="flex flex-col items-center text-xl font-semibold">
                                 <div className="p-2 rounded-full text-gray-50 bg-[#512d6d]">
                                     <BsFillTelephoneFill />
                                 </div>
-                                <p>{user.mobile}</p>
+                                <p>{user?.mobile}</p>
                             </div>
                             <div className="flex flex-col items-center text-xl font-semibold">
                                 <div className="p-2 rounded-full text-gray-50 bg-[#512d6d]">
                                     <MdEmail />
                                 </div>
-                                <p>{user.email}</p>
+                                <p>{user?.email}</p>
                             </div>
                         </div>
                     </div>

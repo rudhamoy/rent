@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
     return (
         <div className="bg-[#eeeeee] h-full relative">
             <Header />
-            <ToastContainer position="bottom-right" />
+            <ToastContainer position="top-right" />
             <div className="">
                 {children}
             </div>
