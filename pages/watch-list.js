@@ -18,13 +18,12 @@ const WatchListPage = () => {
         dispatch(getWatchList())
     }, [dispatch])
 
-    console.log(rooms.length)
 
     return (
         <div className="pt-8">
             <h1 className="sm:text-center sm:text-2xl font-semibold py-5 px-[3%]">My Bookmark List</h1>
 
-            {rooms.length === 0 && (
+            {rooms?.length === 0 && (
                 <div className="my-10 px-[3%]">
                     <p className="p-2 rounded-md font-semibold bg-gray-100">Start adding or bookmark your favorite room</p>
                 </div>
