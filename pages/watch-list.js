@@ -18,25 +18,23 @@ const WatchListPage = () => {
         dispatch(getWatchList())
     }, [dispatch])
 
-
-    // const showModalHandler = () => {
-    //     setShowModal(true);
-    //     setShowRoom(false)
-    // }
-
+    console.log(rooms.length)
 
     return (
         <div className="pt-8">
             <h1 className="sm:text-center sm:text-2xl font-semibold py-5 px-[3%]">My Bookmark List</h1>
+
+            {rooms.length === 0 && (
+                <div className="my-10 px-[3%]">
+                    <p className="p-2 rounded-md font-semibold bg-gray-100">Start adding or bookmark your favorite room</p>
+                </div>
+            )}
             <div className="flex flex-col gap-y-5 justify-center items-center sm:my-10">
                 {showModal === true ? <Modal setShowModal={setShowModal} setShowRoom={setShowRoom} /> :
                     rooms && rooms.map(room => (
                         <RoomCard room={room} key={room._id} clicked={clicked} setShowModal={setShowModal} setShowRoom={setShowRoom} />
                     ))
                 }
-
-
-
             </div>
         </div>
     )
