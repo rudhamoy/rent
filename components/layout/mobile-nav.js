@@ -23,9 +23,9 @@ const MobileNav = () => {
                     <BsBookmarks onClick={() => router.push('/watch-list')} />
                     <span className={`${router.pathname === '/watch-list' && 'text-gray-200'} text-xs`}>Bookmarks</span>
                 </li>
-                <li className={`${router.pathname === '/bookings/me' && 'bg-[#512d6d] text-[#eeeeee] p-1 px-2 rounded-md shadow-md'} flex flex-col justify-center items-center`}>
-                    <BsPersonCircle onClick={() => router.push('/bookings/me')} />
-                    <span className={`${router.pathname === '/bookings/me' && 'text-gray-200'} text-xs`}>Profile</span>
+                <li className={`${router.pathname === '/me' && 'bg-[#512d6d] text-[#eeeeee] p-1 px-2 rounded-md shadow-md'} flex flex-col justify-center items-center`}>
+                    <BsPersonCircle onClick={() => router.push('/me')} />
+                    <span className={`${router.pathname === '/me' && 'text-gray-200'} text-xs`}>Profile</span>
                 </li>
             </ul>
         </footer>

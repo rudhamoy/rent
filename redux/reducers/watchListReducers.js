@@ -17,7 +17,6 @@ if (typeof window !== "undefined") {
 }
 
 
-console.log("initialState", initialState)
 
 
 export const watchListReducer = (state = initialState, action) => {

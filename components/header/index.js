@@ -21,7 +21,6 @@ const Header = () => {
 
     // Get user from state => redux
     const { user, loading } = useSelector(state => state.loadedUser);
-    console.log(user)
 
     useEffect(() => {
         //Header

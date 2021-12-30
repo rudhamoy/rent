@@ -1,7 +1,7 @@
 import React from 'react'
-import { getSession } from 'next-auth/client';
 
 import MyBookings from '../../components/booking/my-bookings';
+import { getSession } from 'next-auth/client';
 import { wrapper } from '../../redux/store'
 import { myBookings } from '../../redux/actions/bookingActions'
 
