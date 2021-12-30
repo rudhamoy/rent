@@ -41,3 +41,6 @@ const WatchListPage = () => {
 }
 
 export default WatchListPage
+
+//wathclist as bookmark
+
