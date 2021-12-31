@@ -29,7 +29,7 @@ const SearchPage = () => {
 
     return (
         <>
-            <div className="py-28 sm:px-32">
+            <div className="pt-28 pb-8 sm:px-32">
                 <SearchBar />
                 <div className={`${classes.search__filter} flex sm:justify-center mt-3`}>
                     <ul className="flex gap-x-5 font-semibold text-sm pl-[2%]">
@@ -73,7 +73,7 @@ const SearchPage = () => {
                     </ul>
                 </div>
             </div>
-            <div className="px-[12px] sm:px-32 flex flex-wrap justify-between">
+            <div className="px-[3%] sm:px-32 flex flex-col sm:flex-row flex-wrap justify-between">
                 {rooms && rooms.filter(room => room.pricePerMonth <= filteredPrice).filter(room => !filteredTenants ? room : filteredTenants === room.tenants).map(room => (
                     <div key={room._id} className="my-3">
                         <RoomCard room={room} id={room._id} />
