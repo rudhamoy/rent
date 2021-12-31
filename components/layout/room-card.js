@@ -77,15 +77,18 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
     // }
 
     return (
-        <div className="flex flex-col gap-y-2 sm:gap-x-2 sm:flex-row bg-white w-[100%] sm:w-[520px] h-[240px] sm:h-[174px] p-1 shadow-md rounded-md">
+        <div className="flex flex-col gap-y-2 sm:gap-x-2 sm:flex-row bg-white w-[100%] sm:w-[520px] h-[320px] sm:h-[174px] p-2 shadow-md rounded-md">
             {/**left */}
             <div className="w-[100%] sm:w-[260px] relative">
-                <img src={images[0].url} alt="" className="rounded-sm h-[130px] sm:h-[165px] w-[100%]" />
-                {clicked === true && <BsFillBookmarkFill className="absolute top-1 left-1 text-lg cursor-pointer" />}
-                <BsBookmark className={`${pathname === "/owner/room" && 'hidden'} absolute top-1 left-1 text-lg cursor-pointer`} onClick={handleAddToWatchlist} />
+                <img src={images[0].url} alt="" className="rounded-md h-[200px] sm:h-[165px] w-[100%]" />
+                <div className='absolute top-1 left-1 bg-[#00000066] p-2 rounded-full'>
+                    {clicked === true ? <BsFillBookmarkFill className=" text-gray-50  text-lg cursor-pointer" /> : (
+                        <BsBookmark className={`${pathname === "/owner/room" && 'hidden'} text-gray-50  text-lg cursor-pointer`} onClick={handleAddToWatchlist} />
+                    )}
+                </div>
             </div>
             {/**Right */}
-            <div className=" w-[340px] sm:w-[260px] h-full relative">
+            <div className=" w-[100%] sm:w-[260px] h-full relative">
                 {/** right__title & location */}
                 <div>
                     <p className="flex items-center gap-x-2 text-xs text-gray-500"> <span><ImLocation /></span> {address}</p>
@@ -96,13 +99,12 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
                     </h1>
                 </div>
                 {/** price and action button */}
-                <div className="flex justify-between absolute bottom-1 w-full">
+                <div className="flex justify-between items-center absolute bottom-1 w-full">
                     <p className="flex items-center"><FaRupeeSign className="font-thin" />{pricePerMonth}/mo</p>
-                    {pathname === '/' ? (
-                        <button className="p-1 px-2 w-[45%] text-[#eee] bg-[#512d6d] rounded-lg mr-3" onClick={() => router.push(`/room/${room._id}`)}>View Details</button>
+                    {pathname === '/' || pathname === '/search' ? (
+                        <button className="p-1 px-2 w-[40%] text-[#eee] bg-[#512d6d] rounded-lg" onClick={() => router.push(`/room/${room._id}`)}>View Details</button>
                     ) : (
-
-                        <button className="p-1 px-2 w-[45%] text-[#eee] bg-[#512d6d] rounded-lg mr-3" onClick={showModalHandler}>Book now</button>
+                        <button className="p-1 px-2 w-[40%] text-[#eee] bg-[#512d6d] rounded-lg " onClick={showModalHandler}>Book now</button>
                     )}
                 </div>
             </div>
