@@ -11,6 +11,10 @@ const bookingSchema = new mongoose.Schema({
         required: true,
         ref: "User"
     },
+    readyToMove: {
+        type: Boolean,
+        default: false
+    },
     // paymentInfo: {
     //     id: {
     //         type: String,

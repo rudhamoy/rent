@@ -18,13 +18,13 @@ const Profile = () => {
                                 <div className="p-2 rounded-full text-gray-50 bg-[#512d6d]">
                                     <BsFillTelephoneFill />
                                 </div>
-                                <p className="text-lg py-2 text-gray-600">{user?.mobile}</p>
+                                <p className="text-base py-2 text-gray-600">{user?.mobile}</p>
                             </div>
                             <div className="flex flex-col items-center text-xl font-semibold">
                                 <div className="p-2 rounded-full text-gray-50 bg-[#512d6d]">
                                     <MdEmail />
                                 </div>
-                                <p className="text-lg py-2 text-gray-600">{user?.email}</p>
+                                <p className="text-base py-2 text-gray-600">{user?.email}</p>
                             </div>
                         </div>
                     </div>

@@ -29,7 +29,7 @@ const MyBookings = () => {
                             </Link>
                             <p className="text-sm text-gray-600">Price/Month: {booking.room.pricePerMonth}</p>
                             <div className="mt-1 sm:mt-6">
-                                <p className="text-sm text-gray-600 py-1">Ready to Move: <span className="p-1 px-2 bg-blue-200 rounded-sm">Inreview</span></p>
+                                <p className="text-sm text-gray-600 py-1">Ready to Move: <span className="p-1 px-2 bg-blue-200 rounded-sm">{booking.readyToMove === true ? "Approved" : "Inreview"}</span></p>
                                 <button className="text-sm ">View details</button>
                             </div>
                         </div>

@@ -15,11 +15,14 @@ const roomSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: [true, 'Please enter a small description']
     },
     address: {
         type: String,
         required: [true, 'Please enter room address']
+    },
+    pincode: {
+        type: Number,
+        required: [true, 'Pincode cannot exceed 6 characters']
     },
     images: [
         {
@@ -37,7 +40,7 @@ const roomSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please enter room category'],
         enum: {
-            values: ["1R", "1RK", "1BHK", "2BHK", "3BHK"]
+            values: ["1R", "1RK", "1BHK", "2R", "2RK", "2BHK", "3BHK"]
         }
     },
     bathroomType: {
@@ -53,6 +56,43 @@ const roomSchema = new mongoose.Schema({
         enum: {
             values: ["All", "Students", "Family", "Girls", "Boys", "Bachelor",]
         }
+    },
+    electricBill: {
+        type: String,
+        required: true,
+        enum: {
+            values: ["Included", "Not included"]
+        },
+    },
+    floor: {
+        type: String,
+        enum: {
+            values: ['Ground Floor', '1st Floor', '2nd Floor', '3rd Floor', '4th Floor', '5th Floor']
+        },
+        default: 'Ground Floor'
+    },
+    balcony: {
+        type: Boolean,
+        default: false
+    },
+    petsFriendly: {
+        type: Boolean,
+        default: false
+    },
+    parking: {
+        type: Boolean,
+        default: false
+    },
+    waterSupply: {
+        type: Boolean,
+        default: false
+    },
+    furnish: {
+        type: String,
+        enum: {
+            values: ['Not Furnished', 'Semi-furnished', 'Furnished']
+        },
+        default: "Not Furnished"
     },
     user: {
         type: mongoose.Schema.ObjectId,

@@ -11,6 +11,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '../../redux/actions/userActions'
 import { signOut } from 'next-auth/client'
+import { myNotifications } from '../../redux/actions/notificationActions'
 
 const Header = () => {
     const [show, handleShow] = useState(false)
@@ -23,6 +24,7 @@ const Header = () => {
     const { user, loading } = useSelector(state => state.loadedUser);
 
     useEffect(() => {
+        dispatch(myNotifications())
         //Header
         if (!user) {
             dispatch(loadUser())
@@ -38,6 +40,8 @@ const Header = () => {
         return () => {
             window.removeEventListener("scroll", scroll)
         }
+
+
     }, [dispatch, user])
 
     //Logout function using next session
