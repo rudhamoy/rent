@@ -17,7 +17,7 @@ const MyRoom = () => {
         <div>
             <h1 className="font-semibold my-3">My room list</h1>
             <div className='flex flex-col sm:flex-row flex-wrap gap-y-3 sm:gap-x-4'>
-                {rooms.map(room => {
+                {rooms?.map(room => {
                     return <RoomCard room={room} key={room._id} />
                 })}
             </div>

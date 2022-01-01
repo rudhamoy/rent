@@ -81,9 +81,9 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
             {/**left */}
             <div className="w-[100%] sm:w-[260px] relative">
                 <img src={images[0].url} alt="" className="rounded-md h-[200px] sm:h-[165px] w-[100%]" />
-                <div className='absolute top-1 left-1 bg-[#00000066] p-2 rounded-full'>
+                <div className={`${pathname === "/me" || pathname === '/owner/room' ? 'hidden' : ""} absolute top-1 left-1 bg-[#00000066] p-2 rounded-full`}>
                     {clicked === true ? <BsFillBookmarkFill className=" text-gray-50  text-lg cursor-pointer" /> : (
-                        <BsBookmark className={`${pathname === "/owner/room" && 'hidden'} text-gray-50  text-lg cursor-pointer`} onClick={handleAddToWatchlist} />
+                        <BsBookmark className={` text-gray-50  text-lg cursor-pointer`} onClick={handleAddToWatchlist} />
                     )}
                 </div>
             </div>
@@ -101,7 +101,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
                 {/** price and action button */}
                 <div className="flex justify-between items-center absolute bottom-1 w-full">
                     <p className="flex items-center"><FaRupeeSign className="font-thin" />{pricePerMonth}/mo</p>
-                    {pathname === '/' || pathname === '/search' ? (
+                    {pathname === '/' || pathname === '/search' || pathname === '/me' ? (
                         <button className="p-1 px-2 w-[40%] text-[#eee] bg-[#512d6d] rounded-lg" onClick={() => router.push(`/room/${room._id}`)}>View Details</button>
                     ) : (
                         <button className="p-1 px-2 w-[40%] text-[#eee] bg-[#512d6d] rounded-lg " onClick={showModalHandler}>Book now</button>

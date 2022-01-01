@@ -4,6 +4,7 @@ import { getSession } from 'next-auth/client'
 import Account from '../../components/user/Account'
 import { wrapper } from '../../redux/store'
 import { myBookings } from '../../redux/actions/bookingActions'
+// import { getOwnerRooms } from '../../redux/actions/roomActions'
 
 
 const MyProfilePage = () => {
@@ -47,6 +48,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
     }
 
     await store.dispatch(myBookings(req.headers.cookie, req))
+    // await store.dispatch(getOwnerRooms(req))
 
     return {
         props: { session }

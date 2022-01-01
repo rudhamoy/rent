@@ -1,0 +1,11 @@
+
+.account__btn {
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.account__btn::-webkit-scrollbar {
+  display: none;
+}

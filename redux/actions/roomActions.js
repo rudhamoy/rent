@@ -101,7 +101,7 @@ export const getOwnerRooms = (req) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: OWNER_ROOMLIST_FAIL,
-            payload: error.response.data.message
+            payload: error.message
         })
     }
 }
