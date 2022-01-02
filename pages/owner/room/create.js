@@ -4,7 +4,7 @@ import { getSession } from 'next-auth/client'
 
 const CreateRoomPage = () => {
     return (
-        <div className="py-28 px-6 sm:px-32">
+        <div className="py-28 px-[3%] sm:px-32">
             <CreateRoom />
         </div>
     )
