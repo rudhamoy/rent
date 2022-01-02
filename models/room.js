@@ -22,7 +22,7 @@ const roomSchema = new mongoose.Schema({
     },
     pincode: {
         type: Number,
-        required: [true, 'Pincode cannot exceed 6 characters']
+        required: true
     },
     images: [
         {
@@ -58,16 +58,14 @@ const roomSchema = new mongoose.Schema({
         }
     },
     electricBill: {
-        type: String,
+        type: Boolean,
         required: true,
-        enum: {
-            values: ["Included", "Not included"]
-        },
+        default: false
     },
     floor: {
         type: String,
         enum: {
-            values: ['Ground Floor', '1st Floor', '2nd Floor', '3rd Floor', '4th Floor', '5th Floor']
+            values: ['Ground Floor', 'First Floor', 'Second Floor', 'Third Floor', 'Fouth Floor', 'Fifth Floor']
         },
         default: 'Ground Floor'
     },

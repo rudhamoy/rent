@@ -14,9 +14,19 @@ const CreateRoom = () => {
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState("")
     const [address, setAddress] = useState('')
+    const [pincode, setPincode] = useState()
     const [category, setCategory] = useState('1RK')
     const [bathroom, setBathroom] = useState('Shared')
     const [tenants, setTenants] = useState('All')
+    const [electricBill, setElectricBill] = useState(false);
+    const [floor, setFloor] = useState();
+    const [balcony, setBalcony] = useState(false)
+    const [petsFriendly, setPetsFriendly] = useState(false)
+    const [parking, setParking] = useState(false)
+    const [waterSupply, setWaterSupply] = useState(false);
+    const [furnish, setFurnish] = useState()
+
+    console.log(electricBill)
 
     const dispatch = useDispatch();
     const router = useRouter()
@@ -41,9 +51,17 @@ const CreateRoom = () => {
             pricePerMonth: price,
             description,
             address,
+            pincode,
             roomCategory: category,
             bathroomType: bathroom,
             tenants,
+            electricBill,
+            floor,
+            balcony,
+            petsFriendly,
+            parking,
+            waterSupply,
+            furnish,
             images
         }
 
@@ -74,22 +92,22 @@ const CreateRoom = () => {
 
     return (
         <div>
-            <h1>List your room</h1>
-            <div className="bg-gray-50 shadow-md mt-4 max-w-2xl mx-auto p-4 rounded-md">
+            <h1 className="font-semibold">List your room</h1>
+            <div className="sm:bg-gray-50 sm:shadow-md mt-4 max-w-2xl mx-auto p-4 rounded-md">
                 <form onSubmit={submitHandler}>
                     {/* image */}
                     <div>
-                        <label>Images</label>
-                        <div>
+                        <label htmlFor="customFile">Choose Images</label>
+                        <div className='p-2 bg-gray-50 rounded-xl'>
                             <input type="file"
                                 name="room_images"
                                 id="customFile"
                                 onChange={onChange}
                                 multiple
                             />
-                            <label htmlFor="customFile">Choose Images</label>
+
                         </div>
-                        <div className='grid grid-cols-3 sm:grid-cols-6' >
+                        <div className='grid grid-cols-4 sm:grid-cols-6 mb-2' >
                             {imagesPreview.map(img => (
 
                                 <img
@@ -107,14 +125,14 @@ const CreateRoom = () => {
 
                     {/* name */}
                     <div className="flex flex-col py-2">
-                        <label htmlFor="name_field">Name</label>
+                        <label htmlFor="name_field">Title</label>
                         <input
                             type="text"
                             id="name_field"
                             value={name}
                             onChange={e => setName(e.target.value)}
                             required
-                            className="p-2 bg-gray-300 rounded-sm"
+                            className="p-2 bg-gray-50 rounded-2xl"
                         />
                     </div>
 
@@ -127,7 +145,7 @@ const CreateRoom = () => {
                             value={price}
                             onChange={e => setPrice(e.target.value)}
                             required
-                            className="p-2 bg-gray-300 rounded-sm"
+                            className="p-2 bg-gray-50 rounded-xl"
                         />
                     </div>
 
@@ -140,7 +158,7 @@ const CreateRoom = () => {
                             value={description}
                             onChange={e => setDescription(e.target.value)}
                             required
-                            className="p-2 bg-gray-300 rounded-sm"
+                            className="p-2 bg-gray-50 rounded-xl"
                         ></textarea>
                     </div>
 
@@ -153,7 +171,18 @@ const CreateRoom = () => {
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                             required
-                            className="p-2 bg-gray-300 rounded-sm"
+                            className="p-2 bg-gray-50 rounded-xl"
+                        />
+                    </div>
+                    <div className="flex flex-col py-2">
+                        <label htmlFor="pincode">Pincode</label>
+                        <input
+                            type="number"
+                            id="pincode"
+                            value={pincode}
+                            onChange={(e) => setPincode(e.target.value)}
+                            required
+                            className="p-2 bg-gray-50 rounded-xl"
                         />
                     </div>
 
@@ -161,13 +190,28 @@ const CreateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="category_field">Room Type</label>
                         <select
-                            className="p-2 bg-gray-300 rounded-sm"
+                            className="p-2 bg-gray-50 rounded-xl"
                             id="room_type_field"
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
                         >
-                            {["1R", "1RK", "1BHK", "2BHK", "3BHK"].map(category => (
+                            {["1R", "1RK", "1BHK", "2R", "2RK", "2BHK", "3BHK"].map(category => (
                                 <option key={category} value={category}>{category}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Furnish */}
+                    <div className="flex flex-col py-2">
+                        <label htmlFor="furnish">Furnish</label>
+                        <select
+                            className="p-2 bg-gray-50 rounded-xl"
+                            id="furnish"
+                            value={furnish}
+                            onChange={(e) => setFurnish(e.target.value)}
+                        >
+                            {['Not Furnished', 'Semi-furnished', 'Furnished'].map(furnish => (
+                                <option key={furnish} value={furnish}>{furnish}</option>
                             ))}
                         </select>
                     </div>
@@ -176,7 +220,7 @@ const CreateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="category_field">Bathroom Type</label>
                         <select
-                            className="p-2 bg-gray-300 rounded-sm"
+                            className="p-2 bg-gray-50 rounded-xl"
                             id="room_type_field"
                             value={bathroom}
                             onChange={(e) => setBathroom(e.target.value)}
@@ -191,7 +235,7 @@ const CreateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="category_field">Preffered Tenants</label>
                         <select
-                            className="p-2 bg-gray-300 rounded-sm"
+                            className="p-2 bg-gray-50 rounded-xl"
                             id="room_type_field"
                             value={tenants}
                             onChange={(e) => setTenants(e.target.value)}
@@ -201,10 +245,71 @@ const CreateRoom = () => {
                             ))}
                         </select>
                     </div>
-                    <button className="px-3 p-2 rounded-md bg-[#512d6d] text-[#eee]">SUBMIT</button>
+
+                    {/* Electric Bill */}
+                    <div className="flex flex-col py-2">
+                        <label htmlFor="electricbill">Electric Bill</label>
+                        <div className="flex gap-x-3">
+                            <button type="button" id="electricbill" value={true} onClick={e => setElectricBill(e.target.value)} className={`${electricBill === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-3 rounded-xl shadow-md border`} >Included</button>
+                            <button type="button" id="electricbill" value={false} onClick={e => setElectricBill(e.target.value)} className={`${electricBill === "false" || electricBill === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-3 rounded-xl shadow-md border`} >Not included</button>
+                        </div>
+                    </div>
+
+                    {/* Floor */}
+                    <div className="flex flex-col py-2">
+                        <label htmlFor="floor">Floor</label>
+                        <select
+                            className="p-2 bg-gray-50 rounded-xl"
+                            id="floor"
+                            value={floor}
+                            onChange={(e) => setFloor(e.target.value)}
+                        >
+                            {['Ground Floor', 'First Floor', 'Second Floor', 'Third Floor', 'Fouth Floor', 'Fifth Floor'].map(floor => (
+                                <option key={floor} value={floor}>{floor}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Balcony */}
+                    <div className="flex flex-col py-2">
+                        <label htmlFor="balcony">Balcony</label>
+                        <div className="flex gap-x-3">
+                            <button type="button" id="balcony" value={true} onClick={e => setBalcony(e.target.value)} className={`${balcony === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
+                            <button type="button" id="balcony" value={false} onClick={e => setBalcony(e.target.value)} className={`${balcony === "false" || balcony === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
+                        </div>
+                    </div>
+
+                    {/* Pets Fried */}
+                    <div className="flex flex-col py-2">
+                        <label htmlFor="petsFriendly">Pets Friendly</label>
+                        <div className="flex gap-x-3">
+                            <button type="button" id="petsFriendly" value={true} onClick={e => setPetsFriendly(e.target.value)} className={`${petsFriendly === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
+                            <button type="button" id="petsFriendly" value={false} onClick={e => setPetsFriendly(e.target.value)} className={`${petsFriendly === "false" || petsFriendly === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
+                        </div>
+                    </div>
+
+                    {/* parking */}
+                    <div className="flex flex-col py-2">
+                        <label htmlFor="parking">Parking</label>
+                        <div className="flex gap-x-3">
+                            <button type="button" id="parking" value={true} onClick={e => setParking(e.target.value)} className={`${parking === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
+                            <button type="button" id="parking" value={false} onClick={e => setParking(e.target.value)} className={`${parking === "false" || parking === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
+                        </div>
+                    </div>
+
+                    {/* Water Supply */}
+                    <div className="flex flex-col py-2">
+                        <label htmlFor="waterSupply">Water Supply</label>
+                        <div className="flex gap-x-3">
+                            <button type="button" id="waterSupply" value={true} onClick={e => setWaterSupply(e.target.value)} className={`${waterSupply === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
+                            <button type="button" id="waterSupply" value={false} onClick={e => setWaterSupply(e.target.value)} className={`${waterSupply === "false" || waterSupply === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" className="px-6 p-2 rounded-md bg-[#ddad0f] my-4 font-semibold text-[#eee]">CREATE ROOM</button>
                 </form>
             </div>
-        </div>
+        </div >
     )
 }
 
