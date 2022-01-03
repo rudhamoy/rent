@@ -8,16 +8,7 @@ import { addToWatchlist } from '../../redux/actions/watchListActions'
 import _ from 'lodash'
 import Footer from '../layout/footer'
 import { BsBookmark } from 'react-icons/bs'
-
-
-const FaciltyCard = ({ title, category }) => {
-    return (
-        <div className="bg-gray-50 p-2 rounded-md text-lg text-gray-600 shadow-md uppercase">
-            {title}<br />
-            <span className="text-xs ">{category}</span>
-        </div>
-    )
-}
+import RoomOverview from './room-overview';
 
 const RoomDetails = () => {
 
@@ -86,20 +77,19 @@ const RoomDetails = () => {
                 {/** Right room details */}
                 <div className=" w-[100%]">
                     {/* switch/toggle button for mobile */}
-                    <div className="flex gap-x-1 my-6 p-1 bg-[lightgrey] rounded-lg shadow-sm">
+                    <div className="flex gap-x-1 my-6 p-1 bg-[lightgrey] rounded-lg shadow-sm ">
                         <button onClick={showOverview} className={`p-2 px-3  w-[100%] rounded-lg font-semibold outline-none ${overview === true ? 'bg-gray-50' : 'text-gray-500'}`}>Overview</button>
                         <button onClick={showDetails} className={`p-2 px-3  w-[100%] rounded-lg font-semibold outline-none ${details === true ? 'bg-gray-50' : 'text-gray-500'}`}>Details</button>
                     </div>
-                    {/** facility and features */}
-                    <div className="mt-10">
-                        <h2 className="text-xl font-semibold font-serif">Facility & Features</h2>
-                        <div className="py-3 grid grid-cols-2 gap-4">
-                            <FaciltyCard title="1bhk" category="room type" />
-                            <FaciltyCard title="For all" category="Preferred Tenants" />
-                            <FaciltyCard title="Self Payment" category="Electricity" />
-                            <FaciltyCard title="1st Floor" category="Floor" />
-                        </div>
+                    {/** room contents*/}
+                    <div className="my-10">
+                        {overview === true ? (
+                            <RoomOverview room={room} />
+                        ) : (
+                            <h1>Details</h1>
+                        )}
                     </div>
+
                     {/** CTA */}
                     <div className="hidden sm:flex mt-8 gap-x-2 items-center ">
                         <div className="w-[50%]">
