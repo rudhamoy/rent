@@ -87,8 +87,8 @@ const RoomDetails = () => {
                 <div className=" w-[100%]">
                     {/* switch/toggle button for mobile */}
                     <div className="flex gap-x-1 my-6 p-1 bg-[lightgrey] rounded-lg shadow-sm">
-                        <button onClick={showOverview} className={`p-2 px-3  w-[100%] rounded-lg font-semibold ${overview === true ? 'bg-gray-50' : 'text-gray-500'}`}>Overview</button>
-                        <button onClick={showDetails} className={`p-2 px-3  w-[100%] rounded-lg font-semibold ${details === true ? 'bg-gray-50' : 'text-gray-500'}`}>Details</button>
+                        <button onClick={showOverview} className={`p-2 px-3  w-[100%] rounded-lg font-semibold outline-none ${overview === true ? 'bg-gray-50' : 'text-gray-500'}`}>Overview</button>
+                        <button onClick={showDetails} className={`p-2 px-3  w-[100%] rounded-lg font-semibold outline-none ${details === true ? 'bg-gray-50' : 'text-gray-500'}`}>Details</button>
                     </div>
                     {/** facility and features */}
                     <div className="mt-10">
