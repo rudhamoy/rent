@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
 import RoomImageContianer from './room-image'
 import { ImLocation } from 'react-icons/im';
@@ -20,10 +20,24 @@ const FaciltyCard = ({ title, category }) => {
 }
 
 const RoomDetails = () => {
+
+    const [overview, setOverview] = useState(true)
+    const [details, setDetails] = useState(false)
+
     const dispatch = useDispatch()
     const { room, error } = useSelector(state => state.roomDetails)
 
-    // const image = imageData[0]
+    // toggel between overview and details
+
+    const showOverview = () => {
+        setOverview(true)
+        setDetails(false)
+    }
+
+    const showDetails = () => {
+        setOverview(false)
+        setDetails(true)
+    }
 
     let watchList = []
 
@@ -51,9 +65,9 @@ const RoomDetails = () => {
     }
 
     return (
-        <div className=" sm:px-32 pt-28 sm:py-32 reltive">
-
-            <div className="px-[3%]">
+        <div className=" sm:px-32 pt-20 sm:py-32 reltive">
+            {/* for pc */}
+            <div className=" hidden">
                 <h1 className="text-2xl sm:text-3xl font-semibold uppercase">{room.name} </h1>
                 <p className="flex items-center gap-x-2 text-sm my-2 text-gray-500"> <span><ImLocation /></span> {room.address}</p>
             </div>
@@ -63,15 +77,18 @@ const RoomDetails = () => {
                 <div className="w-[100%]">
                     <RoomImageContianer image={room.images} />
                 </div>
+                {/* for mobile  -- title and location */}
+                <div className="px-[3%] my-2">
+                    <p className="flex items-center gap-x-2 text-base my-2 text-gray-500"> <span><ImLocation /></span> {room.address}</p>
+                    <h1 className="text-2xl sm:text-2xl font-semibold -mt-2 capitalize">{room.name} </h1>
+                </div>
 
                 {/** Right room details */}
                 <div className=" w-[100%]">
-                    {/** description */}
-                    <div>
-                        <h2 className="text-xl font-semibold font-serif">Description</h2>
-                        <div className="bg-gray-100 p-2 my-1 rounded-md">
-                            <p className="text-gray-600">A newly constructed rent house which has the nice environment and neighbours surrounded with shops and roads, easily accessible to your daily needs and travel.</p>
-                        </div>
+                    {/* switch/toggle button for mobile */}
+                    <div className="flex gap-x-1 my-6 p-1 bg-[lightgrey] rounded-lg shadow-sm">
+                        <button onClick={showOverview} className={`p-2 px-3  w-[100%] rounded-lg font-semibold ${overview === true ? 'bg-gray-50' : 'text-gray-500'}`}>Overview</button>
+                        <button onClick={showDetails} className={`p-2 px-3  w-[100%] rounded-lg font-semibold ${details === true ? 'bg-gray-50' : 'text-gray-500'}`}>Details</button>
                     </div>
                     {/** facility and features */}
                     <div className="mt-10">
