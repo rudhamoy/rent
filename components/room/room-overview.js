@@ -10,7 +10,7 @@ const FaciltyCard = ({ category, title, children }) => {
             <div className="p-2 text-2xl rounded-full bg-[lightgray] shadow-md">
                 {children}
             </div>
-            <p className="text-lg text-gray-500 "> {category}: <span className="text-gray-800 font-semibold">{title}</span> </p>
+            <p className=" text-gray-500 "> {category}: <span className="text-gray-800 font-semibold">{title}</span> </p>
         </div>
     )
 }
