@@ -9,8 +9,8 @@ const MobileNav = () => {
     const router = useRouter()
 
     return (
-        <footer className="sm:hidden bg-gray-100 border py-[6px] mx-1 rounded-md">
-            <ul className='flex justify-between items-center px-6 text-2xl'>
+        <footer className={`${router.pathname === '/room/[id]' ? 'hidden' : 'sm:hidden bg-gray-100 border py-[6px] mx-1 rounded-md'} `}>
+            <ul className='flex justify-between items-center px-6  text-2xl'>
                 <li className={`${router.pathname === '/' && 'bg-[#512d6d] text-[#eeeeee] p-1 px-2 rounded-lg shadow-md'} flex flex-col justify-center items-center`}>
                     <AiFillHome onClick={() => router.push('/')} />
                     <span className={`${router.pathname === '/' && 'text-gray-200'} text-xs`}>Home</span>

@@ -3,8 +3,12 @@ import Footer from './footer'
 import MobileNav from './mobile-nav'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import { useRouter } from 'next/router'
 
 const Layout = ({ children }) => {
+
+    const router = useRouter()
+
     return (
         <div className="bg-[#eeeeee] h-full relative">
             <Header />
@@ -12,8 +16,10 @@ const Layout = ({ children }) => {
             <div className="">
                 {children}
             </div>
-            <Footer />
-            <div className='sticky bottom-[2px]'>
+            <div className={`${router.pathname === '/room/[id]' && 'hidden'}`}>
+                <Footer />
+            </div>
+            <div className={`sticky bottom-[2px]`}>
                 <MobileNav />
             </div>
         </div>
