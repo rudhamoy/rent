@@ -103,7 +103,7 @@ const RoomDetails = () => {
             </div>
 
             {/* mobile detail page */}
-            <div className={`sticky bottom-0 mx-1 border rounded-2xl bg-gray-100 sm:hidden`}>
+            <div className={`sticky bottom-0 border  bg-gray-100 sm:hidden`}>
                 <div className="flex justify-between items-center py-2  px-[3%]">
                     <div className="w-[50%]">
                         <p className="text-gray-500 text-sm">Price</p>

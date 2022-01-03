@@ -13,19 +13,19 @@ const MobileNav = () => {
             <ul className='flex justify-between items-center px-6  text-2xl'>
                 <li className={`${router.pathname === '/' && 'bg-[#512d6d] text-[#eeeeee] p-1 px-2 rounded-lg shadow-md'} flex flex-col justify-center items-center`}>
                     <AiFillHome onClick={() => router.push('/')} />
-                    <span className={`${router.pathname === '/' && 'text-gray-200'} text-xs`}>Home</span>
+                    <span className={`${router.pathname === '/' ? 'text-gray-200' : 'text-gray-600'} text-xs`}>Home</span>
                 </li>
                 <li className={`${router.pathname === '/search' && 'bg-[#512d6d] text-[#eeeeee] p-1 px-2 rounded-md shadow-md'} flex flex-col justify-center items-center`}>
                     <MdExplore onClick={() => router.push('/search')} />
-                    <span className={`${router.pathname === '/search' && 'text-gray-200'} text-xs`}>Explore</span>
+                    <span className={`${router.pathname === '/search' ? 'text-gray-200' : 'text-gray-600'} text-xs`}>Explore</span>
                 </li>
                 <li className={`${router.pathname === '/watch-list' && 'bg-[#512d6d] text-[#eeeeee] p-1 px-2 rounded-md shadow-md'} flex flex-col justify-center items-center`}>
                     <BsBookmarks onClick={() => router.push('/watch-list')} />
-                    <span className={`${router.pathname === '/watch-list' && 'text-gray-200'} text-xs`}>Bookmarks</span>
+                    <span className={`${router.pathname === '/watch-list' ? 'text-gray-200' : "text-gray-600"} text-xs`}>Bookmarks</span>
                 </li>
                 <li className={`${router.pathname === '/me' && 'bg-[#512d6d] text-[#eeeeee] p-1 px-2 rounded-md shadow-md'} flex flex-col justify-center items-center`}>
                     <BsPersonCircle onClick={() => router.push('/me')} />
-                    <span className={`${router.pathname === '/me' && 'text-gray-200'} text-xs`}>Profile</span>
+                    <span className={`${router.pathname === '/me' ? 'text-gray-200' : 'text-gray-600'} text-xs`}>Profile</span>
                 </li>
             </ul>
         </footer>
