@@ -7,12 +7,9 @@ const RoomImageContianer = ({ image }) => {
     const [starting, setStarting] = useState(0)
     const [ending, setEnding] = useState(3)
 
-    console.log(featuredImage)
-
     // const { gallery } = image
     const imageLength = image.length
 
-    console.log(imageLength)
 
     const selectImageHandler = (i) => {
         setPreview(i)

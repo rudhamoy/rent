@@ -9,6 +9,7 @@ import _ from 'lodash'
 import Footer from '../layout/footer'
 import { BsBookmark } from 'react-icons/bs'
 import RoomOverview from './room-overview';
+import FullDetails from './room-fullDetails';
 
 const RoomDetails = () => {
 
@@ -86,7 +87,7 @@ const RoomDetails = () => {
                         {overview === true ? (
                             <RoomOverview room={room} />
                         ) : (
-                            <h1>Details</h1>
+                            <FullDetails room={room} />
                         )}
                     </div>
 
@@ -109,7 +110,7 @@ const RoomDetails = () => {
                 <Footer />
             </div>
 
-            {/* mobile detail page */}
+            {/* mobile CTA and price */}
             <div className={`sticky bottom-0 border  bg-gray-100 sm:hidden`}>
                 <div className="flex justify-between items-center py-2  px-[3%]">
                     <div className="w-[50%]">

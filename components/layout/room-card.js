@@ -11,8 +11,6 @@ import { addToWatchlist } from '../../redux/actions/watchListActions'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 
-import Modal from './modal'
-
 const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
     const dispatch = useDispatch();
 
