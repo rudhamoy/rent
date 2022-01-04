@@ -43,7 +43,7 @@ const WatchListPage = () => {
                     } */}
 
                     {showModal === true &&
-                        <div className="absolute top-0 bottom-0 left-0 right-0 bg-[#00000066] z-50 flex justify-center py-[40%] ">
+                        <div className="absolute top-0 bottom-0 left-0 right-0 bg-[#00000066] z-50 flex justify-center py-[10%] ">
                             <Modal setShowModal={setShowModal} setShowRoom={setShowRoom} />
                         </div>
                     }
