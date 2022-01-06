@@ -3,7 +3,7 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
 
-const upload = () => {
+const Upload = () => {
     const [images, setImages] = useState({})
 
     // const onChange = (e) => {
@@ -102,4 +102,4 @@ const upload = () => {
     )
 }
 
-export default upload
+export default Upload
