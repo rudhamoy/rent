@@ -15,6 +15,10 @@ const bookingSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    numTenants: {
+        type: Number,
+        required: [true, 'Please specify number of tenants']
+    },
     // paymentInfo: {
     //     id: {
     //         type: String,

@@ -49,7 +49,10 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
         setShowModal(true);
         setShowRoom(false)
         const addBooking = {
-            room: room._id
+            room: room._id,
+            name: room.name,
+            price: room.pricePerMonth,
+            address: room.address
         }
         localStorage.setItem("addBooking", JSON.stringify(addBooking))
     }
@@ -78,7 +81,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
         <div className="flex flex-col gap-y-2 sm:gap-x-2 sm:flex-row bg-white w-[100%] sm:w-[520px] h-[320px] sm:h-[174px] p-2 shadow-md rounded-md">
             {/**left */}
             <div className="w-[100%] sm:w-[260px] relative">
-                <img src={images[0].url} alt="" className="rounded-md h-[200px] sm:h-[165px] w-[100%]" />
+                <img src={images[0]} alt="" className="rounded-md h-[200px] sm:h-[165px] w-[100%]" />
                 <div className={`${pathname === "/me" || pathname === '/owner/room' ? 'hidden' : ""} absolute top-1 left-1 bg-[#00000066] p-2 rounded-full`}>
                     {clicked === true ? <BsFillBookmarkFill className=" text-gray-50  text-lg cursor-pointer" /> : (
                         <BsBookmark className={` text-gray-50  text-lg cursor-pointer`} onClick={handleAddToWatchlist} />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 import { toast } from 'react-toastify';
 import { newRoom } from '../../redux/actions/roomActions'
@@ -8,13 +9,13 @@ import { newRoom } from '../../redux/actions/roomActions'
 
 const CreateRoom = () => {
 
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState({});
     const [imagesPreview, setImagesPreview] = useState([])
     const [name, setName] = useState("")
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState("")
     const [address, setAddress] = useState('')
-    const [pincode, setPincode] = useState()
+    const [pincode, setPincode] = useState(0)
     const [category, setCategory] = useState('1RK')
     const [bathroom, setBathroom] = useState('Shared')
     const [tenants, setTenants] = useState('All')
@@ -25,13 +26,15 @@ const CreateRoom = () => {
     const [parking, setParking] = useState(false)
     const [waterSupply, setWaterSupply] = useState(false);
     const [furnish, setFurnish] = useState()
-
-    console.log(electricBill)
+    const [longitude, setLongitude] = useState(0)
+    const [latitude, setLatitude] = useState(0)
+    const [coordinate, setCoordinate] = useState(false)
 
     const dispatch = useDispatch();
     const router = useRouter()
 
     const { loading, success, error } = useSelector(state => state.newRoom);
+    const { user } = useSelector(state => state.loadedUser);
 
     useEffect(() => {
         if (error) {
@@ -43,8 +46,53 @@ const CreateRoom = () => {
         }
     }, [dispatch, success, error, router])
 
-    const submitHandler = (e) => {
+    //images change handler for firebase
+    const onMutate = (e) => {
+
+        //Files
+        if (e.target.files) {
+            setImages(e.target.files)
+        }
+    }
+
+    const submitHandler = async (e) => {
         e.preventDefault();
+
+        //Store images in firebase
+        const storeImage = async (image) => {
+            return new Promise((resolve, reject) => {
+                const storage = getStorage()
+                const fileName = `${Date.now()}-${image.name}`
+
+                const storageRef = ref(storage, 'images/' + fileName);
+
+                const uploadTask = uploadBytesResumable(storageRef, image)
+
+                uploadTask.on(
+                    'state_changed',
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                        console.log("Upload is " + progress + "% done")
+                    },
+                    (error) => {
+                        reject(error)
+                    },
+                    () => {
+                        getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+                            resolve(downloadURL)
+                        })
+                    }
+                )
+            })
+        }
+
+        const imageUrls = await Promise.all(
+            [...images].map((image) => storeImage(image))
+        ).catch(() => {
+            return
+        })
+
+        console.log(imageUrls)
 
         const roomData = {
             name,
@@ -62,7 +110,11 @@ const CreateRoom = () => {
             parking,
             waterSupply,
             furnish,
-            images
+            images: imageUrls,
+            coordinates: {
+                lat: latitude,
+                lng: longitude
+            }
         }
 
         if (images.length === 0 || images.length <= 3) return toast.error("Please uplaod images or minimum 4 images")
@@ -70,25 +122,36 @@ const CreateRoom = () => {
         dispatch(newRoom(roomData))
     }
 
-    const onChange = (e) => {
-        const files = Array.from(e.target.files);
+    let mapDisabled = false
 
-        setImages([])
-        setImagesPreview([]);
-
-        files.forEach(file => {
-            const reader = new FileReader();
-
-            reader.onload = () => {
-                if (reader.readyState === 2) {
-                    setImages(oldArray => [...oldArray, reader.result]);
-                    setImagesPreview(oldArray => [...oldArray, reader.result])
-                }
-            }
-
-            reader.readAsDataURL(file)
-        })
+    if (coordinate === "true") {
+        mapDisabled = true
     }
+
+    if (coordinate === 'false') {
+        mapDisabled = false
+    }
+    // images change handler
+
+    // const onChange = (e) => {
+    //     const files = Array.from(e.target.files);
+
+    //     setImages([])
+    //     setImagesPreview([]);
+
+    //     files.forEach(file => {
+    //         const reader = new FileReader();
+
+    //         reader.onload = () => {
+    //             if (reader.readyState === 2) {
+    //                 setImages(oldArray => [...oldArray, reader.result]);
+    //                 setImagesPreview(oldArray => [...oldArray, reader.result])
+    //             }
+    //         }
+
+    //         reader.readAsDataURL(file)
+    //     })
+    // }
 
     return (
         <div>
@@ -102,7 +165,7 @@ const CreateRoom = () => {
                             <input type="file"
                                 name="room_images"
                                 id="customFile"
-                                onChange={onChange}
+                                onChange={onMutate}
                                 multiple
                             />
 
@@ -157,7 +220,6 @@ const CreateRoom = () => {
                             rows="8"
                             value={description}
                             onChange={e => setDescription(e.target.value)}
-                            required
                             className="p-2 bg-gray-50 rounded-xl"
                         ></textarea>
                     </div>
@@ -174,6 +236,8 @@ const CreateRoom = () => {
                             className="p-2 bg-gray-50 rounded-xl"
                         />
                     </div>
+
+                    {/* pincode */}
                     <div className="flex flex-col py-2">
                         <label htmlFor="pincode">Pincode</label>
                         <input
@@ -183,6 +247,40 @@ const CreateRoom = () => {
                             onChange={(e) => setPincode(e.target.value)}
                             required
                             className="p-2 bg-gray-50 rounded-xl"
+                        />
+                    </div>
+
+                    {/* coordinates */}
+                    <div className="flex flex-col py-2">
+                        <label htmlFor="coordinate">Map ?</label>
+                        <div className="flex gap-x-3">
+                            <button type="button" id="coordinate" value={true} onClick={e => setCoordinate(e.target.value)} className={`${coordinate === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
+                            <button type="button" id="coordinate" value={false} onClick={e => setCoordinate(e.target.value)} className={`${coordinate === "false" || coordinate === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
+                        </div>
+                    </div>
+
+                    {/* co-ordinates - latitude */}
+                    <div className={`flex flex-col py-2 ${mapDisabled === false ? 'text-gray-400' : ''}`}>
+                        <label htmlFor="pincode">Latitude</label>
+                        <input
+                            type="number"
+                            id="latitude"
+                            disabled={!mapDisabled}
+                            value={latitude}
+                            onChange={(e) => setLatitude(e.target.value)}
+                            className={`p-2  rounded-xl ${mapDisabled === false ? 'bg-gray-200' : 'bg-gray-50'}`}
+                        />
+                    </div>
+                    {/* co-ordinates - longitude */}
+                    <div className={`flex flex-col py-2 ${mapDisabled === false ? 'text-gray-400' : ''}`}>
+                        <label htmlFor="pincode">Longitude</label>
+                        <input
+                            type="number"
+                            id="longitude"
+                            disabled={!mapDisabled}
+                            value={longitude}
+                            onChange={(e) => setLongitude(e.target.value)}
+                            className={`p-2  rounded-xl ${mapDisabled === false ? 'bg-gray-200' : 'bg-gray-50'}`}
                         />
                     </div>
 

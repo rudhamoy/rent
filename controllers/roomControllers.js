@@ -28,24 +28,23 @@ const allRooms = catchAsyncErrors(async (req, res) => {
 //create a new room ==> /api/rooms
 const newRoom = catchAsyncErrors(async (req, res) => {
 
-    const images = req.body.images;
+    // const images = req.body.images;
+    // let imageLinks = [];
 
-    let imageLinks = [];
+    // for (let i = 0; i < images.length; i++) {
 
-    for (let i = 0; i < images.length; i++) {
+    //     const result = await cloudinary.v2.uploader.upload(images[i], {
+    //         folder: "rentaloo/rooms"
+    //     });
 
-        const result = await cloudinary.v2.uploader.upload(images[i], {
-            folder: "rentaloo/rooms"
-        });
+    //     imageLinks.push({
+    //         public_id: result.public_id,
+    //         url: result.secure_url
+    //     })
+    // }
 
-        imageLinks.push({
-            public_id: result.public_id,
-            url: result.secure_url
-        })
-    }
-
-    req.body.images = imageLinks;
-    req.body.user = req.user._id
+    // req.body.images = imageLinks;
+    // req.body.user = req.user._id
 
     const room = await Room.create(req.body);
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { GoChevronRight, GoChevronLeft } from 'react-icons/go'
 
 const RoomImageContianer = ({ image }) => {
-    const featuredImage = image[0].url
+    const featuredImage = image[0]
     const [preview, setPreview] = useState(featuredImage);
     const [starting, setStarting] = useState(0)
     const [ending, setEnding] = useState(3)
@@ -40,7 +40,7 @@ const RoomImageContianer = ({ image }) => {
             {/** gallery images */}
             <div className="flex justify-between my-2 relative">
                 {image?.slice(starting, ending).map((i, index) => (
-                    <img key={index} onClick={() => selectImageHandler(i.url)} src={i.url} alt="" className="w-[30%] cursor-pointer rounded-md" />
+                    <img key={index} onClick={() => selectImageHandler(i)} src={i} alt="" className="w-[30%] cursor-pointer rounded-md" />
                 ))}
 
                 <div className="absolute flex justify-between items-center w-full text-xl top-[45%] ">

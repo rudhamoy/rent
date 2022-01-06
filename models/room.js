@@ -26,16 +26,23 @@ const roomSchema = new mongoose.Schema({
     },
     images: [
         {
-            public_id: {
-                type: String,
-                required: true
-            },
-            url: {
-                type: String,
-                required: true
-            }
+            type: String,
+            required: true
         }
-    ],
+    ]
+    ,
+    // images: [
+    //     {
+    //         public_id: {
+    //             type: String,
+    //             required: true
+    //         },
+    //         url: {
+    //             type: String,
+    //             required: true
+    //         }
+    //     }
+    // ],
     roomCategory: {
         type: String,
         required: [true, 'Please enter room category'],
@@ -91,6 +98,26 @@ const roomSchema = new mongoose.Schema({
             values: ['Not Furnished', 'Semi-furnished', 'Furnished']
         },
         default: "Not Furnished"
+    },
+    coordinates: {
+        lat: {
+            type: Number,
+            default: 0
+            // required: true
+        },
+        lng: {
+            type: Number,
+            // required: true
+            default: 0
+        }
+    },
+    featured: {
+        type: Boolean,
+        default: false
+    },
+    status: {
+        type: Boolean,
+        default: false
     },
     user: {
         type: mongoose.Schema.ObjectId,

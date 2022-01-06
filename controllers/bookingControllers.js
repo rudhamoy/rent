@@ -8,11 +8,13 @@ import catchAsyncErrors from '../middlewares/catchAsyncErrors'
 const newBooking = catchAsyncErrors(async (req, res) => {
 
     const {
-        room
+        room,
+        numTenants
     } = req.body
 
     const booking = await Booking.create({
         room,
+        numTenants,
         user: req.user._id,
     })
 

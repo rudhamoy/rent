@@ -18,7 +18,7 @@ const MyBookings = () => {
         <div className="py-6">
             <h1 className="font-semibold">My Bookings List</h1>
             <div className="my-6">
-                {bookings.map(booking => (
+                {bookings?.map(booking => (
                     <div key={booking._id} className="flex gap-x-4 bg-gray-50 shadow-sm p-2 rounded-sm mb-4 h-[148px] w-full sm:w-[380px]">
                         <div>
                             <img src={booking.room.images[0].url} alt="" className="h-[130px] rounded-sm" />
