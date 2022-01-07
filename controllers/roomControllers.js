@@ -44,7 +44,7 @@ const newRoom = catchAsyncErrors(async (req, res) => {
     // }
 
     // req.body.images = imageLinks;
-    // req.body.user = req.user._id
+    req.body.user = req.user._id
 
     const room = await Room.create(req.body);
 
