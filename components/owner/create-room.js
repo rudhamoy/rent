@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from '../../firebase.config'
 
 import { toast } from 'react-toastify';
 import { newRoom } from '../../redux/actions/roomActions'
@@ -62,7 +64,7 @@ const CreateRoom = () => {
         const storeImage = async (image) => {
             return new Promise((resolve, reject) => {
                 const storage = getStorage()
-                const fileName = `${Date.now()}-${image.name}`
+                const fileName = image.name
 
                 const storageRef = ref(storage, 'images/' + fileName);
 
@@ -93,6 +95,11 @@ const CreateRoom = () => {
         })
 
         console.log(imageUrls)
+
+        const formDataCopy = {
+            imageUrls
+        }
+        await addDoc(collection(db, "images"), formDataCopy)
 
         const roomData = {
             name,
