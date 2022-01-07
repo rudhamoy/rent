@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../../firebase.config'
+import { v4 as uuidv4 } from 'uuid'
 
 import { toast } from 'react-toastify';
 import { newRoom } from '../../redux/actions/roomActions'
@@ -55,6 +56,19 @@ const CreateRoom = () => {
         if (e.target.files) {
             setImages(e.target.files)
         }
+
+        const files = Array.from(e.target.files);
+        files.forEach(file => {
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                if (reader.readyState === 2) {
+                    setImagesPreview(oldArray => [...oldArray, reader.result])
+                }
+            }
+
+            reader.readAsDataURL(file)
+        })
     }
 
     const submitHandler = async (e) => {
@@ -64,7 +78,7 @@ const CreateRoom = () => {
         const storeImage = async (image) => {
             return new Promise((resolve, reject) => {
                 const storage = getStorage()
-                const fileName = image.name
+                const fileName = image.name + `-${user.name}` + `-${uuidv4()}`
 
                 const storageRef = ref(storage, 'images/' + fileName);
 
@@ -95,6 +109,7 @@ const CreateRoom = () => {
         })
 
         console.log(imageUrls)
+
 
         const formDataCopy = {
             imageUrls
@@ -128,7 +143,6 @@ const CreateRoom = () => {
 
         dispatch(newRoom(roomData))
     }
-
     let mapDisabled = false
 
     if (coordinate === "true") {

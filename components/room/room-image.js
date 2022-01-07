@@ -35,12 +35,12 @@ const RoomImageContianer = ({ image }) => {
         <div>
             {/** featured image */}
             <div className="w-[100%] rounded-md">
-                <img src={preview} alt="" className="w-full object-cover rounded-lg" />
+                <img src={preview} alt="" className="w-full h-[240px] object-cover rounded-lg" />
             </div>
             {/** gallery images */}
             <div className="flex justify-between my-2 relative">
                 {image?.slice(starting, ending).map((i, index) => (
-                    <img key={index} onClick={() => selectImageHandler(i)} src={i} alt="" className="w-[30%] cursor-pointer rounded-md" />
+                    <img key={index} onClick={() => selectImageHandler(i)} src={i} alt="" className="w-[31.8%] h-[80px] cursor-pointer rounded-md" />
                 ))}
 
                 <div className="absolute flex justify-between items-center w-full text-xl top-[45%] ">
