@@ -227,7 +227,7 @@ const UpdateRoom = () => {
                             value={name}
                             onChange={e => setName(e.target.value)}
                             required
-                            className="p-2 bg-gray-50 rounded-2xl"
+                            className="p-2 bg-gray-50 rounded-2xl outline-none"
                         />
                     </div>
 
@@ -240,7 +240,7 @@ const UpdateRoom = () => {
                             value={price}
                             onChange={e => setPrice(e.target.value)}
                             required
-                            className="p-2 bg-gray-50 rounded-xl"
+                            className="p-2 bg-gray-50 rounded-xl outline-none"
                         />
                     </div>
 
@@ -252,7 +252,7 @@ const UpdateRoom = () => {
                             rows="8"
                             value={description}
                             onChange={e => setDescription(e.target.value)}
-                            className="p-2 bg-gray-50 rounded-xl"
+                            className="p-2 bg-gray-50 rounded-xl outline-none"
                         ></textarea>
                     </div>
 
@@ -265,7 +265,7 @@ const UpdateRoom = () => {
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                             required
-                            className="p-2 bg-gray-50 rounded-xl"
+                            className="p-2 bg-gray-50 rounded-xl outline-none"
                         />
                     </div>
 
@@ -278,7 +278,7 @@ const UpdateRoom = () => {
                             value={pincode}
                             onChange={(e) => setPincode(e.target.value)}
                             required
-                            className="p-2 bg-gray-50 rounded-xl"
+                            className="p-2 bg-gray-50 rounded-xl outline-none"
                         />
                     </div>
 
@@ -286,8 +286,8 @@ const UpdateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="coordinate">Map ?</label>
                         <div className="flex gap-x-3">
-                            <button type="button" id="coordinate" value={true} onClick={e => setCoordinate(e.target.value)} className={`${coordinate === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
-                            <button type="button" id="coordinate" value={false} onClick={e => setCoordinate(e.target.value)} className={`${coordinate === "false" || coordinate === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
+                            <button type="button" id="coordinate" value={true} onClick={e => setCoordinate(e.target.value)} className={`${coordinate === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border outline-none`} >Yes</button>
+                            <button type="button" id="coordinate" value={false} onClick={e => setCoordinate(e.target.value)} className={`${coordinate === "false" || coordinate === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border outline-none`} >No</button>
                         </div>
                     </div>
 
@@ -300,7 +300,7 @@ const UpdateRoom = () => {
                             disabled={!mapDisabled}
                             value={latitude}
                             onChange={(e) => setLatitude(e.target.value)}
-                            className={`p-2  rounded-xl ${mapDisabled === false ? 'bg-gray-200' : 'bg-gray-50'}`}
+                            className={`p-2 outline-none rounded-xl ${mapDisabled === false ? 'bg-gray-200' : 'bg-gray-50'}`}
                         />
                     </div>
                     {/* co-ordinates - longitude */}
@@ -312,7 +312,7 @@ const UpdateRoom = () => {
                             disabled={!mapDisabled}
                             value={longitude}
                             onChange={(e) => setLongitude(e.target.value)}
-                            className={`p-2  rounded-xl ${mapDisabled === false ? 'bg-gray-200' : 'bg-gray-50'}`}
+                            className={`p-2 outline-none rounded-xl ${mapDisabled === false ? 'bg-gray-200' : 'bg-gray-50'}`}
                         />
                     </div>
 
@@ -320,7 +320,7 @@ const UpdateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="category_field">Room Type</label>
                         <select
-                            className="p-2 bg-gray-50 rounded-xl"
+                            className="p-2 bg-gray-50 rounded-xl outline-none"
                             id="room_type_field"
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
@@ -335,7 +335,7 @@ const UpdateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="furnish">Furnish</label>
                         <select
-                            className="p-2 bg-gray-50 rounded-xl"
+                            className="p-2 bg-gray-50 rounded-xl outline-none"
                             id="furnish"
                             value={furnish}
                             onChange={(e) => setFurnish(e.target.value)}
@@ -350,7 +350,7 @@ const UpdateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="category_field">Bathroom Type</label>
                         <select
-                            className="p-2 bg-gray-50 rounded-xl"
+                            className="p-2 bg-gray-50 rounded-xl outline-none"
                             id="room_type_field"
                             value={bathroom}
                             onChange={(e) => setBathroom(e.target.value)}
@@ -365,7 +365,7 @@ const UpdateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="category_field">Preffered Tenants</label>
                         <select
-                            className="p-2 bg-gray-50 rounded-xl"
+                            className="p-2 bg-gray-50 rounded-xl outline-none"
                             id="room_type_field"
                             value={tenants}
                             onChange={(e) => setTenants(e.target.value)}
@@ -380,8 +380,8 @@ const UpdateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="electricbill">Electric Bill</label>
                         <div className="flex gap-x-3">
-                            <button type="button" id="electricbill" value={true} onClick={e => setElectricBill(e.target.value)} className={`${electricBill === "true" || electricBill === true ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-3 rounded-xl shadow-md border`} >Included</button>
-                            <button type="button" id="electricbill" value={false} onClick={e => setElectricBill(e.target.value)} className={`${electricBill === "false" || electricBill === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-3 rounded-xl shadow-md border`} >Not included</button>
+                            <button type="button" id="electricbill" value={true} onClick={e => setElectricBill(e.target.value)} className={`${electricBill === "true" || electricBill === true ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-3 rounded-xl shadow-md border outline-none`} >Included</button>
+                            <button type="button" id="electricbill" value={false} onClick={e => setElectricBill(e.target.value)} className={`${electricBill === "false" || electricBill === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-3 rounded-xl shadow-md border outline-none`} >Not included</button>
                         </div>
                     </div>
 
@@ -389,7 +389,7 @@ const UpdateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="floor">Floor</label>
                         <select
-                            className="p-2 bg-gray-50 rounded-xl"
+                            className="p-2 bg-gray-50 rounded-xl outline-none"
                             id="floor"
                             value={floor}
                             onChange={(e) => setFloor(e.target.value)}
@@ -404,8 +404,8 @@ const UpdateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="balcony">Balcony</label>
                         <div className="flex gap-x-3">
-                            <button type="button" id="balcony" value={true} onClick={e => setBalcony(e.target.value)} className={`${balcony === "true" || balcony === true ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
-                            <button type="button" id="balcony" value={false} onClick={e => setBalcony(e.target.value)} className={`${balcony === "false" || balcony === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
+                            <button type="button" id="balcony" value={true} onClick={e => setBalcony(e.target.value)} className={`${balcony === "true" || balcony === true ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border outline-none`} >Yes</button>
+                            <button type="button" id="balcony" value={false} onClick={e => setBalcony(e.target.value)} className={`${balcony === "false" || balcony === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border outline-none`} >No</button>
                         </div>
                     </div>
 
@@ -413,8 +413,8 @@ const UpdateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="petsFriendly">Pets Friendly</label>
                         <div className="flex gap-x-3">
-                            <button type="button" id="petsFriendly" value={true} onClick={e => setPetsFriendly(e.target.value)} className={`${petsFriendly === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
-                            <button type="button" id="petsFriendly" value={false} onClick={e => setPetsFriendly(e.target.value)} className={`${petsFriendly === "false" || petsFriendly === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
+                            <button type="button" id="petsFriendly" value={true} onClick={e => setPetsFriendly(e.target.value)} className={`${petsFriendly === "true" || petsFriendly === true ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border outline-none`} >Yes</button>
+                            <button type="button" id="petsFriendly" value={false} onClick={e => setPetsFriendly(e.target.value)} className={`${petsFriendly === "false" || petsFriendly === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border outline-none`} >No</button>
                         </div>
                     </div>
 
@@ -422,8 +422,8 @@ const UpdateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="parking">Parking</label>
                         <div className="flex gap-x-3">
-                            <button type="button" id="parking" value={true} onClick={e => setParking(e.target.value)} className={`${parking === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
-                            <button type="button" id="parking" value={false} onClick={e => setParking(e.target.value)} className={`${parking === "false" || parking === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
+                            <button type="button" id="parking" value={true} onClick={e => setParking(e.target.value)} className={`${parking === "true" || parking === true ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border outline-none`} >Yes</button>
+                            <button type="button" id="parking" value={false} onClick={e => setParking(e.target.value)} className={`${parking === "false" || parking === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border outline-none`} >No</button>
                         </div>
                     </div>
 
@@ -431,12 +431,12 @@ const UpdateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="waterSupply">Water Supply</label>
                         <div className="flex gap-x-3">
-                            <button type="button" id="waterSupply" value={true} onClick={e => setWaterSupply(e.target.value)} className={`${waterSupply === "true" || waterSupply === true ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
-                            <button type="button" id="waterSupply" value={false} onClick={e => setWaterSupply(e.target.value)} className={`${waterSupply === "false" || waterSupply === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
+                            <button type="button" id="waterSupply" value={true} onClick={e => setWaterSupply(e.target.value)} className={`${waterSupply === "true" || waterSupply === true ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border outline-none`} >Yes</button>
+                            <button type="button" id="waterSupply" value={false} onClick={e => setWaterSupply(e.target.value)} className={`${waterSupply === "false" || waterSupply === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border outline-none`} >No</button>
                         </div>
                     </div>
 
-                    <button type="submit" className="px-6 p-2 rounded-md bg-[#ddad0f] my-4 font-semibold text-[#eee]">UPDATE ROOM</button>
+                    <button type="submit" className="px-6 p-2 rounded-md bg-[#ddad0f] my-4 font-semibold text-[#eee] outline-none">UPDATE ROOM</button>
                 </form>
             </div>
         </div >

@@ -28,19 +28,19 @@ const Account = () => {
         <div className="py-20">
             <h1 className="px-[3%] font-semibold">My Account</h1>
             <div className={`${classes.account__btn} flex gap-x-4 my-4 px-[3%]`}>
-                <button onClick={ProfileClickHandler} className={`${showProfile === true ? "bg-gray-800 text-gray-50 shadow-xl" : "bg-gray-50 text-gray-500"}  rounded-xl p-2 font-semibold px-5`}>
+                <button onClick={ProfileClickHandler} className={`${showProfile === true ? "bg-gray-800 text-gray-50 shadow-xl" : "bg-gray-50 text-gray-500"}  rounded-xl p-2 font-semibold px-5 outline-none`}>
                     Profile
                 </button>
                 {user?.role === "user" ? (
-                    <button onClick={BookingClickHandler} className={`${showBooking === true ? "bg-gray-800 text-gray-50 shadow-xl" : "bg-gray-50 text-gray-500"}  rounded-xl p-2 font-semibold px-5 flex gap-x-2`}>
+                    <button onClick={BookingClickHandler} className={`${showBooking === true ? "bg-gray-800 text-gray-50 shadow-xl" : "bg-gray-50 text-gray-500"}  rounded-xl p-2 font-semibold px-5 flex gap-x-2 outline-none`}>
                         <span>My</span> <span>Bookings</span>
                     </button>
                 ) : (
-                    <button onClick={BookingClickHandler} className={`${showBooking === true ? "bg-gray-800 text-gray-50 shadow-xl" : "bg-gray-50 text-gray-500"}  rounded-xl p-2 font-semibold px-5 flex gap-x-2`}>
+                    <button onClick={BookingClickHandler} className={`${showBooking === true ? "bg-gray-800 text-gray-50 shadow-xl" : "bg-gray-50 text-gray-500"}  rounded-xl p-2 font-semibold px-5 flex gap-x-2 outline-none`}>
                         <span>Room</span> <span>List</span>
                     </button>
                 )}
-                <button onClick={() => router.push('/owner/room/create')} className={`${user?.role === 'user' && 'hidden'} bg-gray-50 text-gray-500 rounded-xl p-2 font-semibold px-5 flex gap-x-2`}>
+                <button onClick={() => router.push('/owner/room/create')} className={`${user?.role === 'user' && 'hidden'} bg-gray-50 text-gray-500 rounded-xl p-2 font-semibold px-5 flex gap-x-2 outline-none`}>
                     <span>Create</span> <span>Room</span>
                 </button>
             </div>

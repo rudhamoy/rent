@@ -126,20 +126,20 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
                 </div>
                 {/** price and action button */}
                 <div className="flex justify-between items-center absolute bottom-1 w-full">
-                    <div className={`${pathname === '/watch-list' ? '' : 'p-2 px-3  text-[#eee] bg-[#512d6d] rounded-lg'}`}>
-                        <p className="flex items-center"><FaRupeeSign className="font-thin" />{pricePerMonth}/month</p>
-                    </div>
+                    {/* <div className={`${pathname === '/watch-list' ? '' : 'p-2 px-3  text-[#eee] bg-[#512d6d] rounded-lg'}`}> */}
+                    <p className="flex items-center"><FaRupeeSign className="font-thin" />{pricePerMonth}/month</p>
+                    {/* </div> */}
                     <div className="flex gap-x-3">
                         {pathname === '/me' && (
                             <>
-                                <button onClick={() => deleteHandler(room._id)} className="rounded-lg p-2 bg-gray-100"><MdDelete className="text-red-400 text-2xl" /></button>
-                                <button onClick={() => router.push(`/owner/room/${room._id}`)} className="rounded-lg p-2 bg-gray-100"><MdModeEdit className="text-2xl" /></button>
+                                <button onClick={() => deleteHandler(room._id)} className="rounded-lg p-2 bg-gray-100"><MdDelete className="text-red-400 text-2xl outline-none" /></button>
+                                <button onClick={() => router.push(`/owner/room/${room._id}`)} className="rounded-lg p-2 bg-gray-100 outline-none"><MdModeEdit className="text-2xl" /></button>
                             </>
                         )}
                         {pathname === '/' || pathname === '/search' || pathname === '/me' ? (
-                            <button className="p-2 text-[#eee] bg-[lightgrey] rounded-lg" onClick={() => router.push(`/room/${room._id}`)}><BsArrowRight className='text-2xl text-[#512d6d]' /></button>
+                            <button className="p-2 text-[#eee] bg-[lightgrey] rounded-lg outline-none" onClick={() => router.push(`/room/${room._id}`)}><BsArrowRight className='text-2xl text-[#512d6d]' /></button>
                         ) : (
-                            <button className="p-2 px-3 w-[100%] text-[#eee] bg-[#512d6d] rounded-lg " onClick={showModalHandler}>Book now</button>
+                            <button className="p-2 px-3 w-[100%] text-[#eee] bg-[#512d6d] rounded-lg outline-none" onClick={showModalHandler}>Book now</button>
                         )}
                     </div>
                 </div>

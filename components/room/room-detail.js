@@ -98,8 +98,8 @@ const RoomDetails = () => {
                         </div>
                         <div className='flex justify-between w-full'>
 
-                            <button onClick={handleAddToWatchlist} className="bg-[#512d6d] p-2 px-3 rounded-md text-gray-100 shadow-md">Bookmark</button>
-                            <button className="bg-[#512d6d] p-2 px-3 rounded-md text-gray-100 shadow-md">Book Now</button>
+                            <button onClick={handleAddToWatchlist} className="bg-[#512d6d] p-2 px-3 rounded-md text-gray-100 shadow-md outline-none">Bookmark</button>
+                            <button className="bg-[#512d6d] p-2 px-3 rounded-md text-gray-100 shadow-md outline-none">Book Now</button>
                         </div>
                     </div>
                 </div>
