@@ -1,24 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
 import { ImLocation } from 'react-icons/im'
 import { FaRupeeSign } from 'react-icons/fa'
-import { BsFillBookmarkFill, BsBookmark } from 'react-icons/bs'
+import { BsFillBookmarkFill, BsBookmark, BsArrowRight } from 'react-icons/bs'
 import _ from 'lodash'
 import { WATCHLIST_ADD_ROOM } from "../../redux/constants/watchListConstants"
+import { DELETE_ROOM_RESET } from "../../redux/constants/roomConstants"
 import { addToWatchlist } from '../../redux/actions/watchListActions'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { deleteRoom } from '../../redux/actions/roomActions'
+
+import { MdDelete, MdModeEdit } from 'react-icons/md'
 
 const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch();
+    const { error: deleteError, isDeleted } = useSelector(state => state.deleteRoom)
+
 
     const router = useRouter()
     const { pathname } = router
 
 
-    const { name, address, pricePerMonth, images } = room;
+    const { name, address, pricePerMonth, images, } = room;
 
     let watchList = []
 
@@ -57,6 +64,23 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
         localStorage.setItem("addBooking", JSON.stringify(addBooking))
     }
 
+    const deleteHandler = (id) => {
+        if (window.confirm("Are you sure ?")) {
+            dispatch(deleteRoom(id))
+        }
+    }
+
+    useEffect(() => {
+        if (deleteError) {
+            toast.error(deleteError);
+        }
+
+        if (isDeleted) {
+            router.push('/me')
+            dispatch({ type: DELETE_ROOM_RESET })
+        }
+    }, [dispatch, deleteError, isDeleted])
+
     // const newBooking = async () => {
     //     const bookingData = {
     //         room: room._id
@@ -76,6 +100,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
     //         console.log(error)
     //     }
     // }
+
 
     return (
         <div className="flex flex-col gap-y-2 sm:gap-x-2 sm:flex-row bg-white w-[100%] sm:w-[520px] h-[320px] sm:h-[174px] p-2 shadow-md rounded-md">
@@ -101,12 +126,22 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
                 </div>
                 {/** price and action button */}
                 <div className="flex justify-between items-center absolute bottom-1 w-full">
-                    <p className="flex items-center"><FaRupeeSign className="font-thin" />{pricePerMonth}/mo</p>
-                    {pathname === '/' || pathname === '/search' || pathname === '/me' ? (
-                        <button className="p-1 px-2 w-[40%] text-[#eee] bg-[#512d6d] rounded-lg" onClick={() => router.push(`/room/${room._id}`)}>View Details</button>
-                    ) : (
-                        <button className="p-1 px-2 w-[40%] text-[#eee] bg-[#512d6d] rounded-lg " onClick={showModalHandler}>Book now</button>
-                    )}
+                    <div className={`${pathname === '/watch-list' ? '' : 'p-2 px-3  text-[#eee] bg-[#512d6d] rounded-lg'}`}>
+                        <p className="flex items-center"><FaRupeeSign className="font-thin" />{pricePerMonth}/month</p>
+                    </div>
+                    <div className="flex gap-x-3">
+                        {pathname === '/me' && (
+                            <>
+                                <button onClick={() => deleteHandler(room._id)} className="rounded-lg p-2 bg-gray-100"><MdDelete className="text-red-400 text-2xl" /></button>
+                                <button onClick={() => router.push(`/owner/room/${room._id}`)} className="rounded-lg p-2 bg-gray-100"><MdModeEdit className="text-2xl" /></button>
+                            </>
+                        )}
+                        {pathname === '/' || pathname === '/search' || pathname === '/me' ? (
+                            <button className="p-2 text-[#eee] bg-[lightgrey] rounded-lg" onClick={() => router.push(`/room/${room._id}`)}><BsArrowRight className='text-2xl text-[#512d6d]' /></button>
+                        ) : (
+                            <button className="p-2 px-3 w-[100%] text-[#eee] bg-[#512d6d] rounded-lg " onClick={showModalHandler}>Book now</button>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

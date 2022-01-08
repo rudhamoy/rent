@@ -11,6 +11,14 @@ import {
     OWNER_ROOMLIST_REQUEST,
     OWNER_ROOMLIST_SUCCESS,
     OWNER_ROOMLIST_FAIL,
+    DELETE_ROOM_REQUEST,
+    DELETE_ROOM_SUCCESS,
+    DELETE_ROOM_RESET,
+    DELETE_ROOM_FAIL,
+    UPDATE_ROOM_FAIL,
+    UPDATE_ROOM_RESET,
+    UPDATE_ROOM_SUCCESS,
+    UPDATE_ROOM_REQUEST,
 
 } from '../constants/roomConstants'
 
@@ -88,10 +96,10 @@ export const newRoomReducer = (state = { room: {} }, action) => {
 //Get single owner room list
 export const myRoomlistReducer = (state = { rooms: [] }, action) => {
     switch (action.type) {
-        // case OWNER_ROOMLIST_REQUEST:
-        //     return {
-        //         loading: true
-        //     }
+        case OWNER_ROOMLIST_REQUEST:
+            return {
+                loading: true
+            }
         case OWNER_ROOMLIST_SUCCESS:
             return {
                 loading: false,
@@ -101,6 +109,73 @@ export const myRoomlistReducer = (state = { rooms: [] }, action) => {
             return {
                 error: action.payload
             }
+        default:
+            return state
+    }
+}
+
+//update room
+export const roomUpdateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case UPDATE_ROOM_REQUEST:
+            return {
+                loading: true
+            }
+
+        case UPDATE_ROOM_SUCCESS:
+            return {
+                loading: false,
+                isUpdated: action.payload
+            }
+
+        case UPDATE_ROOM_RESET:
+            return {
+                isUpdated: false
+            }
+
+        case UPDATE_ROOM_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
+//rooom delete
+export const deleteRoomReducer = (state = {}, action) => {
+    switch (action.type) {
+        case DELETE_ROOM_REQUEST:
+            return {
+                loading: true
+            }
+
+        case DELETE_ROOM_SUCCESS:
+            return {
+                loading: false,
+                isDeleted: action.payload
+            }
+
+        case DELETE_ROOM_RESET:
+            return {
+                loading: false,
+                isDeleted: false
+            }
+
+        case DELETE_ROOM_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
         default:
             return state
     }

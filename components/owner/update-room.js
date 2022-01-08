@@ -7,10 +7,11 @@ import { db } from '../../firebase.config'
 import { v4 as uuidv4 } from 'uuid'
 
 import { toast } from 'react-toastify';
-import { newRoom } from '../../redux/actions/roomActions'
+import { updateRoom, getRoomDetails } from '../../redux/actions/roomActions'
+import { UPDATE_ROOM_RESET } from '../../redux/constants/roomConstants'
 
 
-const CreateRoom = () => {
+const UpdateRoom = () => {
 
     const [images, setImages] = useState({});
     const [imagesPreview, setImagesPreview] = useState([])
@@ -19,15 +20,15 @@ const CreateRoom = () => {
     const [description, setDescription] = useState("")
     const [address, setAddress] = useState('')
     const [pincode, setPincode] = useState(0)
-    const [category, setCategory] = useState('1RK')
-    const [bathroom, setBathroom] = useState('Shared')
-    const [tenants, setTenants] = useState('All')
-    const [electricBill, setElectricBill] = useState(false);
+    const [category, setCategory] = useState('')
+    const [bathroom, setBathroom] = useState('')
+    const [tenants, setTenants] = useState('')
+    const [electricBill, setElectricBill] = useState();
     const [floor, setFloor] = useState();
-    const [balcony, setBalcony] = useState(false)
-    const [petsFriendly, setPetsFriendly] = useState(false)
-    const [parking, setParking] = useState(false)
-    const [waterSupply, setWaterSupply] = useState(false);
+    const [balcony, setBalcony] = useState()
+    const [petsFriendly, setPetsFriendly] = useState()
+    const [parking, setParking] = useState()
+    const [waterSupply, setWaterSupply] = useState();
     const [furnish, setFurnish] = useState()
     const [longitude, setLongitude] = useState(0)
     const [latitude, setLatitude] = useState(0)
@@ -36,18 +37,47 @@ const CreateRoom = () => {
     const dispatch = useDispatch();
     const router = useRouter()
 
-    const { loading, success, error } = useSelector(state => state.newRoom);
-    const { user } = useSelector(state => state.loadedUser);
+    const { error, isUpdated } = useSelector(state => state.roomUpdate)
+    const { error: roomDetailsError, room } = useSelector(state => state.roomDetails)
+
+    const { id } = router.query
 
     useEffect(() => {
+
+        if (room && room._id !== id) {
+            dispatch(getRoomDetails('', id))
+        } else {
+            setName(room.name)
+            setPrice(room.pricePerMonth)
+            setDescription(room.description)
+            setAddress(room.address)
+            setPincode(room.pincode)
+            setCategory(room.roomCategory)
+            setBathroom(room.bathroomType)
+            setTenants(room.tenants)
+            setElectricBill(room.electricBill)
+            setFloor(room.floor)
+            setBalcony(room.balcony)
+            setBalcony(room.balcony)
+            setPetsFriendly(room.petsFriendly)
+            setParking(room.parking)
+            setWaterSupply(room.waterSupply)
+            setFurnish(room.furnish)
+            setLatitude(room.coordinates.lat)
+            setLongitude(room.coordinates.lng)
+        }
+
         if (error) {
             toast.error(error)
         }
 
-        if (success) {
+        if (isUpdated) {
+            dispatch(getRoomDetails('', id))
             router.push('/me')
+            dispatch({ type: UPDATE_ROOM_RESET })
         }
-    }, [dispatch, success, error, router])
+    }, [dispatch, error, roomDetailsError, isUpdated, room, id])
+
 
     //images change handler for firebase
     const onMutate = (e) => {
@@ -75,46 +105,46 @@ const CreateRoom = () => {
         e.preventDefault();
 
         //Store images in firebase
-        const storeImage = async (image) => {
-            return new Promise((resolve, reject) => {
-                const storage = getStorage()
-                const fileName = image.name + `-${user.name}` + `-${uuidv4()}`
+        // const storeImage = async (image) => {
+        //     return new Promise((resolve, reject) => {
+        //         const storage = getStorage()
+        //         const fileName = image.name + `-${user.name}` + `-${uuidv4()}`
 
-                const storageRef = ref(storage, 'images/' + fileName);
+        //         const storageRef = ref(storage, 'images/' + fileName);
 
-                const uploadTask = uploadBytesResumable(storageRef, image)
+        //         const uploadTask = uploadBytesResumable(storageRef, image)
 
-                uploadTask.on(
-                    'state_changed',
-                    (snapshot) => {
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                        console.log("Upload is " + progress + "% done")
-                    },
-                    (error) => {
-                        reject(error)
-                    },
-                    () => {
-                        getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
-                            resolve(downloadURL)
-                        })
-                    }
-                )
-            })
-        }
+        //         uploadTask.on(
+        //             'state_changed',
+        //             (snapshot) => {
+        //                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        //                 console.log("Upload is " + progress + "% done")
+        //             },
+        //             (error) => {
+        //                 reject(error)
+        //             },
+        //             () => {
+        //                 getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+        //                     resolve(downloadURL)
+        //                 })
+        //             }
+        //         )
+        //     })
+        // }
 
-        const imageUrls = await Promise.all(
-            [...images].map((image) => storeImage(image))
-        ).catch(() => {
-            return
-        })
+        // const imageUrls = await Promise.all(
+        //     [...images].map((image) => storeImage(image))
+        // ).catch(() => {
+        //     return
+        // })
 
-        console.log(imageUrls)
+        // console.log(imageUrls)
 
 
-        const formDataCopy = {
-            imageUrls
-        }
-        await addDoc(collection(db, "images"), formDataCopy)
+        // const formDataCopy = {
+        //     imageUrls
+        // }
+        // await addDoc(collection(db, "images"), formDataCopy)
 
         const roomData = {
             name,
@@ -132,16 +162,17 @@ const CreateRoom = () => {
             parking,
             waterSupply,
             furnish,
-            images: imageUrls,
+            // images: imageUrls,
             coordinates: {
                 lat: latitude,
                 lng: longitude
             }
         }
 
-        if (images.length === 0 || images.length <= 3) return toast.error("Please uplaod images or minimum 4 images")
 
-        dispatch(newRoom(roomData))
+        // if (images.length === 0 || images.length <= 3) return toast.error("Please uplaod images or minimum 4 images")
+
+        dispatch(updateRoom(room._id, roomData))
     }
     let mapDisabled = false
 
@@ -152,31 +183,11 @@ const CreateRoom = () => {
     if (coordinate === 'false') {
         mapDisabled = false
     }
-    // images change handler
 
-    // const onChange = (e) => {
-    //     const files = Array.from(e.target.files);
-
-    //     setImages([])
-    //     setImagesPreview([]);
-
-    //     files.forEach(file => {
-    //         const reader = new FileReader();
-
-    //         reader.onload = () => {
-    //             if (reader.readyState === 2) {
-    //                 setImages(oldArray => [...oldArray, reader.result]);
-    //                 setImagesPreview(oldArray => [...oldArray, reader.result])
-    //             }
-    //         }
-
-    //         reader.readAsDataURL(file)
-    //     })
-    // }
 
     return (
         <div>
-            <h1 className="font-semibold">List your room</h1>
+            <h1 className="font-semibold">Update your room</h1>
             <div className="sm:bg-gray-50 sm:shadow-md mt-4 max-w-2xl mx-auto p-4 rounded-md">
                 <form onSubmit={submitHandler}>
                     {/* image */}
@@ -369,7 +380,7 @@ const CreateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="electricbill">Electric Bill</label>
                         <div className="flex gap-x-3">
-                            <button type="button" id="electricbill" value={true} onClick={e => setElectricBill(e.target.value)} className={`${electricBill === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-3 rounded-xl shadow-md border`} >Included</button>
+                            <button type="button" id="electricbill" value={true} onClick={e => setElectricBill(e.target.value)} className={`${electricBill === "true" || electricBill === true ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-3 rounded-xl shadow-md border`} >Included</button>
                             <button type="button" id="electricbill" value={false} onClick={e => setElectricBill(e.target.value)} className={`${electricBill === "false" || electricBill === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-3 rounded-xl shadow-md border`} >Not included</button>
                         </div>
                     </div>
@@ -393,7 +404,7 @@ const CreateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="balcony">Balcony</label>
                         <div className="flex gap-x-3">
-                            <button type="button" id="balcony" value={true} onClick={e => setBalcony(e.target.value)} className={`${balcony === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
+                            <button type="button" id="balcony" value={true} onClick={e => setBalcony(e.target.value)} className={`${balcony === "true" || balcony === true ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
                             <button type="button" id="balcony" value={false} onClick={e => setBalcony(e.target.value)} className={`${balcony === "false" || balcony === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
                         </div>
                     </div>
@@ -420,16 +431,16 @@ const CreateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="waterSupply">Water Supply</label>
                         <div className="flex gap-x-3">
-                            <button type="button" id="waterSupply" value={true} onClick={e => setWaterSupply(e.target.value)} className={`${waterSupply === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
+                            <button type="button" id="waterSupply" value={true} onClick={e => setWaterSupply(e.target.value)} className={`${waterSupply === "true" || waterSupply === true ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >Yes</button>
                             <button type="button" id="waterSupply" value={false} onClick={e => setWaterSupply(e.target.value)} className={`${waterSupply === "false" || waterSupply === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-5 rounded-xl shadow-md border`} >No</button>
                         </div>
                     </div>
 
-                    <button type="submit" className="px-6 p-2 rounded-md bg-[#ddad0f] my-4 font-semibold text-[#eee]">CREATE ROOM</button>
+                    <button type="submit" className="px-6 p-2 rounded-md bg-[#ddad0f] my-4 font-semibold text-[#eee]">UPDATE ROOM</button>
                 </form>
             </div>
         </div >
     )
 }
 
-export default CreateRoom
+export default UpdateRoom

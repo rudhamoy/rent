@@ -40,7 +40,7 @@ const RoomImageContianer = ({ image }) => {
             {/** gallery images */}
             <div className="flex justify-between my-2 relative">
                 {image?.slice(starting, ending).map((i, index) => (
-                    <img key={index} onClick={() => selectImageHandler(i)} src={i} alt="" className="w-[31.8%] h-[80px] cursor-pointer rounded-md" />
+                    <img key={index} onClick={() => selectImageHandler(i)} src={i} alt="" className="w-[31.5%] h-[80px] cursor-pointer rounded-md" />
                 ))}
 
                 <div className="absolute flex justify-between items-center w-full text-xl top-[45%] ">

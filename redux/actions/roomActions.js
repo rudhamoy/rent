@@ -12,6 +12,12 @@ import {
     OWNER_ROOMLIST_REQUEST,
     OWNER_ROOMLIST_SUCCESS,
     OWNER_ROOMLIST_FAIL,
+    UPDATE_ROOM_REQUEST,
+    UPDATE_ROOM_SUCCESS,
+    UPDATE_ROOM_FAIL,
+    DELETE_ROOM_REQUEST,
+    DELETE_ROOM_SUCCESS,
+    DELETE_ROOM_FAIL,
 } from '../constants/roomConstants';
 
 //get all rooms
@@ -102,6 +108,52 @@ export const getOwnerRooms = (req) => async (dispatch) => {
         dispatch({
             type: OWNER_ROOMLIST_FAIL,
             payload: error.message
+        })
+    }
+}
+
+export const updateRoom = (id, roomData) => async (dispatch) => {
+    try {
+        dispatch({
+            type: UPDATE_ROOM_REQUEST
+        })
+
+        const config = {
+            header: {
+                'Content-Type': 'applicatoin/json'
+            }
+        }
+
+        const { data } = await axios.put(`/api/rooms/${id}`, roomData, config)
+
+        dispatch({
+            type: UPDATE_ROOM_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+        dispatch({
+            type: UPDATE_ROOM_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const deleteRoom = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: DELETE_ROOM_REQUEST })
+
+        const { data } = await axios.delete(`/api/rooms/${id}`)
+
+        dispatch({
+            type: DELETE_ROOM_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+        dispatch({
+            type: DELETE_ROOM_FAIL,
+            payload: error.response.data.message
         })
     }
 }

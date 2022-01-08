@@ -85,4 +85,40 @@ const myRooms = catchAsyncErrors(async (req, res) => {
     })
 })
 
-export { allRooms, newRoom, getSingleRoom, myRooms }
+//Update room details 
+const updateRoom = catchAsyncErrors(async (req, res) => {
+    let room = await Room.findById(req.query.id);
+
+    if (!room) {
+        return next(new ErrorHandler('Room not found with this ID', 404))
+    }
+
+    room = await Room.findByIdAndUpdate(req.query.id, req.body, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    res.status(200).json({
+        success: true,
+        room
+    })
+})
+
+//Delete room 
+const deleteRoom = catchAsyncErrors(async (req, res) => {
+    const room = await Room.findById(req.query.id);
+
+    if (!room) {
+        return next(new ErrorHandler('Room not found with this ID', 404))
+    }
+
+    await room.remove();
+
+    res.status(200).json({
+        success: true,
+        message: 'Room is deleted'
+    })
+})
+
+export { allRooms, newRoom, getSingleRoom, myRooms, updateRoom, deleteRoom }
