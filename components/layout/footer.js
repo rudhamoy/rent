@@ -10,8 +10,8 @@ const Footer = () => {
 
     return (
         <div className="px-6 sm:px-32 py-5 bg-gray-50">
-            {/** Info Section */}
-            <div className={` flex flex-col sm:flex-row  gap-y-10 bg-[#512d6d] text-[#eeeeee] sm:h-[210px] p-3 rounded-md shadow-lg ${classes.footer__info}`}>
+            {/** Info Section ------ css- divide */}
+            <div className={` flex flex-col  sm:flex-row  gap-y-10 bg-[#512d6d] text-[#eeeeee] sm:h-[210px] p-3 rounded-md shadow-lg ${classes.footer__info}`}>
                 {/**Find a rent */}
                 <div className={`${classes.footer__infoLeft} sm:w-[40%] flex flex-col justify-center gap-y-3`}>
                     <h1 className="text-3xl text-center font-semibold">Find Rent House</h1>

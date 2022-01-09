@@ -1,13 +1,16 @@
 
-.background_svg {
+/* .background_svg {
     background-image: url(../../pages/public/images/svg/building_background.svg);
     object-fit: contain;
     background-repeat: no-repeat;
     background-position: center ; 
-    /* height: 85vh; */
-    /* width: 100% */
-}
+} */
 
 .hero_heading{
-    text-shadow: 1px 0px 6px rgba(118,118,118,0.94);
+    /* text-shadow: 1px 0px 6px rgba(118,118,118,0.94); */
+    font-weight: bold;
+  background-image: linear-gradient(75deg, #ff0798, #4354b8, #3f7eca);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
 }

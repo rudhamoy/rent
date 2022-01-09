@@ -137,7 +137,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
                             </>
                         )}
                         {pathname === '/' || pathname === '/search' || pathname === '/me' ? (
-                            <button className="p-2 text-[#eee] bg-[lightgrey] rounded-lg outline-none" onClick={() => router.push(`/room/${room._id}`)}><BsArrowRight className='text-2xl text-[#512d6d]' /></button>
+                            <button className="p-2 text-[#eee] border bg-gray-200 rounded-lg outline-none" onClick={() => router.push(`/room/${room._id}`)}><BsArrowRight className='text-2xl text-[#512d6d]' /></button>
                         ) : (
                             <button className="p-2 px-3 w-[100%] text-[#eee] bg-[#512d6d] rounded-lg outline-none" onClick={showModalHandler}>Book now</button>
                         )}

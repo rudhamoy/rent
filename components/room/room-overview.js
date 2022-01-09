@@ -7,10 +7,10 @@ import { BsPeopleFill } from 'react-icons/bs'
 const FaciltyCard = ({ category, title, children }) => {
     return (
         <div className="flex gap-x-2 items-center my-2">
-            <div className="p-2 text-2xl rounded-full bg-[lightgray] shadow-md">
+            <div className="p-2 text-2xl rounded-xl bg-gray-50 text-gray-700 shadow-md">
                 {children}
             </div>
-            <p className=" text-gray-500 "> {category}: <span className="text-gray-800 font-semibold">{title}</span> </p>
+            <p className=" text-gray-500 "> {category}: <span className="text-gray-700 font-semibold">{title}</span> </p>
         </div>
     )
 }
