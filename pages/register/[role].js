@@ -1,11 +1,18 @@
-import Register from '../components/auth/Register';
+import Register from '../../components/auth/Register';
 import { getSession } from 'next-auth/client'
+import { useRouter } from 'next/router'
 
 
 export default function RegisterPage() {
+    const router = useRouter()
+
+    const { role } = router.query
+
+    console.log(role)
+
     return (
         <div>
-            <Register />
+            <Register role={role} />
         </div>
     )
 }

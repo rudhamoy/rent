@@ -132,7 +132,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
                     <div className="flex gap-x-3">
                         {pathname === '/me' && (
                             <>
-                                <button onClick={() => deleteHandler(room._id)} className="rounded-lg p-2 bg-gray-100"><MdDelete className="text-red-400 text-2xl outline-none" /></button>
+                                <button onClick={() => deleteHandler(room._id)} className="rounded-lg p-2 bg-gray-100 outline-none"><MdDelete className="text-red-400 text-2xl " /></button>
                                 <button onClick={() => router.push(`/owner/room/${room._id}`)} className="rounded-lg p-2 bg-gray-100 outline-none"><MdModeEdit className="text-2xl" /></button>
                             </>
                         )}

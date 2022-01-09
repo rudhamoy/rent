@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser, clearErrors } from '../../redux/actions/userActions'
 
-const Register = () => {
+const Register = ({ role }) => {
 
     const dispatch = useDispatch();
     const router = useRouter();
@@ -15,7 +15,7 @@ const Register = () => {
         name: "",
         email: "",
         mobile: "",
-        password: ""
+        password: "",
     })
 
     const { name, email, password, mobile } = user
@@ -40,7 +40,7 @@ const Register = () => {
         e.preventDefault();
 
         const userData = {
-            name, email, mobile, password, avatar
+            name, email, mobile, password, avatar, role
         }
 
         dispatch(registerUser(userData))

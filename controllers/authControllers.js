@@ -22,13 +22,14 @@ const registerUser = catchAsyncErrors(async (req, res) => {
         scale: "scale"
     });
 
-    const { name, email, mobile, password } = req.body;
+    const { name, email, mobile, password, role } = req.body;
 
     const user = await User.create({
         name,
         email,
         mobile,
         password,
+        role,
         avatar: {
             public_id: result.public_id,
             url: result.secure_url
