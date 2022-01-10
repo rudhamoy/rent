@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import classes from './featured.module.css'
 
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import RoomCard from '../layout/room-card';
@@ -9,24 +10,53 @@ const Featured = () => {
     const { user } = useSelector(state => state.loadedUser)
 
     return (
-        <div className="px-[3%] sm:px-32 bg-gray-200 py-8">
+        <div className=" sm:px-32 bg-gray-200 py-10">
+            <div className="px-[3%]">
+                {user && user?.role === 'owner' ? (
+                    <div className="p-2 rounded-md border-[0.5px] border-[gray] mb-10">
+                        <p className="text-base">Want to list your rental? <Link href="/owner/room/create"><a className="text-[#7a0acf]">Create now</a></Link> </p>
+                    </div>
+                ) : user?.role !== 'user' && (
+                    <div className="p-2 rounded-md border-[0.5px] border-[gray] mb-10">
+                        <p className="text-base">Want to list your rental? <Link href="/register/owner"><a className="text-[#7a0acf]">Sign Up & continue</a></Link> </p>
+                    </div>
+                )}
+            </div>
 
-            {user && user?.role === 'owner' ? (
-                <div className="p-2 rounded-md border-[0.5px] border-[gray] mb-7">
-                    <p className="text-base">Want to list your rental? <Link href="/owner/room/create"><a className="text-[#7a0acf]">Create now</a></Link> </p>
+            {/* new room */}
+            <div>
+                <div className="px-[3%]">
+                    <h1 className="flex items-center gap-x-5 text-lg font-semibold ">New room <span><HiOutlineArrowNarrowRight /></span></h1>
+                    <p className="text-[#7a0acf]">view all new listings</p>
                 </div>
-            ) : user?.role !== 'user' && (
-                <div className="p-2 rounded-md border-[0.5px] border-[gray] mb-7">
-                    <p className="text-base">Want to list your rental? <Link href="/register/owner"><a className="text-[#7a0acf]">Sign Up & continue</a></Link> </p>
+                <div className={`${classes.featured__list} flex  pt-5 mb-10 `}>
+                    <div className={`${classes.container}  flex gap-x-4 mx-[3%]`}>
+
+                        {rooms && rooms.slice(0, 4).map(room => (
+                            <div className={`${classes.child} bg-green-200`}>
+                                <RoomCard room={room} key={room._id} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            )}
+            </div>
 
-            <h1 className="flex items-center gap-x-5 font-semibold">Featured home <span><HiOutlineArrowNarrowRight /></span></h1>
+            {/* featured room */}
+            <div>
+                <div className="px-[3%]">
+                    <h1 className="flex items-center gap-x-5 text-lg font-semibold">Featured home <span><HiOutlineArrowNarrowRight /></span></h1>
+                    <p className="text-[#7a0acf]">view all in featured list</p>
+                </div>
+                <div className="flex justify-between flex-wrap gap-y-4 pt-5 mb-10">
+                    <div className={`${classes.container}  flex gap-x-4 mx-[3%]`}>
 
-            <div className="flex justify-between flex-wrap gap-y-4 pt-5">
-                {rooms && rooms.slice(0, 4).map(room => (
-                    <RoomCard room={room} key={room._id} />
-                ))}
+                        {rooms && rooms.slice(0, 4).map(room => (
+                            <div className={`${classes.child} bg-green-200`}>
+                                <RoomCard room={room} key={room._id} />
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     )

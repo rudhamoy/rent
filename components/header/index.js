@@ -84,7 +84,7 @@ const Header = () => {
             {/** profile */}
             <div className="relative">
                 <div className={`${classes.burger_conatainer} ml-[40vw] sm:ml-12 sm:m-0`}>
-                    <div className={`${classes.header__profile} px-[12px;] text-[16px]`}>
+                    <div className={`${classes.header__profile} bg-gray-100 px-[12px;] text-[16px]`}>
                         {showModal === true ? (<CgClose onClick={closeMenu} className="font-bold cursor-pointer hover:text-[blueviolet]" />) : (
                             <GiHamburgerMenu onClick={openMenu} className="cursor-pointer hover:text-[blueviolet]" />
                         )}

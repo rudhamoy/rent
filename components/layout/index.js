@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
         <div className="bg-[#eeeeee] h-full relative">
             <Header />
             <ToastContainer position="top-right" />
-            <div className="">
+            <div>
                 {children}
             </div>
             <div className={`${router.pathname === '/room/[id]' || router.pathname === '/watch-list' ? 'hidden' : ''}`}>

@@ -5,9 +5,9 @@ const HeroSection = () => {
     return (
         <div className={`${classes.background_svg} h-[65vh] sm:h-[85vh] `}>
             <div className="px-[3%] sm:px-32 backdrop-blur-[1.5px] h-full w-full flex flex-col justify-center pt-[20vh] relative">
-                <div className="absolute bg-purple-200 mix-blend-multiply filter blur-3xl rounded-full w-48 h-48 top-10"></div>
-                <div className="absolute bg-yellow-200 mix-blend-multiply filter blur-3xl rounded-full w-48 h-48 right-7 top-10"></div>
-                <div className="absolute bg-pink-200 mix-blend-multiply filter blur-3xl rounded-full w-48 h-48 left-16 top-10"></div>
+                <div className="absolute bg-purple-300 mix-blend-multiply filter blur-3xl rounded-full w-44 h-44 right-28 top-10"></div>
+                <div className="absolute bg-yellow-200 mix-blend-multiply filter blur-3xl rounded-full w-44 h-44 right-0 top-10"></div>
+                <div className="absolute bg-pink-200 mix-blend-multiply filter blur-3xl rounded-full w-44 h-44 right-14 top-14"></div>
                 <h1 className={`text-base text-[#4f4755] sm:text-6xl font-bold uppercase text-center ${classes.hero_heading}`}><span className={`text-3xl font-sans ${classes.hero_heading}`}>Searching a rent</span> <br /> is tiring, Say no more!</h1>
                 <p className="my-2 text-center font-semibold text-gray-600">Let us find a perfect room for you</p>
 
