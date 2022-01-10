@@ -34,7 +34,7 @@ const Featured = () => {
 
                         {rooms && rooms.slice(0, 4).map(room => (
                             <div key={room._id} className={`${classes.child}`}>
-                                <RoomCard room={room} />
+                                <RoomCard room={room} key={room._id} />
                             </div>
                         ))}
                     </div>
@@ -52,7 +52,7 @@ const Featured = () => {
 
                         {rooms && rooms.slice(0, 4).map(room => (
                             <div key={room._id} className={`${classes.child}`}>
-                                <RoomCard room={room} />
+                                <RoomCard room={room} key={room._id} />
                             </div>
                         ))}
                     </div>
