@@ -98,7 +98,7 @@ const RoomDetails = () => {
                         </div>
                         <div className='flex justify-between w-full'>
 
-                            <button onClick={handleAddToWatchlist} className="bg-[#512d6d] p-2 px-3 rounded-md text-gray-100 shadow-md outline-none">Bookmark</button>
+                            <button onClick={handleAddToWatchlist} className="bg-[#512d6d] p-2 px-3 rounded-md text-gray-100 shadow-md ">Bookmark</button>
                             <button className="bg-[#512d6d] p-2 px-3 rounded-md text-gray-100 shadow-md outline-none">Book Now</button>
                         </div>
                     </div>
@@ -112,12 +112,12 @@ const RoomDetails = () => {
 
             {/* mobile CTA and price */}
             <div className={`sticky bottom-0 border  bg-gray-100 sm:hidden`}>
-                <div className="flex justify-between items-center py-2  px-[3%]">
+                <div className="flex justify-between items-center py-1  px-[3%]">
                     <div className="w-[50%]">
-                        <p className="text-gray-500 text-sm">Price</p>
-                        <p className="font-semibold ">{room.pricePerMonth} / <span className="text-gray-500 text-sm">Month</span></p>
+                        <p className="text-gray-500 text-sm -mb-2">Price</p>
+                        <p className="font-semibold text-2xl">{room.pricePerMonth} / <span className="text-gray-500 text-sm">Month</span></p>
                     </div>
-                    <div className='flex gap-x-3 w-[50%]'>
+                    <div className='flex justify-end gap-x-3 w-[50%]'>
                         <button onClick={handleAddToWatchlist} className="bg-[#512d6d] p-2 px-3 rounded-md text-gray-100 text-lg shadow-md"><BsBookmark /></button>
                         <button className="bg-[#512d6d] text-lg p-2 px-3 rounded-md text-gray-100 shadow-md">Book Now</button>
                     </div>
