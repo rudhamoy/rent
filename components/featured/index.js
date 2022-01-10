@@ -33,8 +33,8 @@ const Featured = () => {
                     <div className={`${classes.container}  flex gap-x-4 mx-[3%]`}>
 
                         {rooms && rooms.slice(0, 4).map(room => (
-                            <div className={`${classes.child} bg-green-200`}>
-                                <RoomCard room={room} key={room._id} />
+                            <div key={room._id} className={`${classes.child}`}>
+                                <RoomCard room={room} />
                             </div>
                         ))}
                     </div>
@@ -51,8 +51,8 @@ const Featured = () => {
                     <div className={`${classes.container}  flex gap-x-4 mx-[3%]`}>
 
                         {rooms && rooms.slice(0, 4).map(room => (
-                            <div className={`${classes.child} bg-green-200`}>
-                                <RoomCard room={room} key={room._id} />
+                            <div key={room._id} className={`${classes.child}`}>
+                                <RoomCard room={room} />
                             </div>
                         ))}
                     </div>
