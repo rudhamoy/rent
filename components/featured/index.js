@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import classes from './featured.module.css'
+import searchclass from '../search/search.module.css'
 
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import RoomCard from '../layout/room-card';
@@ -29,11 +30,11 @@ const Featured = () => {
                     <h1 className="flex items-center gap-x-5 text-lg font-semibold ">New room <span><HiOutlineArrowNarrowRight /></span></h1>
                     <p className="text-[#7a0acf]">view all new listings</p>
                 </div>
-                <div className={`${classes.featured__list} flex  pt-5 mb-10 `}>
-                    <div className={`${classes.container}  flex gap-x-4 mx-[3%]`}>
+                <div className={`${searchclass.search__filter} flex  pt-5 mb-10 `}>
+                    <div className={`${classes.container}  flex gap-x-1`}>
 
                         {rooms && rooms.slice(0, 4).map(room => (
-                            <div key={room._id} className={`${classes.child}`}>
+                            <div key={room._id} className={`${classes.child} px-[3%]`}>
                                 <RoomCard room={room} />
                             </div>
                         ))}
@@ -47,11 +48,11 @@ const Featured = () => {
                     <h1 className="flex items-center gap-x-5 text-lg font-semibold">Featured home <span><HiOutlineArrowNarrowRight /></span></h1>
                     <p className="text-[#7a0acf]">view all in featured list</p>
                 </div>
-                <div className="flex justify-between flex-wrap gap-y-4 pt-5 mb-10">
-                    <div className={`${classes.container}  flex gap-x-4 mx-[3%]`}>
+                <div className={`flex  pt-5 mb-10 ${classes.featured__list}`}>
+                    <div className={`${classes.container}  flex gap-x-1`}>
 
                         {rooms && rooms.slice(0, 4).map(room => (
-                            <div key={room._id} className={`${classes.child}`}>
+                            <div key={room._id} className={`${classes.child} px-[3%]`}>
                                 <RoomCard room={room} />
                             </div>
                         ))}
