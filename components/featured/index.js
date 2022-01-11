@@ -45,7 +45,7 @@ const Featured = () => {
             {/* featured room */}
             <div>
                 <div className="px-[3%]">
-                    <h1 className="flex items-center gap-x-5 text-lg font-semibold">Featured home <span><HiOutlineArrowNarrowRight /></span></h1>
+                    <h1 className="flex items-center gap-x-5 text-lg font-semibold">Featured room <span><HiOutlineArrowNarrowRight /></span></h1>
                     <p className="text-[#7a0acf]">view all in featured list</p>
                 </div>
                 <div className={`flex  pt-5 mb-10 ${classes.featured__list}`}>
@@ -59,6 +59,26 @@ const Featured = () => {
                     </div>
                 </div>
             </div>
+
+            {/* attached room */}
+            <div>
+                <div className="px-[3%]">
+                    <h1 className="flex items-center gap-x-5 text-lg font-semibold">Rentals with attached bathroom <span><HiOutlineArrowNarrowRight /></span></h1>
+                    <p className="text-[#7a0acf]">view all list</p>
+                </div>
+                <div className={`flex  pt-5 mb-10 ${classes.featured__list}`}>
+                    <div className={`${classes.container}  flex gap-x-1`}>
+
+                        {rooms && rooms.slice(0, 4).map(room => (
+                            <div key={room._id} className={`${classes.child} px-[3%]`}>
+                                <RoomCard room={room} />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     )
 }
