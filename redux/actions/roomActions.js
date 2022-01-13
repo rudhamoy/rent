@@ -35,7 +35,7 @@ export const getRooms = (req, location = "") => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: ALL_ROOMS_FAIL,
-            payload: error.response.data.message
+            payload: error.message
         })
     }
 }

@@ -47,7 +47,7 @@ export const myNotifications = (req) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: MY_NOTIFICATION_FAIL,
-            payload: error.response.data.message
+            payload: error.message
         })
     }
 }

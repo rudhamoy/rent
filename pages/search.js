@@ -4,18 +4,11 @@ import { getRooms } from "../redux/actions/roomActions"
 import { useSelector } from 'react-redux';
 import RoomCard from "../components/layout/room-card";
 import SearchBar from '../components/search/SearchBar'
-import { FaChevronDown } from 'react-icons/fa'
+import SearchFilter from '../components/search/search-filter'
 import { HiAdjustments } from 'react-icons/hi'
 
 import classes from '../components/search/search.module.css'
 
-const SearchFilterBox = ({ children }) => {
-    return (
-        <li className="bg-white px-2 rounded-md shadow-md cursor-pointer flex justify-center items-center gap-x-2">
-            {children}
-        </li>
-    )
-}
 
 
 const SearchPage = () => {
@@ -24,53 +17,17 @@ const SearchPage = () => {
     const [filteredPrice, setFilteredPrice] = useState("100000")
     const [filteredTenants, setFilteredTenants] = useState("")
 
+    const [showFilter, setShowFilter] = useState(false)
+
     useEffect(() => {
     }, [filteredPrice])
 
     return (
-        <>
-            <div className="pt-28 pb-8 sm:px-32">
+        <div className="relative">
+            <div className="pt-28 pb-8 px-[3%] sm:px-32 flex items-center gap-x-1">
                 <SearchBar />
-                <div className={`${classes.search__filter} flex sm:justify-center mt-3`}>
-                    <ul className="flex gap-x-5 font-semibold text-sm pl-[2%]">
-                        <SearchFilterBox>
-                            <div className="flex items-center gap-x-2">
-                                <p>Filter</p>
-                                <HiAdjustments />
-                            </div>
-                        </SearchFilterBox>
-                        <SearchFilterBox>
-                            <select
-                                value={filteredPrice}
-                                onChange={e => setFilteredPrice(e.target.value)}
-                            >
-                                <option value="100000" >Price</option>
-                                <option value="4000" >Below 4000</option>
-                                <option value="6000" >Below 6000</option>
-                                <option value="8000" >Below 8000</option>
-                                <option value="10000" >Below 10000</option>
-                            </select>
-                        </SearchFilterBox>
-                        <SearchFilterBox>
-                            Room Type <FaChevronDown />
-                        </SearchFilterBox>
-                        <SearchFilterBox>
-                            <select
-                                value={filteredTenants}
-                                onChange={e => setFilteredTenants(e.target.value)}
-                            >
-                                <option value="">Preferred Tenants</option>
-                                <option value="All">All</option>
-                                <option value="Students">Students</option>
-                                <option value="Family">Family</option>
-                                <option value="Girls">Girls</option>
-                            </select>
-                        </SearchFilterBox>
-                        <SearchFilterBox>Bathroom Type <FaChevronDown /></SearchFilterBox>
-                        <SearchFilterBox>
-                            Electricity Type <FaChevronDown />
-                        </SearchFilterBox>
-                    </ul>
+                <div className="p-2 rounded-xl bg-gray-100">
+                    <HiAdjustments onClick={() => setShowFilter(true)} className="text-3xl text-gray-600" />
                 </div>
             </div>
             <div className="px-[3%] sm:px-32 flex flex-col sm:flex-row flex-wrap justify-between">
@@ -80,7 +37,12 @@ const SearchPage = () => {
                     </div>
                 ))}
             </div>
-        </>
+            {showFilter === true && (
+                <div className="absolute top-0 bottom-0 left-0 right-0 bg-[#00000066] z-50 flex justify-center">
+                    <SearchFilter />
+                </div>
+            )}
+        </div>
     )
 }
 

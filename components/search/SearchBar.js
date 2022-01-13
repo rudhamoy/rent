@@ -19,7 +19,7 @@ const SearchBar = () => {
     }
 
     return (
-        <div className="p-2">
+        <div className="p-2 w-[100%]">
             <div>
                 <form className={`bg-white max-w-xl mx-auto h-[50px]  overflow-hidden flex gap-x-1 items-center p-1 shadow-md ${classes.search_container}`} onSubmit={submitHandler}>
                     <input type="text" placeholder="location, room type, tenant type, etc" className="h-[100%] w-full outline-none pl-3"

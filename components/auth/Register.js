@@ -17,6 +17,7 @@ const Register = ({ role }) => {
         mobile: "",
         password: "",
     })
+    // const [loading, setLoading] = useState(false)
 
     const { name, email, password, mobile } = user
 
@@ -38,12 +39,15 @@ const Register = ({ role }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        window.scrollTo(0, 0)
+        // setLoading(true)
 
         const userData = {
             name, email, mobile, password, avatar, role
         }
 
         dispatch(registerUser(userData))
+        // setLoading(false)
     }
 
     const onChange = (e) => {
@@ -67,6 +71,14 @@ const Register = ({ role }) => {
 
     }
 
+    if (loading) {
+        return (
+            <div className="bg-gray-50 p-2 rounded-md py-20">
+                <h1>Please Wait!</h1>
+                <p>Creating your account...</p>
+            </div>
+        )
+    }
 
     return (
         <div className="h-[90vh] flex justify-center items-center">
