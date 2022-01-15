@@ -57,7 +57,7 @@ const RoomDetails = () => {
     }
 
     return (
-        <div className=" sm:px-32 pt-20 sm:py-32 reltive">
+        <div className=" sm:px-32 pt-20 sm:py-32 relative">
             {/* for pc */}
             <div className=" hidden">
                 <h1 className="text-2xl sm:text-3xl font-semibold uppercase">{room.name} </h1>

@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
             <div>
                 {children}
             </div>
-            <div className={`${router.pathname === '/room/[id]' || router.pathname === '/watch-list' ? 'hidden' : ''}`}>
+            <div className={`${router.pathname === '/room/[id]' || router.pathname === '/search' || router.pathname === '/watch-list' ? 'hidden' : ''}`}>
                 <Footer />
             </div>
             <div className={`sticky bottom-[2px]`}>
