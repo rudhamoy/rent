@@ -81,22 +81,22 @@ const SearchFilter = ({ close }) => {
                         {/* bathroom */}
                         <div className="p-2 border rounded-lg bg-gray-200 flex items-center gap-x-2">
                             <input type="checkbox" name="check-1" value="check-1" id="check-1" />
-                            <label className='flex gap-x-1' for="check-1">Attached <span>Bathroom</span></label>
+                            <label className='flex gap-x-1' htmlFor="check-1">Attached <span>Bathroom</span></label>
                         </div>
                         {/* bathroom */}
                         <div className="p-2 border rounded-lg bg-gray-200 flex items-center gap-x-2">
                             <input type="checkbox" name="check-1" value="check-1" id="check-1" />
-                            <label className='flex gap-x-1' for="check-1">Attached <span>Bathroom</span></label>
+                            <label className='flex gap-x-1' htmlFor="check-2">Attached <span>Bathroom</span></label>
                         </div>
                         {/* bathroom */}
                         <div className="p-2 border rounded-lg bg-gray-200 flex items-center gap-x-2">
                             <input type="checkbox" name="check-1" value="check-1" id="check-1" />
-                            <label className='flex gap-x-1' for="check-1">Attached <span>Bathroom</span></label>
+                            <label className='flex gap-x-1' htmlFor="check-3">Attached <span>Bathroom</span></label>
                         </div>
                         {/* bathroom */}
                         <div className="p-2 border rounded-lg bg-gray-200 flex items-center gap-x-2">
                             <input type="checkbox" name="check-1" value="check-1" id="check-1" />
-                            <label className='flex gap-x-1' for="check-1">Attached <span>Bathroom</span></label>
+                            <label className='flex gap-x-1' htmlFor="check-4">Attached <span>Bathroom</span></label>
                         </div>
                     </div>
                 </div>
