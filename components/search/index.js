@@ -24,11 +24,16 @@ const Search = () => {
 
     return (
         <div className="relative ">
-            <div className="pt-28 pb-8 px-[3%] sm:px-32 flex items-center ">
+            <div className="pt-28 pb-5 px-[3%] sm:px-32 flex items-center ">
                 <SearchBar />
                 <div className="p-2 rounded-xl bg-gray-100">
                     <HiAdjustments onClick={() => setShowFilter(!showFilter)} className="text-3xl text-gray-600" />
                 </div>
+            </div>
+            <div className="flex gap-x-2 my-2 pl-[3%]">
+                <button className="p-2 px-4 rounded-md border bg-gray-100 ">All</button>
+                <button className="p-2 px-4 rounded-md border bg-gray-100 ">New rooms</button>
+                <button className="p-2 px-4 rounded-md border bg-gray-100 ">Featured rooms</button>
             </div>
             <div className="px-[3%] sm:px-32 flex flex-col sm:flex-row flex-wrap justify-between">
                 {rooms && rooms.filter(room => room.pricePerMonth <= filteredPrice).filter(room => !filteredTenants ? room : filteredTenants === room.tenants).map(room => (

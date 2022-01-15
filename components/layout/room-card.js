@@ -118,7 +118,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
                 {/** right__title & location */}
                 <div>
                     <p className="flex items-center gap-x-2 text-xs text-gray-500"> <span><ImLocation /></span> {address}</p>
-                    <h1 className="uppercase font-semibold">
+                    <h1 className="capitalize font-semibold">
                         <Link href={`/room/${room._id}`}>
                             <a>{name}</a>
                         </Link>
