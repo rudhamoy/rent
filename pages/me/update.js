@@ -1,12 +1,12 @@
 import React from 'react'
 import { getSession } from 'next-auth/client'
 
-import Profile from '../../components/user/Profile';
+import Update from '../../components/user/update';
 
 const UpdateProfilePage = () => {
     return (
         <div>
-            <Profile />
+            <Update />
         </div>
     )
 }

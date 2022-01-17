@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { addBookingReducer, bookingsReducer } from './bookingReducers';
 import { notificationReducer } from './notificationReducers';
 import { allRoomsReducer, newRoomReducer, roomDetailsReducer, myRoomlistReducer, deleteRoomReducer, roomUpdateReducer } from './roomReducers'
-import { authReducer, loadedUserReducer } from './userReducers';
+import { authReducer, loadedUserReducer, updateUserReducer, forgotPasswordReducer } from './userReducers';
 import { allWatchListReducer, watchListReducer } from './watchListReducers';
 
 const reducers = combineReducers({
@@ -16,6 +16,8 @@ const reducers = combineReducers({
     allWatchList: allWatchListReducer,
     auth: authReducer,
     loadedUser: loadedUserReducer,
+    updateUser: updateUserReducer,
+    forgotPassword: forgotPasswordReducer,
     addBooking: addBookingReducer,
     bookings: bookingsReducer,
     notification: notificationReducer,

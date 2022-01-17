@@ -1,15 +1,15 @@
-// import nc from 'next-connect'
-// import dbConnect from '../../../config/dbConnect';
+import nc from 'next-connect'
+import dbConnect from '../../../config/dbConnect';
 
-// import { updateProfile } from '../../../controllers/authControllers';
+import { updateProfile } from '../../../controllers/authControllers';
 
-// import { isAuthenticatedUser } from '../../../middlewares/auth';
-// import onError from "../../../middlewares/error";
+import { isAuthenticatedUser } from '../../../middlewares/auth';
+import onError from "../../../middlewares/error";
 
-// const handler = nc({ onError });
+const handler = nc({ onError });
 
-// dbConnect();
+dbConnect();
 
-// handler.use(isAuthenticatedUser).put(updateProfile);
+handler.use(isAuthenticatedUser).put(updateProfile);
 
-// export default handler
+export default handler

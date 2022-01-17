@@ -1,14 +1,17 @@
 import { useSelector } from 'react-redux'
 import { BsFillTelephoneFill } from 'react-icons/bs'
 import { MdEmail } from 'react-icons/md'
+import { useRouter } from 'next/router'
 
 const Profile = () => {
-    const { user } = useSelector(state => state.loadedUser)
+    const { user } = useSelector(state => state.loadedUser);
+
+    const router = useRouter()
 
     return (
         <div className="py-6">
             <h1 className="font-semibold">My Profile</h1>
-            <div className="flex justify-center">
+            <div className="flex justify-center my-2">
                 <div className="flex flex-col items-center w-full">
                     <img src={user?.avatar.url} alt={user?.name} className="h-[120px] w-[120px] rounded-full" />
                     <div>
@@ -30,6 +33,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
+            <button onClick={() => router.push('/me/update')} className="border bg-gray-100 p-2 px-4 rounded-md">Update Profile</button>
         </div>
     )
 }
