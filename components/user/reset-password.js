@@ -42,7 +42,7 @@ const ResetPassword = () => {
 
                     <div className="flex flex-col my-4">
                         <label htmlFor="password">New Password</label>
-                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="bg-gray-300 py-3 px-2 ring-1rounded-md outline-none" />
+                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="bg-gray-300 py-3 px-2 rounded-md outline-none" />
                     </div>
                     <div className="flex flex-col my-4">
                         <label htmlFor="confirm password">Confirm Password</label>

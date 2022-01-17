@@ -1,6 +1,7 @@
 import User from '../models/user'
 import cloudinary from 'cloudinary';
 import absoluteUrl from 'next-absolute-url'
+import crypto from 'crypto'
 
 import ErrorHandler from '../utils/errorHandler';
 import sendEmail from '../utils/sendEmail';
