@@ -33,7 +33,7 @@ const Login = () => {
 
                     <div className="flex flex-col my-4">
                         <label htmlFor="email_field">Email</label>
-                        <input type="email" id="email_field" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-300 py-3 px-2 ring-1rounded-md outline-none" />
+                        <input type="email" id="email_field" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-300 py-3 px-2 rounded-md outline-none" />
                     </div>
                     <div className="flex flex-col my-4">
                         <label htmlFor="password_field">Password</label>
