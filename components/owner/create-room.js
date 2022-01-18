@@ -239,7 +239,7 @@ const CreateRoom = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="price_field">Price</label>
                         <input
-                            type="text"
+                            type="number"
                             id="price_field"
                             value={price}
                             onChange={e => setPrice(e.target.value)}
