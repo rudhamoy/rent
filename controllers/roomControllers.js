@@ -11,16 +11,27 @@ import cloudinary from 'cloudinary';
 //Get all rooms
 const allRooms = catchAsyncErrors(async (req, res) => {
 
-    const apiFeatures = new APIFeatures(Room.find(), req.query).search()
+    const resPerPage = 4;
+    const roomsCount = await Room.countDocuments()
 
-    let rooms = await apiFeatures.query
+    const apiFeatures = new APIFeatures(Room.find(), req.query).search().filter()
 
-    const roomCount = rooms.length
+    // let rooms = await apiFeatures.query
 
+    // let filteredRoomsCount = rooms.length;
+
+    // apiFeatures.pagination(resPerPage)
+    // rooms = await apiFeatures.query;
+
+    apiFeatures.pagination(resPerPage);
+    let rooms = await apiFeatures.query;
+    let filteredRoomsCount = rooms.length;
 
     res.status(200).json({
         success: true,
-        roomCount,
+        roomsCount,
+        resPerPage,
+        filteredRoomsCount,
         rooms
     })
 })

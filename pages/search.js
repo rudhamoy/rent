@@ -10,7 +10,7 @@ const SearchPage = () => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
-    await store.dispatch(getRooms(req, query.location))
+    await store.dispatch(getRooms(req, query.page, query.location, query.roomCategory, query.tenants, query.bathroomType, query.waterSupply, query.furnish))
 })
 
 export default SearchPage

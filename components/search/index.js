@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux';
 import RoomCard from "../layout/room-card";
 import SearchBar from './SearchBar'
 import SearchFilter from './search-filter'
 import { HiAdjustments } from 'react-icons/hi'
-
+import ReactPaginate from 'react-paginate';
+import Pagination from 'react-js-pagination'
 import Footer from '../layout/footer';
 
 const Search = () => {
-    const { rooms } = useSelector(state => state.allRooms)
+    const { rooms, resPerPage, roomsCount, filteredRoomsCount } = useSelector(state => state.allRooms)
+    const router = useRouter()
+    let { location, page = 1 } = router.query
+    page = Number(page)
 
     const [filteredPrice, setFilteredPrice] = useState("100000")
     const [filteredTenants, setFilteredTenants] = useState("")
@@ -21,6 +26,15 @@ const Search = () => {
 
     useEffect(() => {
     }, [filteredPrice])
+
+    const handlePagination = (pageNumber) => {
+        window.location.href = `/search?page=${pageNumber}`
+    }
+
+    let count = roomsCount;
+    if (location) {
+        count = filteredRoomsCount
+    }
 
     return (
         <div className="relative ">
@@ -35,12 +49,30 @@ const Search = () => {
                 <button className="p-2 px-4 rounded-md border bg-gray-100 ">New rooms</button>
                 <button className="p-2 px-4 rounded-md border bg-gray-100 ">Featured rooms</button>
             </div>
+
+            {location && (
+                <div className="px-[3%] text-lg font-semibold my-3">
+                    <p>Your search results for <span className="text-red-500">{location}</span></p>
+                </div>
+            )}
             <div className="px-[3%] sm:px-32 flex flex-col sm:flex-row flex-wrap justify-between">
                 {rooms && rooms.filter(room => room.pricePerMonth <= filteredPrice).filter(room => !filteredTenants ? room : filteredTenants === room.tenants).map(room => (
                     <div key={room._id} className="my-3">
                         <RoomCard room={room} id={room._id} />
                     </div>
                 ))}
+                {resPerPage < count && (
+                    <Pagination
+                        activePage={page}
+                        itemsCountPerPage={resPerPage}
+                        totalItemsCount={roomsCount}
+                        onChange={handlePagination}
+                        nextPageText={'Next'}
+                        prevPageText={'Prev'}
+                        innerClass="flex items-center gap-x-5 text-lg  my-3"
+                        activeClass="bg-[#512d6d] text-gray-50 p-1 px-2 rounded-sm"
+                    />
+                )}
             </div>
 
             {/* footer for only mobile */}

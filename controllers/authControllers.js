@@ -19,13 +19,13 @@ cloudinary.config({
 const registerUser = catchAsyncErrors(async (req, res) => {
 
     //image upload to cloudianry and get the url
-    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-        folder: "rentaloo/avatars",
-        width: "150",
-        scale: "scale"
-    });
+    // const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    //     folder: "rentaloo/avatars",
+    //     width: "150",
+    //     scale: "scale"
+    // });
 
-    const { name, email, mobile, password, role } = req.body;
+    const { name, email, mobile, password, role, avatar } = req.body;
 
     const user = await User.create({
         name,
@@ -33,10 +33,11 @@ const registerUser = catchAsyncErrors(async (req, res) => {
         mobile,
         password,
         role,
-        avatar: {
-            public_id: result.public_id,
-            url: result.secure_url
-        }
+        avatar,
+        // avatar: {
+        //     public_id: result.public_id,
+        //     url: result.secure_url
+        // }
     });
 
     res.status(200).json({

@@ -6,10 +6,12 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser, clearErrors } from '../../redux/actions/userActions'
 
-const Register = ({ role }) => {
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, uploadString } from 'firebase/storage';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from '../../firebase.config'
+import { v4 as uuidv4 } from 'uuid'
 
-    const dispatch = useDispatch();
-    const router = useRouter();
+const Register = ({ role }) => {
 
     const [user, setUser] = useState({
         name: "",
@@ -17,42 +19,59 @@ const Register = ({ role }) => {
         mobile: "",
         password: "",
     })
-    // const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const { name, email, password, mobile } = user
 
-    const [avatar, setAvatar] = useState("")
+    const [avatar, setAvatar] = useState(null)
     const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg');
 
-    const { success, loading, error } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
+    const router = useRouter();
 
-    const submitHandler = (e) => {
+    const { success, loading: createLoading, error } = useSelector(state => state.auth);
+
+    const submitHandler = async (e) => {
         e.preventDefault();
-        // setLoading(true)
         window.scrollTo(0, 0)
+        setLoading(true)
+
+        //firebase
+        const storage = getStorage()
+        const fileName = avatar.name + `-${user.name}` + `-${uuidv4()}`
+
+        const imageRef = ref(storage, 'images/' + fileName);
+        let imageUrls = ''
+
+        await uploadString(imageRef, avatar, "data_url").then(async snapshot => {
+            const downloadURL = await getDownloadURL(imageRef)
+            imageUrls = downloadURL
+            const data = {
+                imageUrls
+            }
+            await addDoc(collection(db, "images"), data)
+        })
 
         const userData = {
-            name, email, mobile, password, avatar, role
+            name, email, mobile, password, avatar: imageUrls, role
         }
 
         dispatch(registerUser(userData))
-        // setLoading(false)
+        setLoading(false)
     }
 
     const onChange = (e) => {
 
         if (e.target.name === 'avatar') {
-
-            const reader = new FileReader();
-
-            reader.onload = () => {
-                if (reader.readyState === 2) {
-                    setAvatar(reader.result);
-                    setAvatarPreview(reader.result);
-                }
+            const reader = new FileReader()
+            if (e.target.files[0]) {
+                reader.readAsDataURL(e.target.files[0])
             }
 
-            reader.readAsDataURL(e.target.files[0])
+            reader.onload = (readerEvent) => {
+                setAvatar(readerEvent.target.result)
+                setAvatarPreview(readerEvent.target.result)
+            }
 
         } else {
             setUser({ ...user, [e.target.name]: e.target.value })
@@ -61,13 +80,14 @@ const Register = ({ role }) => {
     }
 
     useEffect(() => {
-        if (success) {
-            router.push('/login')
-        }
-
         if (error) {
             toast.error(error)
+            setLoading(false)
             dispatch(clearErrors())
+        }
+
+        if (success) {
+            router.push('/login')
         }
     }, [dispatch, success, error, loading, router])
 
@@ -155,6 +175,7 @@ const Register = ({ role }) => {
                         </div>
                         <div className=''>
                             <input
+                                required
                                 type='file'
                                 name='avatar'
                                 className='custom-file-input'
@@ -168,7 +189,7 @@ const Register = ({ role }) => {
                         </div>
                     </div>
                     {/* button */}
-                    <button disabled={loading ? true : false} className="bg-[#512d6d] text-md p-2 rounded-md my-3 w-full text-gray-100">
+                    <button className="bg-[#512d6d] text-md p-2 rounded-md my-3 w-full text-gray-100">
                         {loading ? ' Registering..' : 'REGISTER'}
                     </button>
                 </form>

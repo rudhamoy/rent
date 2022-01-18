@@ -21,10 +21,17 @@ import {
 } from '../constants/roomConstants';
 
 //get all rooms
-export const getRooms = (req, location = "") => async (dispatch) => {
+export const getRooms = (req, currentPage = 1, location = "", roomCategory, tenants, bathroomType, waterSupply, furnish) => async (dispatch) => {
     try {
         const { origin } = absoluteUrl(req)
-        let link = `${origin}/api/rooms?location=${location}`
+
+        let link = `${origin}/api/rooms?page=${currentPage}&location=${location}`
+
+        if (roomCategory) link = link.concat(`&category=${roomCategory}`)
+        if (tenants) link = link.concat(`&tenants=${tenants}`)
+        if (bathroomType) link = link.concat(`&bathroom=${bathroomType}`)
+        if (waterSupply) link = link.concat(`&waterSupply=${waterSupply}`)
+        if (furnish) link = link.concat(`&furnish=${furnish}`)
 
         const { data } = await axios.get(link)
 
