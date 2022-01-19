@@ -101,14 +101,14 @@ const Register = ({ role }) => {
     // }
 
     return (
-        <div className="h-[90vh] flex justify-center items-center">
+        <div className="h-[90vh] flex justify-center items-center overflow-hidden">
             {loading === true ? (
                 <div className="w-[340px] bg-gray-50 p-2 rounded-md py-20">
                     <h1>Please Wait!</h1>
                     <p>Creating your account...</p>
                 </div>
             ) : (
-                <form className="w-[340px] bg-gray-100 rounded-md shadow-md p-4" onSubmit={submitHandler}>
+                <form className="w-[90vw] bg-gray-100 rounded-md shadow-md p-4 mt-14" onSubmit={submitHandler}>
                     {/* name */}
                     <div className="flex flex-col my-3">
                         <label htmlFor="name">Name</label>
