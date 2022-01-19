@@ -8,7 +8,7 @@ const Home = ({ rooms }) => {
   return (
     <div>
       <HeroSection />
-      <Featured rooms={rooms.rooms} />
+      <Featured rooms={rooms} />
       <HowItWorks />
     </div>
   )
@@ -20,7 +20,7 @@ const Home = ({ rooms }) => {
 
 export async function getStaticProps() {
   const res = await fetch('https://rentmeroom.com/api/rooms')
-  const rooms = await res.json()
+  const { rooms } = await res.json()
 
   return {
     props: {
@@ -29,6 +29,9 @@ export async function getStaticProps() {
     revalidate: 10, // In seconds
   }
 }
+
+
+
 
 
 export default Home

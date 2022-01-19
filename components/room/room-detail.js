@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import RoomImageContianer from './room-image'
 import { ImLocation } from 'react-icons/im';
 import { useDispatch } from 'react-redux'
@@ -11,13 +11,13 @@ import { BsBookmark } from 'react-icons/bs'
 import RoomOverview from './room-overview';
 import FullDetails from './room-fullDetails';
 
-const RoomDetails = () => {
+const RoomDetails = ({ room }) => {
 
     const [overview, setOverview] = useState(true)
     const [details, setDetails] = useState(false)
 
     const dispatch = useDispatch()
-    const { room, error } = useSelector(state => state.roomDetails)
+    // const { room, error } = useSelector(state => state.roomDetails)
 
     // toggel between overview and details
 
