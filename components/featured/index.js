@@ -6,9 +6,10 @@ import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import RoomCard from '../layout/room-card';
 import { useSelector } from 'react-redux';
 
-const Featured = () => {
-    const { rooms, error } = useSelector(state => state.allRooms)
+const Featured = ({ rooms }) => {
+    // const { rooms, error } = useSelector(state => state.allRooms)
     const { user } = useSelector(state => state.loadedUser)
+    // console.log(rooms)
 
     return (
         <div className=" sm:px-32 bg-gray-200 py-10">
@@ -33,7 +34,7 @@ const Featured = () => {
                 <div className={`${searchclass.search__filter} flex  pt-5 mb-10 `}>
                     <div className={`${classes.container}  flex gap-x-1`}>
 
-                        {rooms && rooms.slice(0, 4).map(room => (
+                        {rooms && rooms?.map(room => (
                             <div key={room._id} className={`${classes.child} px-[3%]`}>
                                 <RoomCard room={room} />
                             </div>
@@ -51,7 +52,7 @@ const Featured = () => {
                 <div className={`flex  pt-5 mb-10 ${classes.featured__list}`}>
                     <div className={`${classes.container}  flex gap-x-1`}>
 
-                        {rooms && rooms.slice(0, 4).map(room => (
+                        {rooms && rooms?.map(room => (
                             <div key={room._id} className={`${classes.child} px-[3%]`}>
                                 <RoomCard room={room} />
                             </div>
@@ -69,7 +70,7 @@ const Featured = () => {
                 <div className={`flex  pt-5 mb-10 ${classes.featured__list}`}>
                     <div className={`${classes.container}  flex gap-x-1`}>
 
-                        {rooms && rooms.slice(0, 4).map(room => (
+                        {rooms && rooms?.map(room => (
                             <div key={room._id} className={`${classes.child} px-[3%]`}>
                                 <RoomCard room={room} />
                             </div>
