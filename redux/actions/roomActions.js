@@ -27,9 +27,9 @@ export const getRooms = (req, currentPage = 1, location = "", roomCategory, tena
 
         let link = `${origin}/api/rooms?page=${currentPage}&location=${location}`
 
-        if (roomCategory) link = link.concat(`&category=${roomCategory}`)
+        if (roomCategory) link = link.concat(`&roomCategory=${roomCategory}`)
         if (tenants) link = link.concat(`&tenants=${tenants}`)
-        if (bathroomType) link = link.concat(`&bathroom=${bathroomType}`)
+        if (bathroomType) link = link.concat(`&bathroomType=${bathroomType}`)
         if (waterSupply) link = link.concat(`&waterSupply=${waterSupply}`)
         if (furnish) link = link.concat(`&furnish=${furnish}`)
 

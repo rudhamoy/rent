@@ -5,7 +5,7 @@ import RoomCard from "../layout/room-card";
 import SearchBar from './SearchBar'
 import SearchFilter from './search-filter'
 import { HiAdjustments } from 'react-icons/hi'
-import ReactPaginate from 'react-paginate';
+import { VscLocation } from 'react-icons/vsc'
 import Pagination from 'react-js-pagination'
 import Footer from '../layout/footer';
 
@@ -15,24 +15,18 @@ const Search = () => {
     let { location, page = 1 } = router.query
     page = Number(page)
 
-    const [filteredPrice, setFilteredPrice] = useState("100000")
-    const [filteredTenants, setFilteredTenants] = useState("")
-
     const [showFilter, setShowFilter] = useState(false)
 
     const closeFilter = () => {
         setShowFilter(false)
     }
 
-    useEffect(() => {
-    }, [filteredPrice])
-
     const handlePagination = (pageNumber) => {
         window.location.href = `/search?page=${pageNumber}`
     }
 
     let count = roomsCount;
-    if (location) {
+    if (filteredRoomsCount) {
         count = filteredRoomsCount
     }
 
@@ -52,16 +46,16 @@ const Search = () => {
 
             {location && (
                 <div className="px-[3%] text-lg font-semibold my-3">
-                    <p>Your search results for <span className="text-red-500">{location}</span></p>
+                    <p className="flex gap-x-2">Your search results for <span className="text-green-800 flex gap-x-1 items-center"><VscLocation className="text-xl font-semibold text-green-600" /> {location}</span></p>
                 </div>
             )}
             <div className="px-[3%] sm:px-32 flex flex-col sm:flex-row flex-wrap justify-between">
-                {rooms && rooms.filter(room => room.pricePerMonth <= filteredPrice).filter(room => !filteredTenants ? room : filteredTenants === room.tenants).map(room => (
-                    <div key={room._id} className="my-3">
+                {rooms && rooms.map(room => (
+                    <div key={room._id} className="my-3 mb-5">
                         <RoomCard room={room} id={room._id} />
                     </div>
                 ))}
-                {resPerPage < count && (
+                {resPerPage <= count && (
                     <Pagination
                         activePage={page}
                         itemsCountPerPage={resPerPage}
@@ -82,7 +76,9 @@ const Search = () => {
 
             {showFilter === true && (
                 <div className="sticky bottom-0 z-50 ">
-                    <SearchFilter close={closeFilter} />
+                    <SearchFilter
+                        close={closeFilter}
+                    />
                 </div>
             )}
         </div>

@@ -13,7 +13,7 @@ const Profile = () => {
             <h1 className="font-semibold">My Profile</h1>
             <div className="flex justify-center my-2">
                 <div className="flex flex-col items-center w-full">
-                    <img src={user?.avatar.url} alt={user?.name} className="h-[120px] w-[120px] rounded-full" />
+                    <img src={user?.avatar} alt={user?.name} className="h-[120px] w-[120px] rounded-full" />
                     <div>
                         <h1 className="text-3xl font-semibold text-center">{user?.name}</h1>
                         <div className="flex justify-between gap-x-10 py-10">

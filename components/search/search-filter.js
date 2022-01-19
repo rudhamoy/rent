@@ -1,16 +1,41 @@
 import React, { useState, useEffect } from 'react'
-import { RiCloseCircleLine } from 'react-icons/ri'
+import { useRouter } from 'next/router'
+import { RiCloseCircleLine, RiNumbersFill } from 'react-icons/ri'
 import { FiHome } from 'react-icons/fi'
 import { BiChevronDown } from 'react-icons/bi'
 import { BsPersonFill } from 'react-icons/bs'
-import Slider, { Range } from 'rc-slider';
+import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import classes from './search.module.css'
 
 const SearchFilter = ({ close }) => {
+    const router = useRouter()
+    let { location, roomCategory, tenants } = router.query
+
     // const [value, setValue] = useState([1000, 100000])
     const [min, setMin] = useState(1000)
     const [max, setMax] = useState(30000)
     const [value, setValue] = useState([])
+    const [room, setRoom] = useState('')
+    const [tenant, setTenant] = useState('')
+
+    useEffect(() => {
+        if (room === '' && roomCategory) {
+            setRoom(roomCategory)
+        } else if (room === undefined) {
+            setRoom('')
+        } else {
+            setRoom(room)
+        }
+
+        if (tenant === '' && tenants) {
+            setTenant(tenants)
+        } else if (tenant === undefined) {
+            setTenant('')
+        } else {
+            setTenant(tenant)
+        }
+    })
 
     const handleChange = (e) => {
         // e.preventDefault()
@@ -18,13 +43,17 @@ const SearchFilter = ({ close }) => {
         setValue(e)
     }
 
-    // useEffect(() => {
-    //     const ele = document.querySelector('.bubble')
+    const submitHandler = (e) => {
+        e.preventDefault();
 
-    //     if (ele) {
-    //         ele.style.left = `${Number(value / 4)}px`
-    //     }
-    // })
+        if (location) {
+            router.push(`/search?location=${location}&roomCategory=${room}&tenants=${tenant}`)
+        }
+
+        router.push(`/search?roomCategory=${room}&tenants=${tenant}`)
+
+        close()
+    }
 
     return (
         <div className='bg-[#00000066] h-[100vh] relative'>
@@ -41,25 +70,36 @@ const SearchFilter = ({ close }) => {
                 {/* room type filter */}
                 <div className="px-4 py-1 mt-1 mb-2">
                     <p className="font-semibold text-gray-800">Type of room</p>
-                    <div className="bg-gray-200 p-2 py-3 rounded-lg flex items-center gap-x-2 my-2">
+                    <div className="bg-gray-200 p-2 py-3  rounded-lg my-2 flex items-center gap-x-2 overflow-hidden relative">
                         <FiHome className='text-2xl font-bold' />
-                        <input type="text" placeholder='select type of house' className="w-full bg-gray-200 outline-none" />
-                        <button className="bg-gray-50 rounded-full p-1">
-                            <BiChevronDown />
-                        </button>
+                        <div className={`w-[120%] ${classes.select__container}`}>
+                            <select value={room} onChange={e => setRoom(e.target.value)} className="w-[120%] bg-transparent relative outline-none">
+                                <option value="select" >select type of room</option>
+                                {["1R", "1RK", "1BHK", "2R", "2RK", "2BHK", "3BHK"].map(category => (
+                                    <option key={category} value={category}>{category}</option>
+                                ))}
+
+                            </select>
+                        </div>
                     </div>
                 </div>
+
                 {/* tenant type filter */}
                 <div className="px-4 py-1 mt-1 mb-2">
                     <p className="font-semibold text-gray-800">Type of tenant</p>
-                    <div className="bg-gray-200 p-2 py-3 rounded-lg flex items-center gap-x-2 my-2">
+                    <div className="bg-gray-200 p-2 py-3  rounded-lg my-2 flex items-center gap-x-2 overflow-hidden relative">
                         <BsPersonFill className='text-2xl font-bold' />
-                        <input type="text" placeholder='select type of tenant' className="w-full bg-gray-200 outline-none" />
-                        <button className="bg-gray-50 rounded-full p-1">
-                            <BiChevronDown />
-                        </button>
+                        <div className={`w-[120%] ${classes.select__container}`}>
+                            <select value={tenant} onChange={e => setTenant(e.target.value)} className="w-[120%] bg-transparent relative outline-none">
+                                <option value="select">select type of tenant</option>
+                                {["All", "Students", "Family", "Girls", "Boys", "Bachelor",].map(tenants => (
+                                    <option key={tenants} value={tenants}>{tenants}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
                 </div>
+
                 {/* price filter */}
                 <div className="px-4 py-1 mt-1 mb-2 ">
                     <p className="font-semibold text-gray-800">Filter my price</p>
@@ -101,7 +141,7 @@ const SearchFilter = ({ close }) => {
                     </div>
                 </div>
                 <div className="bg-green-200 m-4">
-                    <button className="bg-[#512d6d] p-2 w-[100%] text-lg font-semibold text-gray-50 rounded-md">Filter</button>
+                    <button onClick={submitHandler} className="bg-[#512d6d] p-2 w-[100%] text-lg font-semibold text-gray-50 rounded-md">Filter</button>
                 </div>
             </div>
         </div>
