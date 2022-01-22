@@ -28,6 +28,23 @@ class APIFeatures {
         return this
     }
 
+    priceRange(price) {
+        const queryCopy = { ...this.queryStr }
+
+        //Remove fields from query
+        const removeFields = ['location']
+        removeFields.forEach(el => delete queryCopy[el])
+
+        //
+        this.query = this.query.find({
+            pricePerMonth: {
+                $gte: price[0],
+                $lte: price[1]
+            }
+        })
+        return this
+    }
+
     pagination(resPerPage) {
         const currentPage = Number(this.queryStr.page) || 1;
         const skip = resPerPage * (currentPage - 1);

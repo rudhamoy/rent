@@ -12,9 +12,8 @@ import cloudinary from 'cloudinary';
 const allRooms = catchAsyncErrors(async (req, res) => {
 
     const resPerPage = 4;
-    const roomsCount = await Room.countDocuments()
-
-    const apiFeatures = new APIFeatures(Room.find(), req.query).search().filter()
+    const roomsCount = await Room.countDocuments();
+    const apiFeatures = new APIFeatures(Room.find(), req.query).search().filter().priceRange([req.query.min, req.query.max])
 
     // let rooms = await apiFeatures.query
 
@@ -35,6 +34,20 @@ const allRooms = catchAsyncErrors(async (req, res) => {
         rooms
     })
 })
+
+//Search /filter
+// const handleQuery = async (req, res, query) => {
+//     const rooms = await Room.find()
+// }
+
+// const searchFilter = catchAsyncErrors(async (req, res) => {
+//     const { query } = req.body
+
+//     if(query) {
+//         console.log('query', query)
+//         await handleQuery(req, res, query)
+//     }
+// })
 
 //create a new room ==> /api/rooms
 const newRoom = catchAsyncErrors(async (req, res) => {

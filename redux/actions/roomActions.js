@@ -21,17 +21,24 @@ import {
 } from '../constants/roomConstants';
 
 //get all rooms
-export const getRooms = (req, currentPage = 1, location = "", roomCategory, tenants, bathroomType, waterSupply, furnish) => async (dispatch) => {
+export const getRooms = (req, currentPage = 1, location = "", roomCategory, tenants, min, max, electricBill, bathroomType, waterSupply, petsFriendly, furnish, parking) => async (dispatch) => {
     try {
         const { origin } = absoluteUrl(req)
+        // let min = 1000
+        // let max = 80000
 
-        let link = `${origin}/api/rooms?page=${currentPage}&location=${location}`
+        let link = `${origin}/api/rooms?page=${currentPage}&location=${location}&min=${!min ? 1000 : min}&max=${!max ? 40000 : max}`
 
         if (roomCategory) link = link.concat(`&roomCategory=${roomCategory}`)
         if (tenants) link = link.concat(`&tenants=${tenants}`)
         if (bathroomType) link = link.concat(`&bathroomType=${bathroomType}`)
+        if (electricBill) link = link.concat(`&electricBill=${electricBill}`)
         if (waterSupply) link = link.concat(`&waterSupply=${waterSupply}`)
+        if (petsFriendly) link = link.concat(`&petsFriendly=${petsFriendly}`)
+        if (parking) link = link.concat(`&parking=${parking}`)
         if (furnish) link = link.concat(`&furnish=${furnish}`)
+        // if (min) link = link.concat(`&min=${min}`)
+        // if (max) link = link.concat(`&max=${max}`)
 
         const { data } = await axios.get(link)
 
