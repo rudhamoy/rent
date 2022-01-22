@@ -19,7 +19,7 @@ const Home = ({ rooms }) => {
 // })
 
 export async function getStaticProps() {
-  const res = await fetch('https://rentmeroom.com/api/rooms')
+  const res = await fetch('https://rentmeroom.com/api/rooms?min=1000&max=30000')
   const { rooms } = await res.json()
 
   return {
