@@ -118,14 +118,14 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
                 {/** right__title & location */}
                 <div>
                     <p className="flex items-center gap-x-2 text-xs text-gray-500"> <span><ImLocation /></span> {address}</p>
-                    <h1 className="capitalize font-semibold">
+                    <h1 className="capitalize font-semibold truncate overflow-hidden ">
                         <Link href={`/room/${room._id}`}>
-                            <a>{name}</a>
+                            <a className="">{name}</a>
                         </Link>
                     </h1>
                 </div>
                 {/** price and action button */}
-                <div className="flex justify-between items-center absolute bottom-1 w-full">
+                <div className="flex justify-between items-center absolute bottom-0 w-full">
                     {/* <div className={`${pathname === '/watch-list' ? '' : 'p-2 px-3  text-[#eee] bg-[#512d6d] rounded-lg'}`}> */}
                     <p className="flex items-center"><FaRupeeSign className="font-thin" />{pricePerMonth}/month</p>
                     {/* </div> */}
