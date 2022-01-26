@@ -1,7 +1,6 @@
 import {
     ALL_ROOMS_SUCCESS,
     ALL_ROOMS_FAIL,
-    CLEAR_ERRORS,
     ROOM_DETAILS_SUCCESS,
     ROOM_DETAILS_FAIL,
     NEW_ROOM_REQUEST,
@@ -19,7 +18,7 @@ import {
     UPDATE_ROOM_RESET,
     UPDATE_ROOM_SUCCESS,
     UPDATE_ROOM_REQUEST,
-
+    CLEAR_ERRORS
 } from '../constants/roomConstants'
 
 //All rooms reducers
@@ -90,6 +89,11 @@ export const newRoomReducer = (state = { room: {} }, action) => {
             return {
                 loading: false,
                 error: action.payload
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
             }
         default:
             return state

@@ -7,7 +7,7 @@ import { db } from '../../firebase.config'
 import { v4 as uuidv4 } from 'uuid'
 
 import { toast } from 'react-toastify';
-import { newRoom } from '../../redux/actions/roomActions'
+import { newRoom, clearErrors } from '../../redux/actions/roomActions'
 
 
 const CreateRoom = () => {
@@ -40,15 +40,7 @@ const CreateRoom = () => {
     const { success, error } = useSelector(state => state.newRoom);
     const { user } = useSelector(state => state.loadedUser);
 
-    useEffect(() => {
-        if (error) {
-            toast.error(error)
-        }
 
-        if (success) {
-            router.push('/me')
-        }
-    }, [dispatch, success, error, router])
 
     //images change handler for firebase
     const onMutate = (e) => {
@@ -144,7 +136,10 @@ const CreateRoom = () => {
             }
         }
 
-        if (images.length === 0 || images.length <= 3) return toast.error("Please uplaod images or minimum 4 images")
+        if (images.length === 0 || images.length <= 3) {
+            setLoading(false)
+            return toast.error("Please uplaod images or minimum 4 images")
+        }
 
         dispatch(newRoom(roomData))
         setLoading(false)
@@ -180,6 +175,18 @@ const CreateRoom = () => {
     //     })
     // }
 
+    useEffect(() => {
+        if (error) {
+            toast.error(error)
+            setLoading(false)
+            dispatch(clearErrors())
+        }
+
+        if (success) {
+            router.push('/me')
+        }
+    }, [dispatch, success, error, router])
+
     if (loading === true) {
         return (
             <div className="bg-gray-100 p-2 rounded-md">
@@ -196,7 +203,7 @@ const CreateRoom = () => {
                 <form onSubmit={submitHandler}>
                     {/* image */}
                     <div>
-                        <label htmlFor="customFile">Choose Images</label>
+                        <label htmlFor="customFile">Choose Images <span className="text-xs text-gray-600">(min 4 images)</span></label>
                         <div className='p-2 bg-gray-50 rounded-xl'>
                             <input type="file"
                                 name="room_images"
@@ -224,7 +231,7 @@ const CreateRoom = () => {
 
                     {/* name */}
                     <div className="flex flex-col py-2">
-                        <label htmlFor="name_field">Title</label>
+                        <label htmlFor="name_field">Title <span className="text-red-600">*</span></label>
                         <input
                             type="text"
                             id="name_field"
@@ -237,7 +244,7 @@ const CreateRoom = () => {
 
                     {/* price */}
                     <div className="flex flex-col py-2">
-                        <label htmlFor="price_field">Price</label>
+                        <label htmlFor="price_field">Price <span className="text-red-600">*</span></label>
                         <input
                             type="number"
                             id="price_field"
@@ -262,7 +269,7 @@ const CreateRoom = () => {
 
                     {/* address */}
                     <div className="flex flex-col py-2">
-                        <label htmlFor="address_field">Address</label>
+                        <label htmlFor="address_field">Address <span className="text-red-600">*</span></label>
                         <input
                             type="text"
                             id="address_field"
@@ -275,7 +282,7 @@ const CreateRoom = () => {
 
                     {/* pincode */}
                     <div className="flex flex-col py-2">
-                        <label htmlFor="pincode">Pincode</label>
+                        <label htmlFor="pincode">Pincode <span className="text-red-600">*</span></label>
                         <input
                             type="number"
                             id="pincode"
@@ -322,7 +329,7 @@ const CreateRoom = () => {
 
                     {/* category */}
                     <div className="flex flex-col py-2">
-                        <label htmlFor="category_field">Room Type</label>
+                        <label htmlFor="category_field">Room Type <span className="text-red-600">*</span></label>
                         <select
                             className="p-2 bg-gray-50 rounded-xl outline-none"
                             id="room_type_field"
@@ -337,7 +344,7 @@ const CreateRoom = () => {
 
                     {/* Furnish */}
                     <div className="flex flex-col py-2">
-                        <label htmlFor="furnish">Furnish</label>
+                        <label htmlFor="furnish">Furnish <span className="text-red-600">*</span></label>
                         <select
                             className="p-2 bg-gray-50 rounded-xl outline-none"
                             id="furnish"
@@ -352,7 +359,7 @@ const CreateRoom = () => {
 
                     {/* bathroom */}
                     <div className="flex flex-col py-2">
-                        <label htmlFor="category_field">Bathroom Type</label>
+                        <label htmlFor="category_field">Bathroom Type <span className="text-red-600">*</span></label>
                         <select
                             className="p-2 bg-gray-50 rounded-xl outline-none"
                             id="room_type_field"
@@ -367,7 +374,7 @@ const CreateRoom = () => {
 
                     {/* tenants */}
                     <div className="flex flex-col py-2">
-                        <label htmlFor="category_field">Preffered Tenants</label>
+                        <label htmlFor="category_field">Preffered Tenants <span className="text-red-600">*</span></label>
                         <select
                             className="p-2 bg-gray-50 rounded-xl outline-none"
                             id="room_type_field"
@@ -382,7 +389,7 @@ const CreateRoom = () => {
 
                     {/* Electric Bill */}
                     <div className="flex flex-col py-2">
-                        <label htmlFor="electricbill">Electric Bill</label>
+                        <label htmlFor="electricbill">Electric Bill <span className="text-red-600">*</span></label>
                         <div className="flex gap-x-3">
                             <button type="button" id="electricbill" value={true} onClick={e => setElectricBill(e.target.value)} className={`${electricBill === "true" ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-3 rounded-xl shadow-md border outline-none`} >Included</button>
                             <button type="button" id="electricbill" value={false} onClick={e => setElectricBill(e.target.value)} className={`${electricBill === "false" || electricBill === false ? "bg-[#512d6d] text-gray-50" : " bg-gray-50"} p-2 px-3 rounded-xl shadow-md border outline-none`} >Not included</button>

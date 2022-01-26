@@ -18,6 +18,7 @@ import {
     DELETE_ROOM_REQUEST,
     DELETE_ROOM_SUCCESS,
     DELETE_ROOM_FAIL,
+    CLEAR_ERRORS
 } from '../constants/roomConstants';
 
 //get all rooms
@@ -170,4 +171,11 @@ export const deleteRoom = (id) => async (dispatch) => {
             payload: error.response.data.message
         })
     }
+}
+
+// Clear Errors
+export const clearErrors = () => async (dispatch) => {
+    dispatch({
+        type: CLEAR_ERRORS
+    })
 }
