@@ -8,16 +8,16 @@ import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import classes from './search.module.css'
 
-const SearchFilter = ({ close }) => {
+const SearchFilter = ({ close, room, setRoom, tenant, setTenant, value, setValue }) => {
     const router = useRouter()
     let { location, roomCategory, tenants, min, max } = router.query
 
     // const [value, setValue] = useState([1000, 100000])
     const [minPrice, setMinPrice] = useState(1000)
     const [maxPrice, setMaxPrice] = useState(30000)
-    const [value, setValue] = useState([1000, 30000])
-    const [room, setRoom] = useState('')
-    const [tenant, setTenant] = useState('')
+    // const [value, setValue] = useState([1000, 30000])
+    // const [room, setRoom] = useState('')
+    // const [tenant, setTenant] = useState('')
     // const [bathroomCheck, setBathroomCheck] = useState('')
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const SearchFilter = ({ close }) => {
             setValue([min, max])
         }
 
-    }, [min, max, location])
+    }, [min, max, location, roomCategory])
 
     const handleChange = (e) => {
         setValue(e)

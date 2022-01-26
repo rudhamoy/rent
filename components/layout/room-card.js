@@ -103,7 +103,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
 
 
     return (
-        <div className={`flex flex-col gap-y-2 sm:gap-x-2 sm:flex-row bg-white ${pathname === '/' ? 'w-[75vw]' : 'w-[95%]'}  sm:w-[520px] h-[320px] sm:h-[174px] p-2 shadow-md rounded-md`}>
+        <div className={`flex flex-col gap-y-2 sm:gap-x-2 sm:flex-row bg-white ${pathname === '/' ? 'w-[75vw]' : 'w-[98%]'}  sm:w-[520px] h-[320px] sm:h-[174px] p-2 shadow-md rounded-md`}>
             {/**left */}
             <div className="w-[100%] sm:w-[260px] relative">
                 <img src={images[0]} alt="" className="rounded-md h-[200px] sm:h-[165px] w-[100%]" />

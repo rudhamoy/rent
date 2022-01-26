@@ -6,6 +6,7 @@ import SearchBar from './SearchBar'
 import SearchFilter from './search-filter'
 import { HiAdjustments } from 'react-icons/hi'
 import { VscLocation } from 'react-icons/vsc'
+import { GrFormClose } from 'react-icons/gr'
 import Pagination from 'react-js-pagination'
 import Footer from '../layout/footer';
 
@@ -16,6 +17,9 @@ const Search = () => {
     page = Number(page)
 
     const [showFilter, setShowFilter] = useState(false)
+    const [room, setRoom] = useState('')
+    const [tenant, setTenant] = useState('')
+    const [value, setValue] = useState([1000, 30000])
 
     const closeFilter = () => {
         setShowFilter(false)
@@ -25,9 +29,36 @@ const Search = () => {
         window.location.href = `/search?page=${pageNumber}`
     }
 
+
     let count = roomsCount;
-    if (filteredRoomsCount) {
+    if (location || roomCategory || tenants && filteredRoomsCount) {
         count = filteredRoomsCount
+    }
+
+    const closeRoomHandler = () => {
+        setRoom('')
+        if (location) {
+            router.push(`/search?location=${location}&min=${value[0]}&max=${value[1]}&tenants=${tenant}`)
+        } else {
+            router.push(`/search?min=${value[0]}&max=${value[1]}&tenants=${tenant}`)
+        }
+    }
+
+    const closeTenantHandler = () => {
+        setTenant('')
+        if (location) {
+            router.push(`/search?location=${location}&min=${value[0]}&max=${value[1]}&roomCategory=${room}`)
+        } else {
+            router.push(`/search?min=${value[0]}&max=${value[1]}&roomCategory=${room}`)
+        }
+    }
+
+    const closeAddressHandler = () => {
+        router.push(`/search?min=${value[0]}&max=${value[1]}&roomCategory=${room}&tenants=${tenant}`)
+    }
+
+    const clearAll = () => {
+        router.push(`/search`)
     }
 
     return (
@@ -50,15 +81,23 @@ const Search = () => {
                 ) : null}
                 {location && (
 
-                    <p className="flex gap-x-2 p-1 px-3 bg-gray-300 rounded-xl"> <span className=" flex gap-x-1 items-center"><VscLocation className="text-xl font-semibold text-green-600" /> {location}</span></p>
+                    <p className="flex items-center gap-x-2 p-1 px-2 bg-gray-300 rounded-md text-base"> <span className=" flex gap-x-1 items-center"><VscLocation className="text-xl font-semibold text-green-600" /> {location}</span><GrFormClose onClick={() => closeAddressHandler()} className="text-lg" /></p>
                 )}
                 {roomCategory && (
-                    <p className="flex gap-x-2 p-1 px-3 bg-gray-300 rounded-xl"><span className=" flex gap-x-1 items-center">{roomCategory}</span></p>
+                    <p className="flex items-center gap-x-2 p-1 px-2 bg-gray-300 rounded-md text-base"><span className=" flex gap-x-1 items-center">{roomCategory}</span><GrFormClose onClick={() => closeRoomHandler()} className="text-lg" /></p>
                 )}
                 {tenants && (
-                    <p className="flex gap-x-2 p-1 px-3 bg-gray-300 rounded-xl"> <span className=" flex gap-x-1 items-center">{tenants}</span></p>
+                    <p className="flex items-center gap-x-2 p-1 px-2 bg-gray-300 rounded-md text-base"> <span className=" flex gap-x-1 items-center">{tenants}</span><GrFormClose onClick={() => closeTenantHandler()} className="text-lg" /></p>
                 )}
             </div>
+            {location || roomCategory || tenants ? (
+                <div className="flex justify-between text-sm text-gray-600 px-[3%]">
+                    <p>{filteredRoomsCount} results</p>
+                    <button onClick={clearAll}>clear all</button>
+                </div>
+            ) : (
+                null
+            )}
             <div className="px-[3%] sm:px-32 flex flex-col sm:flex-row flex-wrap justify-between">
                 {rooms && rooms.map(room => (
                     <div key={room._id} className="my-3 mb-5">
@@ -74,7 +113,7 @@ const Search = () => {
                     <Pagination
                         activePage={page}
                         itemsCountPerPage={resPerPage}
-                        totalItemsCount={roomsCount}
+                        totalItemsCount={count}
                         onChange={handlePagination}
                         nextPageText={'Next'}
                         prevPageText={'Prev'}
@@ -93,6 +132,12 @@ const Search = () => {
                 <div className="sticky bottom-0 z-50 ">
                     <SearchFilter
                         close={closeFilter}
+                        room={room}
+                        setRoom={setRoom}
+                        tenant={tenant}
+                        setTenant={setTenant}
+                        value={value}
+                        setValue={setValue}
                     />
                 </div>
             )}
