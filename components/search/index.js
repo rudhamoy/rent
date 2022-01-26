@@ -34,7 +34,7 @@ const Search = () => {
         <div className="relative ">
             <div className="pt-28 pb-5 px-[3%] sm:px-32 flex items-center ">
                 <SearchBar />
-                <div className="p-2 rounded-xl bg-gray-100">
+                <div className="p-1 rounded-xl bg-gray-100">
                     <HiAdjustments onClick={() => setShowFilter(!showFilter)} className="text-3xl text-gray-600" />
                 </div>
             </div>
