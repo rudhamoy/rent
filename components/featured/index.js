@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import classes from './featured.module.css'
 import searchclass from '../search/search.module.css'
 
@@ -9,7 +10,7 @@ import { useSelector } from 'react-redux';
 const Featured = ({ rooms, newRooms, featuredRoom }) => {
     // const { rooms, error } = useSelector(state => state.allRooms)
     const { user } = useSelector(state => state.loadedUser)
-    // console.log(rooms)
+    const router = useRouter()
 
     return (
         <div className=" sm:px-32 bg-gray-200 py-10">
@@ -29,7 +30,9 @@ const Featured = ({ rooms, newRooms, featuredRoom }) => {
             <div>
                 <div className="px-[3%]">
                     <h1 className="flex items-center gap-x-5 text-lg font-semibold ">New room <span><HiOutlineArrowNarrowRight /></span></h1>
-                    <p className="text-[#7a0acf]">view all new listings</p>
+                    <Link href={`/search?newRoom=true`}>
+                        <a className="text-[#7a0acf]">view all new listings</a>
+                    </Link>
                 </div>
                 <div className={`${searchclass.search__filter} flex  pt-5 mb-10 `}>
                     <div className={`${classes.container}  flex gap-x-1`}>
@@ -47,7 +50,9 @@ const Featured = ({ rooms, newRooms, featuredRoom }) => {
             <div>
                 <div className="px-[3%]">
                     <h1 className="flex items-center gap-x-5 text-lg font-semibold">Featured room <span><HiOutlineArrowNarrowRight /></span></h1>
-                    <p className="text-[#7a0acf]">view all in featured list</p>
+                    <Link href={`/search?min=1000&max=30000&featured=true`}>
+                        <a className="text-[#7a0acf]">view all in featured list</a>
+                    </Link>
                 </div>
                 <div className={`flex  pt-5 mb-10 ${classes.featured__list}`}>
                     <div className={`${classes.container}  flex gap-x-1`}>

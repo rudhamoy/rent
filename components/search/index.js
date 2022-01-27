@@ -28,8 +28,10 @@ const Search = () => {
         if (!location) {
             location = ""
         }
-        dispatch(getNewRooms())
-    }, [location, dispatch])
+        if (newRoom) {
+            dispatch(getNewRooms())
+        }
+    }, [location, dispatch, newRoom])
 
     //dispacth new room on click
     const newRoomHandler = () => {
