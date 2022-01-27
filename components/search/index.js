@@ -107,10 +107,12 @@ const Search = () => {
                     <HiAdjustments onClick={() => setShowFilter(!showFilter)} className="text-3xl text-gray-600" />
                 </div>
             </div>
+
+            {/* categories button */}
             <div className="flex gap-x-2 my-2 pl-[3%]">
-                <button onClick={() => router.push('/search')} className={`p-2 px-4 rounded-md border ${!newRoom && !featured ? 'bg-gray-800 text-gray-50' : 'bg-gray-100'} `}>All</button>
-                <button onClick={newRoomHandler} className={`p-2 px-4 rounded-md border ${newRoom ? 'bg-gray-800 text-gray-50' : 'bg-gray-100'} `}>New rooms</button>
-                <button onClick={featuredRoomList} className={`p-2 px-4 rounded-md border ${featured ? 'bg-gray-800 text-gray-50' : 'bg-gray-100'} `}>Featured rooms</button>
+                <button onClick={() => router.push('/search')} className={`outline-none p-2 px-4 rounded-md border ${!newRoom && !featured ? 'bg-gray-800 text-gray-50' : 'bg-gray-100'} `}>All</button>
+                <button onClick={newRoomHandler} className={`outline-none p-2 px-4 rounded-md border ${newRoom ? 'bg-gray-800 text-gray-50' : 'bg-gray-100'} `}>New rooms</button>
+                <button onClick={featuredRoomList} className={`outline-none p-2 px-4 rounded-md border ${featured ? 'bg-gray-800 text-gray-50' : 'bg-gray-100'} `}>Featured rooms</button>
             </div>
 
             <div className="px-[3%] text-lg font-semibold my-5 lowercase flex flex-wrap gap-x-2 items-center">
