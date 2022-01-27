@@ -23,7 +23,7 @@ export async function getStaticProps() {
   const { rooms } = await res.json()
 
   //fetch new Room list
-  const newRoomRes = await fetch(`https://rentmeroom.com/api/rooms/featured`)
+  const newRoomRes = await fetch(`https://rentmeroom.com/api/rooms?min=1000&max=30000`)
   const newRoom = await newRoomRes.json()
 
   //featured room list
