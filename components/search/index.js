@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import RoomCard from "../layout/room-card";
 import SearchBar from './SearchBar'
 import SearchFilter from './search-filter'
@@ -9,11 +9,14 @@ import { VscLocation } from 'react-icons/vsc'
 import { GrFormClose } from 'react-icons/gr'
 import Pagination from 'react-js-pagination'
 import Footer from '../layout/footer';
+import { getNewRooms } from '../../redux/actions/roomActions';
 
 const Search = () => {
+    const dispatch = useDispatch()
     const { rooms, resPerPage, roomsCount, filteredRoomsCount } = useSelector(state => state.allRooms)
+    const { rooms: newRooms, loading } = useSelector(state => state.newRoomsList)
     const router = useRouter()
-    let { location, roomCategory, tenants, page = 1 } = router.query
+    let { location, roomCategory, tenants, featured, newRoom, page = 1 } = router.query
     page = Number(page)
 
     const [showFilter, setShowFilter] = useState(false)
@@ -21,20 +24,43 @@ const Search = () => {
     const [tenant, setTenant] = useState('')
     const [value, setValue] = useState([1000, 30000])
 
+    useEffect(() => {
+        if (!location) {
+            location = ""
+        }
+        dispatch(getNewRooms())
+    }, [location, dispatch])
+
+    //dispacth new room on click
+    const newRoomHandler = () => {
+
+        window.location.href = `/search?newRoom=true`
+    }
+
+    // close filter modal
     const closeFilter = () => {
         setShowFilter(false)
     }
 
+
+    // onclick function for pagination
     const handlePagination = (pageNumber) => {
-        window.location.href = `/search?page=${pageNumber}`
+        if (roomCategory || tenants && filteredRoomsCount) {
+            window.location.href = `/search?page=${pageNumber}&min=${value[0]}&max=${value[1]}&tenants=${tenant}&roomCategory=${room}`
+        } else if (location) {
+            window.location.href = `/search?page=${pageNumber}&location=${location}&min=${value[0]}&max=${value[1]}&roomCategory=${room}&tenants=${tenant}`
+        } else {
+            window.location.href = `/search?page=${pageNumber}`
+        }
     }
 
-
+    // room count for pagination
     let count = roomsCount;
-    if (location || roomCategory || tenants && filteredRoomsCount) {
+    if (location || roomCategory || tenants || featured && filteredRoomsCount) {
         count = filteredRoomsCount
     }
 
+    // clear room cateogry filter
     const closeRoomHandler = () => {
         setRoom('')
         if (location) {
@@ -44,6 +70,7 @@ const Search = () => {
         }
     }
 
+    // clear tenant filter
     const closeTenantHandler = () => {
         setTenant('')
         if (location) {
@@ -53,13 +80,24 @@ const Search = () => {
         }
     }
 
+    // clear location filter
     const closeAddressHandler = () => {
         router.push(`/search?min=${value[0]}&max=${value[1]}&roomCategory=${room}&tenants=${tenant}`)
     }
 
+    // clear all search filter
     const clearAll = () => {
         router.push(`/search`)
     }
+
+    //render featured room list
+    const featuredRoomList = () => {
+        router.push(`/search?min=${value[0]}&max=${value[1]}&featured=true`)
+    }
+
+    // client side pagination
+    const skip = resPerPage * (page - 1);
+    const end = resPerPage * (page);
 
     return (
         <div className="relative ">
@@ -70,15 +108,22 @@ const Search = () => {
                 </div>
             </div>
             <div className="flex gap-x-2 my-2 pl-[3%]">
-                <button className="p-2 px-4 rounded-md border bg-gray-100 ">All</button>
-                <button className="p-2 px-4 rounded-md border bg-gray-100 ">New rooms</button>
-                <button className="p-2 px-4 rounded-md border bg-gray-100 ">Featured rooms</button>
+                <button onClick={() => router.push('/search')} className={`p-2 px-4 rounded-md border ${!newRoom && !featured ? 'bg-gray-800 text-gray-50' : 'bg-gray-100'} `}>All</button>
+                <button onClick={newRoomHandler} className={`p-2 px-4 rounded-md border ${newRoom ? 'bg-gray-800 text-gray-50' : 'bg-gray-100'} `}>New rooms</button>
+                <button onClick={featuredRoomList} className={`p-2 px-4 rounded-md border ${featured ? 'bg-gray-800 text-gray-50' : 'bg-gray-100'} `}>Featured rooms</button>
             </div>
 
             <div className="px-[3%] text-lg font-semibold my-5 lowercase flex flex-wrap gap-x-2 items-center">
+                {featured && (
+                    <p>Featured Room List</p>
+                )}
+                {newRoom && (
+                    <p>New Room List</p>
+                )}
                 {location || roomCategory || tenants ? (
                     <p>Your search results for:</p>
                 ) : null}
+
                 {location && (
 
                     <p className="flex items-center gap-x-2 p-1 px-2 bg-gray-300 rounded-md text-base"> <span className=" flex gap-x-1 items-center"><VscLocation className="text-xl font-semibold text-green-600" /> {location}</span><GrFormClose onClick={() => closeAddressHandler()} className="text-lg" /></p>
@@ -99,7 +144,20 @@ const Search = () => {
                 null
             )}
             <div className="px-[3%] sm:px-32 flex flex-col sm:flex-row flex-wrap justify-between">
-                {rooms && rooms.map(room => (
+                {/* fetch room list */}
+                {/* {rooms && rooms.slice(skip, end).map(room => (
+                    <div key={room._id} className="my-3 mb-5">
+                        <RoomCard room={room} id={room._id} />
+                    </div>
+                ))} */}
+                {loading === true && (
+                    <div className="p-2 bg-gray-100 rounded-md flex justify-center">Loading Room List....</div>
+                )}
+                {newRoom ? newRooms?.map(room => (
+                    <div key={room._id} className="my-3 mb-5">
+                        <RoomCard room={room} id={room._id} />
+                    </div>
+                )) : rooms.slice(skip, end).map(room => (
                     <div key={room._id} className="my-3 mb-5">
                         <RoomCard room={room} id={room._id} />
                     </div>
@@ -109,6 +167,8 @@ const Search = () => {
                         <p className="p-3 text-xl bg-gray-200 border rounded-md">No room found!</p>
                     </div>
                 )}
+
+                {/* pagination */}
                 {resPerPage <= count && (
                     <Pagination
                         activePage={page}
@@ -128,6 +188,7 @@ const Search = () => {
                 <Footer />
             </div>
 
+            {/* filter modal */}
             {showFilter === true && (
                 <div className="sticky bottom-0 z-50 ">
                     <SearchFilter

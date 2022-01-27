@@ -6,7 +6,7 @@ import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import RoomCard from '../layout/room-card';
 import { useSelector } from 'react-redux';
 
-const Featured = ({ rooms }) => {
+const Featured = ({ rooms, newRooms, featuredRoom }) => {
     // const { rooms, error } = useSelector(state => state.allRooms)
     const { user } = useSelector(state => state.loadedUser)
     // console.log(rooms)
@@ -34,7 +34,7 @@ const Featured = ({ rooms }) => {
                 <div className={`${searchclass.search__filter} flex  pt-5 mb-10 `}>
                     <div className={`${classes.container}  flex gap-x-1`}>
 
-                        {rooms && rooms?.map(room => (
+                        {newRooms && newRooms?.slice(0, 4).map(room => (
                             <div key={room._id} className={`${classes.child} px-[3%]`}>
                                 <RoomCard room={room} />
                             </div>
@@ -52,7 +52,7 @@ const Featured = ({ rooms }) => {
                 <div className={`flex  pt-5 mb-10 ${classes.featured__list}`}>
                     <div className={`${classes.container}  flex gap-x-1`}>
 
-                        {rooms && rooms?.map(room => (
+                        {featuredRoom && featuredRoom?.slice(0, 4).map(room => (
                             <div key={room._id} className={`${classes.child} px-[3%]`}>
                                 <RoomCard room={room} />
                             </div>

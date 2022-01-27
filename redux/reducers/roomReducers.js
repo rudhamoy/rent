@@ -1,6 +1,9 @@
 import {
     ALL_ROOMS_SUCCESS,
     ALL_ROOMS_FAIL,
+    NEW_ROOMS_LIST_REQUEST,
+    NEW_ROOMS_LIST_SUCCESS,
+    NEW_ROOMS_LIST_FAIL,
     ROOM_DETAILS_SUCCESS,
     ROOM_DETAILS_FAIL,
     NEW_ROOM_REQUEST,
@@ -33,6 +36,36 @@ export const allRoomsReducer = (state = { rooms: [] }, action) => {
             }
         case ALL_ROOMS_FAIL:
             return {
+                error: action.payload
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+}
+
+//All new rooms list reducers
+export const newRoomsListReducer = (state = { rooms: [] }, action) => {
+    switch (action.type) {
+        case NEW_ROOMS_LIST_REQUEST:
+            return {
+                loading: true
+            }
+
+        case NEW_ROOMS_LIST_SUCCESS:
+            return {
+                loading: false,
+                roomsCount: action.payload.roomsCount,
+                filteredRoomsCount: action.payload.filteredRoomsCount,
+                rooms: action.payload.rooms
+            }
+        case NEW_ROOMS_LIST_FAIL:
+            return {
+                loading: false,
                 error: action.payload
             }
         case CLEAR_ERRORS:

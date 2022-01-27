@@ -22,9 +22,9 @@ const allRooms = catchAsyncErrors(async (req, res) => {
     // apiFeatures.pagination(resPerPage)
     // rooms = await apiFeatures.query;
 
-    apiFeatures.pagination(resPerPage);
     let rooms = await apiFeatures.query;
     let filteredRoomsCount = rooms.length;
+    apiFeatures.pagination(resPerPage)
 
     res.status(200).json({
         success: true,
@@ -35,19 +35,21 @@ const allRooms = catchAsyncErrors(async (req, res) => {
     })
 })
 
-//Search /filter
-// const handleQuery = async (req, res, query) => {
-//     const rooms = await Room.find()
-// }
+//Get featured room list
+const featuredRooms = catchAsyncErrors(async (req, res) => {
+    const roomsCount = await Room.countDocuments();
+    const apiFeatures = new APIFeatures(Room.find(), req.query).filter().sort('-createdAt')
 
-// const searchFilter = catchAsyncErrors(async (req, res) => {
-//     const { query } = req.body
+    let rooms = await apiFeatures.query;
+    let filteredRoomsCount = rooms.length;
 
-//     if(query) {
-//         console.log('query', query)
-//         await handleQuery(req, res, query)
-//     }
-// })
+    res.status(200).json({
+        success: true,
+        roomsCount,
+        filteredRoomsCount,
+        rooms
+    })
+})
 
 //create a new room ==> /api/rooms
 const newRoom = catchAsyncErrors(async (req, res) => {
@@ -145,4 +147,4 @@ const deleteRoom = catchAsyncErrors(async (req, res) => {
     })
 })
 
-export { allRooms, newRoom, getSingleRoom, myRooms, updateRoom, deleteRoom }
+export { allRooms, newRoom, getSingleRoom, myRooms, updateRoom, deleteRoom, featuredRooms }

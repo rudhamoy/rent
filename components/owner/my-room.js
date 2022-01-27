@@ -13,12 +13,16 @@ const MyRoom = () => {
     useEffect(() => {
         dispatch(getOwnerRooms())
 
-    }, [dispatch])
+    }, [dispatch, loading])
 
     return (
         <div>
             <h1 className="font-semibold my-3">My room list</h1>
-
+            {loading === true && (
+                <div className='p-2 bg-gray-100 rounded-md text-gray-500'>
+                    <p>Loading</p>
+                </div>
+            )}
             <div className='flex flex-col sm:flex-row flex-wrap gap-y-3 sm:gap-x-4'>
                 {rooms.length > 0 ? rooms?.map(room => {
                     return <RoomCard room={room} key={room._id} />

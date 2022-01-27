@@ -53,6 +53,18 @@ class APIFeatures {
         return this
     }
 
+    sort(sortQuery) {
+        // const queryCopy = { ...this.query }
+
+        // //Remove fields from query
+        // const removeFields = ['createdAt']
+        // removeFields.forEach(el => delete queryCopy[el])
+
+        //
+        this.query = this.query.sort(sortQuery)
+        return this
+    }
+
 }
 
 export default APIFeatures

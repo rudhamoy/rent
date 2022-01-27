@@ -3,6 +3,9 @@ import absoluteUrl from 'next-absolute-url';
 import {
     ALL_ROOMS_FAIL,
     ALL_ROOMS_SUCCESS,
+    NEW_ROOMS_LIST_REQUEST,
+    NEW_ROOMS_LIST_SUCCESS,
+    NEW_ROOMS_LIST_FAIL,
     ROOM_DETAILS_FAIL,
     ROOM_DETAILS_SUCCESS,
     NEW_ROOM_REQUEST,
@@ -22,12 +25,9 @@ import {
 } from '../constants/roomConstants';
 
 //get all rooms
-export const getRooms = (req, currentPage = 1, location = "", roomCategory, tenants, min, max, electricBill, bathroomType, waterSupply, petsFriendly, furnish, parking) => async (dispatch) => {
+export const getRooms = (req, currentPage = 1, location = "", roomCategory, tenants, min, max, electricBill, bathroomType, waterSupply, petsFriendly, furnish, parking, featured) => async (dispatch) => {
     try {
         const { origin } = absoluteUrl(req)
-        // let min = 1000
-        // let max = 80000
-
         let link = `${origin}/api/rooms?page=${currentPage}&location=${location}&min=${!min ? 1000 : min}&max=${!max ? 40000 : max}`
 
         if (roomCategory) link = link.concat(`&roomCategory=${roomCategory}`)
@@ -38,6 +38,7 @@ export const getRooms = (req, currentPage = 1, location = "", roomCategory, tena
         if (petsFriendly) link = link.concat(`&petsFriendly=${petsFriendly}`)
         if (parking) link = link.concat(`&parking=${parking}`)
         if (furnish) link = link.concat(`&furnish=${furnish}`)
+        if (featured) link = link.concat(`&featured=${featured}`)
         // if (min) link = link.concat(`&min=${min}`)
         // if (max) link = link.concat(`&max=${max}`)
 
@@ -50,6 +51,30 @@ export const getRooms = (req, currentPage = 1, location = "", roomCategory, tena
     } catch (error) {
         dispatch({
             type: ALL_ROOMS_FAIL,
+            payload: error.message
+        })
+    }
+}
+
+//get all new rooms list
+export const getNewRooms = (req) => async (dispatch) => {
+    try {
+        dispatch({
+            type: NEW_ROOMS_LIST_REQUEST
+        });
+
+        const { origin } = absoluteUrl(req)
+        let link = `${origin}/api/rooms/featured`
+
+        const { data } = await axios.get(link)
+
+        dispatch({
+            type: NEW_ROOMS_LIST_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: NEW_ROOMS_LIST_FAIL,
             payload: error.message
         })
     }
