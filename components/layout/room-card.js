@@ -79,7 +79,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
             router.push('/me')
             dispatch({ type: DELETE_ROOM_RESET })
         }
-    }, [dispatch, deleteError, isDeleted])
+    }, [dispatch, deleteError, isDeleted, router])
 
     // const newBooking = async () => {
     //     const bookingData = {
