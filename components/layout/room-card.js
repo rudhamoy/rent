@@ -6,16 +6,14 @@ import { ImLocation } from 'react-icons/im'
 import { FaRupeeSign } from 'react-icons/fa'
 import { BsFillBookmarkFill, BsBookmark, BsArrowRight } from 'react-icons/bs'
 import _ from 'lodash'
-import { WATCHLIST_ADD_ROOM } from "../../redux/constants/watchListConstants"
 import { DELETE_ROOM_RESET } from "../../redux/constants/roomConstants"
-import { addToWatchlist } from '../../redux/actions/watchListActions'
+import { addToWatchlist, getWatchList } from '../../redux/actions/watchListActions'
 import { toast } from 'react-toastify'
-import axios from 'axios'
 import { deleteRoom } from '../../redux/actions/roomActions'
 
 import { MdDelete, MdModeEdit } from 'react-icons/md'
 
-const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
+const RoomCard = ({ room, clicked, setShowModal, setShowRoom, bookmarkList }) => {
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch();
     const { error: deleteError, isDeleted } = useSelector(state => state.deleteRoom)
@@ -29,6 +27,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
 
     let watchList = []
 
+    // click handler for adding to watchlist/bookmark
     const handleAddToWatchlist = () => {
         if (typeof window !== "undefined") {
             if (localStorage.getItem("watchList")) {
@@ -44,14 +43,32 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
             localStorage.setItem("watchList", JSON.stringify(unique));
 
             dispatch(addToWatchlist(unique))
-            // dispatch({
-            //     type: WATCHLIST_ADD_ROOM,
-            //     payload: unique
-            // })
+
             toast.success("Added to Bookmarks")
         }
     }
 
+    //click handler for removing from wathclist
+    const removeFromWatchlist = (id) => {
+        if (typeof window !== "undefined") {
+
+            for (let i = 0; i < bookmarkList.length; i++) {
+                // let itemsList = JSON.parse(items[i]);
+                if (bookmarkList[i]._id === id) {
+                    bookmarkList.splice(i, 1);
+                }
+            }
+
+            localStorage.setItem("watchList", JSON.stringify(bookmarkList));
+
+            dispatch(addToWatchlist(bookmarkList))
+            dispatch(getWatchList())
+        }
+
+        console.log('clicked', id)
+    }
+
+    //show modal while user booking
     const showModalHandler = () => {
         setShowModal(true);
         setShowRoom(false)
@@ -64,6 +81,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
         localStorage.setItem("addBooking", JSON.stringify(addBooking))
     }
 
+    //delete room  for owner
     const deleteHandler = (id) => {
         if (window.confirm("Are you sure ?")) {
             dispatch(deleteRoom(id))
@@ -81,26 +99,6 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
         }
     }, [dispatch, deleteError, isDeleted, router])
 
-    // const newBooking = async () => {
-    //     const bookingData = {
-    //         room: room._id
-    //     }
-
-    //     try {
-    //         const config = {
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             }
-    //         }
-
-    //         const { data } = await axios.post("/api/bookings", bookingData, config)
-
-    //         console.log(data)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
-
 
     return (
         <div className={`flex flex-col gap-y-2 sm:gap-x-2 sm:flex-row bg-white ${pathname === '/' ? 'w-[75vw]' : 'w-[98%]'}  sm:w-[520px] h-[320px] sm:h-[174px] p-2 shadow-md rounded-md`}>
@@ -108,7 +106,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom }) => {
             <div className="w-[100%] sm:w-[260px] relative">
                 <img src={images[0]} alt="" className="rounded-md h-[200px] sm:h-[165px] w-[100%]" />
                 <div className={`${pathname === "/me" || pathname === '/owner/room' ? 'hidden' : ""} absolute top-1 left-1 bg-[#00000066] p-2 rounded-full`}>
-                    {clicked === true ? <BsFillBookmarkFill className=" text-gray-50  text-lg cursor-pointer" /> : (
+                    {clicked === true ? <BsFillBookmarkFill onClick={() => removeFromWatchlist(room._id)} className=" text-gray-50  text-lg cursor-pointer" /> : (
                         <BsBookmark className={` text-gray-50  text-lg cursor-pointer`} onClick={handleAddToWatchlist} />
                     )}
                 </div>
