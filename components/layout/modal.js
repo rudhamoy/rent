@@ -53,40 +53,39 @@ const Modal = ({ setShowModal, setShowRoom }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-    }, [])
+    }, [router])
 
     return (
 
         <div className="w-[85%]  sm:w-[60%] bg-gray-50 p-3 sm:p-8 my-6 rounded-md fixed">
             <button onClick={close} className="bg-[#512d6d] h-6 w-6 rounded-full text-white flex justify-center items-center">X</button>
-            {/* <div className="my-6 bg-gray-100 rounded-md p-2">
-                <h1>Click on Confirm to Complete Your Bookings</h1>
-            </div> */}
-            {isAuthenticated === false ? (
-                <button className="p-1 px-2 text-[#eee] bg-[#512d6d] rounded-md">Please Login to Continue</button>
-            ) : (
-                <div className="pt-3">
-                    <div className=" text-gray-500 p-1 border rounded-md">
-                        <p>Room Details</p>
-                        <p className="my-2 p-2 bg-gray-200 rounded-md">Title: <span className=" text-gray-800 font-semibold">{data.name}</span></p>
-                        <p className="my-2 p-2 bg-gray-200 rounded-md">Address: <span className=" text-gray-800 font-semibold">{data.address}</span></p>
-                        <p className="my-2 p-2 bg-gray-200 rounded-md">Price: <span className=" text-gray-800 font-semibold">{data.price} / Month</span></p>
-                    </div>
-                    <form onSubmit={newBooking}>
-                        <div className="my-4 rounded-md border p-1">
-                            <p>Enter number of stay</p>
-                            <input type="number" value={tenants} onChange={(e) => setTenants(e.target.value)} className="my-2 p-2 bg-gray-200 rounded-md" />
-                        </div>
-                        <div className="flex justify-between ">
 
-                            <button className="p-2 px-3 text-[#eee] bg-[#e05219] rounded-md" onClick={close}>Cancel</button>
-                            <button className="p-2 px-3 text-[#eee] bg-[#512d6d] rounded-md" onClick={newBooking}>Confirm Booking</button>
-                        </div>
-                    </form>
+            <div className="pt-3">
+                <div className=" text-gray-500 p-1 border rounded-md">
+                    <p>Room Details</p>
+                    <p className="my-2 p-2 bg-gray-200 rounded-md">Title: <span className=" text-gray-800 font-semibold">{data.name}</span></p>
+                    <p className="my-2 p-2 bg-gray-200 rounded-md">Address: <span className=" text-gray-800 font-semibold">{data.address}</span></p>
+                    <p className="my-2 p-2 bg-gray-200 rounded-md">Price: <span className=" text-gray-800 font-semibold">{data.price} / Month</span></p>
                 </div>
+                <form onSubmit={newBooking}>
+                    <div className="my-4 rounded-md border p-1">
+                        <p>Enter number of stay</p>
+                        <input type="number" value={tenants} onChange={(e) => setTenants(e.target.value)} className="my-2 p-2 bg-gray-200 rounded-md" />
+                    </div>
+                    <div className="flex justify-between ">
 
-                // <BookingForm booking={newBooking} room={data} />
-            )}
+                        <button className="p-2 px-3 text-[#eee] bg-[#e05219] rounded-md" onClick={close}>Cancel</button>
+                        {isAuthenticated === false ? (
+                            <button onClick={() => router.push('/login')} className="p-1 px-2 text-[#eee] bg-[#512d6d] rounded-md">Login to Continue</button>
+                        ) : (
+
+                            <button className="p-2 px-3 text-[#eee] bg-[#512d6d] rounded-md" onClick={newBooking}>Confirm Booking</button>
+                        )}
+                    </div>
+                </form>
+            </div>
+
+            {/* // <BookingForm booking={newBooking} room={data} /> */}
         </div>
     )
 }

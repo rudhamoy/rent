@@ -45,7 +45,7 @@ const WatchListPage = () => {
             <div className="pt-12 py-10 px-[3%] ">
                 <div className="py-10 px-[3%] flex justify-between">
                     <h1 className="sm:text-center sm:text-2xl font-semibold ">My Bookmark List</h1>
-                    <button onClick={removeAll} className="text-[#512d6d]">clear all</button>
+                    <button onClick={removeAll} className="text-[#512d6d] outline-none">clear all</button>
                 </div>
 
                 {rooms?.length === 0 && (
@@ -56,7 +56,7 @@ const WatchListPage = () => {
                 <div className="flex flex-col gap-y-5 justify-center items-center sm:my-10">
 
                     {showModal === true &&
-                        <div className="absolute top-0 bottom-0 left-0 right-0 bg-[#00000066] z-50 flex justify-center py-[10%] ">
+                        <div className="absolute top-0 bottom-0 left-0 right-0 bg-[#00000066] z-50 flex justify-center  py-[20%] ">
                             <Modal setShowModal={setShowModal} setShowRoom={setShowRoom} />
                         </div>
                     }
