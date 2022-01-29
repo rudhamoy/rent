@@ -32,7 +32,6 @@ const WatchListPage = () => {
         }
     }
 
-    console.log('bookmarkList', bookmarkList)
 
     useEffect(() => {
         dispatch(getWatchList())

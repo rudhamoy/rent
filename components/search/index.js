@@ -4,9 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import RoomCard from "../layout/room-card";
 import SearchBar from './SearchBar'
 import SearchFilter from './search-filter'
-import { HiAdjustments } from 'react-icons/hi'
+import { HiAdjustments, HiOutlineArrowNarrowRight } from 'react-icons/hi'
 import { VscLocation } from 'react-icons/vsc'
 import { GrFormClose } from 'react-icons/gr'
+import { BiSearch } from 'react-icons/bi'
+
 import Pagination from 'react-js-pagination'
 import Footer from '../layout/footer';
 import { getNewRooms } from '../../redux/actions/roomActions';
@@ -23,6 +25,7 @@ const Search = () => {
     const [room, setRoom] = useState('')
     const [tenant, setTenant] = useState('')
     const [value, setValue] = useState([1000, 30000])
+    const [showSearch, setShowSearch] = useState(false)
 
     useEffect(() => {
         if (!location) {
@@ -101,10 +104,53 @@ const Search = () => {
     const skip = resPerPage * (page - 1);
     const end = resPerPage * (page);
 
+    // click handler for search modal
+    const showSearchHandler = (e) => {
+        e.preventDefault()
+        setShowSearch(true)
+    }
+
+    //close search modal
+    const closeSearch = () => {
+        setShowSearch(false)
+    }
+
+    //onClick handler for search
+    const onclickHandler = (location) => {
+        if (location.trim()) {
+            router.push(`/search?location=${location}`)
+            closeSearch()
+        } else {
+            router.push('/search')
+        }
+    }
+
     return (
         <div className="relative ">
-            <div className="pt-28 pb-5 px-[3%] sm:px-32 flex items-center ">
-                <SearchBar />
+
+            {/** Search bar */}
+            {showSearch === true &&
+                <div className={`absolute top-0 bottom-0 left-0 right-0 bg-[#000000e5] z-50 pt-[5%]`}>
+                    <SearchBar closeSearch={closeSearch} />
+                    <div className='mx-[3%] p-2 shadow-md border mt-[5px] bg-gray-100 rounded-md'>
+                        <ul>
+                            <li className='text-gray-500 text-sm'>suggested keyword</li>
+                            <li onClick={() => onclickHandler('abhaynagar')} className="flex justify-between items-center mb-2"><p>Abhaynagar</p> <HiOutlineArrowNarrowRight /></li>
+                            <li onClick={() => onclickHandler('krishna nagar')} className="flex justify-between items-center mb-2"><p>Krishna nagar</p> <HiOutlineArrowNarrowRight /></li>
+                            <li onClick={() => onclickHandler('radhanagar')} className="flex justify-between items-center mb-2"><p>Radha nagar</p> <HiOutlineArrowNarrowRight /></li>
+                            <li onClick={() => onclickHandler('buddha mandir')} className="flex justify-between items-center mb-2"><p>Buddha Mandir</p> <HiOutlineArrowNarrowRight /></li>
+
+                        </ul>
+                    </div>
+                </div>
+            }
+            <div className="pt-28 pb-5 px-[3%] sm:px-32 flex items-center gap-x-1">
+                {/* search bar placeholder */}
+                <div className={`bg-white w-[100%] rounded-md  overflow-hidden flex gap-x-1 items-center py-2 p-1 shadow-md`} >
+                    <BiSearch className="cursor-pointer text-2xl text-gray-600" />
+                    <input type="text" disabled={showSearch === true ? true : false} onClick={showSearchHandler} placeholder="Search for location" className="h-[100%] w-full outline-none pl-3"
+                    />
+                </div>
                 <div className="p-1 rounded-xl bg-gray-100">
                     <HiAdjustments onClick={() => setShowFilter(!showFilter)} className="text-3xl text-gray-600" />
                 </div>
@@ -161,7 +207,7 @@ const Search = () => {
                     <div key={room._id} className="my-3 mb-5">
                         <RoomCard room={room} id={room._id} />
                     </div>
-                )) : rooms.slice(skip, end).map(room => (
+                )) : rooms?.slice(skip, end).map(room => (
                     <div key={room._id} className="my-3 mb-5">
                         <RoomCard room={room} id={room._id} />
                     </div>

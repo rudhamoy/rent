@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import classes from './search.module.css'
 import { useRouter } from 'next/router'
 import { BiSearch } from 'react-icons/bi'
+import { GrFormClose } from 'react-icons/gr'
 
-const SearchBar = () => {
+const SearchBar = ({ closeSearch }) => {
     const [location, setLocation] = useState("");
 
     const router = useRouter();
@@ -19,7 +20,11 @@ const SearchBar = () => {
     }
 
     return (
-        <div className="p-2 w-[100%]">
+        <div className="px-[3%] w-[100%]">
+            <div className="flex justify-between pb-3 text-gray-50">
+                <p>Search</p>
+                <GrFormClose onClick={() => closeSearch()} className="text-2xl bg-gray-50 rounded-full" />
+            </div>
             <div>
                 <form className={`bg-white max-w-xl mx-auto  rounded-md  overflow-hidden flex gap-x-1 items-center py-2 p-1 shadow-md ${classes.search_container}`} onSubmit={submitHandler}>
                     <BiSearch onClick={submitHandler} className="cursor-pointer text-2xl text-gray-600" />

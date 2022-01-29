@@ -88,7 +88,13 @@ const Header = () => {
                         {showModal === true ? (<CgClose onClick={closeMenu} className="font-bold cursor-pointer hover:text-[blueviolet]" />) : (
                             <GiHamburgerMenu onClick={openMenu} className="cursor-pointer hover:text-[blueviolet]" />
                         )}
-                        <CgProfile className="text-3xl cursor-pointer hover:text-[blueviolet]" />
+
+                        {user ? (
+                            <img src={user?.avatar} alt="user" className="w-[32px] h-[32px] rounded-full" />
+                        ) : (
+
+                            <CgProfile className="text-3xl cursor-pointer hover:text-[blueviolet]" />
+                        )}
                     </div>
                 </div>
                 {/* modal menu */}
@@ -97,7 +103,7 @@ const Header = () => {
                         <div className="bg-white shadow-md my-2 p-4 rounded-md absolute right-[2px] sm:right-10 w-[250px] text-base text-gray-600">
                             <ul className="py-2 flex flex-col gap-y-2">
 
-                                <li >
+                                <li className="hidden sm:block" >
                                     <Link href="/watch-list">
                                         <a className="hover:no-underline flex items-center gap-x-4">Bookmarks <span className="font-bold text-[#512d6d] text-xl">2</span></a>
                                     </Link>
@@ -110,8 +116,8 @@ const Header = () => {
                                 </li>
 
                             </ul>
-                            <ul className="border-t-[1px] py-1 flex flex-col gap-y-2">
-                                {user?.role !== 'user' && (
+                            <ul className="py-1 flex flex-col gap-y-2">
+                                {user?.role === 'owner' && (
 
                                     <li>
                                         <Link href="/owner/room">

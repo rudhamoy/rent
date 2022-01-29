@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import HeroSection from "../components/hero"
 import Featured from '../components/featured'
 import HowItWorks from "../components/sections/how-it-work"
@@ -5,9 +6,15 @@ import { wrapper } from "../redux/store"
 import { getRooms } from "../redux/actions/roomActions"
 
 const Home = ({ rooms, newRooms, featuredRoom }) => {
+  const [showSearch, setShowSearch] = useState(false)
+  const absolute = {
+    position: 'absolute'
+  }
   return (
-    <div>
-      <HeroSection />
+    <div className="relative">
+      <div className={`${showSearch === true && 'fixed h-[100%] w-[100vw] z-50 bg-[#fff]'}`}>
+        <HeroSection showSearch={showSearch} setShowSearch={setShowSearch} />
+      </div>
       <Featured rooms={rooms} newRooms={newRooms} featuredRoom={featuredRoom} />
       <HowItWorks />
     </div>
