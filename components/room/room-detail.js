@@ -10,9 +10,10 @@ import Footer from '../layout/footer'
 import { BsBookmark } from 'react-icons/bs'
 import RoomOverview from './room-overview';
 import FullDetails from './room-fullDetails';
+import SingleRoomMap from './single-roomMap'
 
 const RoomDetails = ({ room }) => {
-
+    console.log(room)
     const [overview, setOverview] = useState(true)
     const [details, setDetails] = useState(false)
 
@@ -91,6 +92,11 @@ const RoomDetails = ({ room }) => {
                         )}
                     </div>
 
+                    {/* room map location */}
+                    <section className="w-[100%] rounded-md overflow-hidden">
+                        <SingleRoomMap coords={room.coordinates} />
+                    </section>
+
                     {/** CTA */}
                     <div className="hidden sm:flex mt-8 gap-x-2 items-center ">
                         <div className="w-[50%]">
@@ -103,6 +109,7 @@ const RoomDetails = ({ room }) => {
                         </div>
                     </div>
                 </div>
+
             </div>
 
             {/* footer for only mobile */}
