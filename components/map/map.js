@@ -8,7 +8,7 @@ import { addToWatchlist } from '../../redux/actions/watchListActions'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 
-const map = ({ rooms }) => {
+const Map = ({ rooms }) => {
     const [selectedLocation, setSelectedLocation] = useState({})
     const dispatch = useDispatch()
 
@@ -101,4 +101,4 @@ const map = ({ rooms }) => {
     );
 };
 
-export default map;
+export default Map;
