@@ -1,10 +1,17 @@
 import RoomDetails from '../../components/room/room-detail';
+import Head from 'next/head'
 // import { getRoomDetails } from '../../redux/actions/roomActions';
 // import { wrapper } from '../../redux/store';
 
 const RoomDetailPage = ({ room }) => {
     return (
-        <RoomDetails room={room} />
+        <>
+            <Head>
+                <title>{room.name}</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
+            <RoomDetails room={room} />
+        </>
     )
 }
 

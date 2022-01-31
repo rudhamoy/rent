@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Head from 'next/head'
 import HeroSection from "../components/hero"
 import Featured from '../components/featured'
 import HowItWorks from "../components/sections/how-it-work"
@@ -11,13 +12,19 @@ const Home = ({ rooms, newRooms, featuredRoom }) => {
     position: 'absolute'
   }
   return (
-    <div className="relative">
-      <div className={`${showSearch === true && 'fixed h-[100%] w-[100vw] z-50 bg-[#fff]'}`}>
-        <HeroSection showSearch={showSearch} setShowSearch={setShowSearch} />
+    <>
+      <Head>
+        <title>RentmeRoom | Home</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className="relative">
+        <div className={`${showSearch === true && 'fixed h-[100%] w-[100vw] z-50 bg-[#fff]'}`}>
+          <HeroSection showSearch={showSearch} setShowSearch={setShowSearch} />
+        </div>
+        <Featured rooms={rooms} newRooms={newRooms} featuredRoom={featuredRoom} />
+        <HowItWorks />
       </div>
-      <Featured rooms={rooms} newRooms={newRooms} featuredRoom={featuredRoom} />
-      <HowItWorks />
-    </div>
+    </>
   )
 }
 

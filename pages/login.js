@@ -1,11 +1,19 @@
 import Login from '../components/auth/Login';
 import { getSession } from 'next-auth/client';
+import Head from 'next/head'
+
 
 export default function LoginPage() {
     return (
-        <div className="py-20">
-            <Login />
-        </div>
+        <>
+            <Head>
+                <title>RentmeRoom | Login</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
+            <div className="py-20">
+                <Login />
+            </div>
+        </>
     )
 }
 

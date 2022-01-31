@@ -1,11 +1,17 @@
 import { wrapper } from "../redux/store"
 import { getRooms } from "../redux/actions/roomActions"
 import Search from "../components/search"
-
+import Head from 'next/head'
 
 const SearchPage = () => {
     return (
-        <Search />
+        <>
+            <Head>
+                <title>RentmeRoom | Explore</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
+            <Search />
+        </>
     )
 }
 

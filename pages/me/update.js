@@ -1,11 +1,15 @@
 import React from 'react'
 import { getSession } from 'next-auth/client'
-
+import Head from 'next/head'
 import Update from '../../components/user/update';
 
 const UpdateProfilePage = () => {
     return (
         <div>
+            <Head>
+                <title>RentmeRoom | Update Profile</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <Update />
         </div>
     )

@@ -1,10 +1,14 @@
 import MapView from '../components/map/map'
-
+import Head from 'next/head'
 
 const Map = ({ rooms }) => {
 
     return (
         <div>
+            <Head>
+                <title>RentmeRoom | Explore Map</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <MapView rooms={rooms} />
         </div>
     )

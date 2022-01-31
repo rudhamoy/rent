@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getWatchList } from '../redux/actions/watchListActions';
 import { addToWatchlist } from '../redux/actions/watchListActions'
-
+import Head from 'next/head'
 import RoomCard from '../components/layout/room-card';
 import Modal from '../components/layout/modal';
 import Footer from '../components/layout/footer'
@@ -40,7 +40,10 @@ const WatchListPage = () => {
 
     return (
         <div className='relative'>
-
+            <Head>
+                <title>RentmeRoom | Bookmark List</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <div className="pt-12 py-10 px-[3%] ">
                 <div className="py-10 px-[3%] flex justify-between">
                     <h1 className="sm:text-center sm:text-2xl font-semibold ">My Bookmark List</h1>

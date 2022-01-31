@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 
 import MyBookings from '../../components/booking/my-bookings';
 import { getSession } from 'next-auth/client';
@@ -8,6 +9,10 @@ import { myBookings } from '../../redux/actions/bookingActions'
 const MyBookingPage = () => {
     return (
         <div>
+            <Head>
+                <title>My Booking</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <MyBookings />
         </div>
     )
