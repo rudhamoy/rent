@@ -19,6 +19,7 @@ const Layout = ({ children }) => {
             <div className={`${router.pathname === '/room/[id]' || router.pathname === '/search' || router.pathname === '/watch-list' ? 'hidden' : ''}`}>
                 <Footer />
             </div>
+
             <div className={`sticky bottom-[2px]`}>
                 <MobileNav />
             </div>

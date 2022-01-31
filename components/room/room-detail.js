@@ -13,7 +13,6 @@ import FullDetails from './room-fullDetails';
 import SingleRoomMap from './single-roomMap'
 
 const RoomDetails = ({ room }) => {
-    console.log(room)
     const [overview, setOverview] = useState(true)
     const [details, setDetails] = useState(false)
 
