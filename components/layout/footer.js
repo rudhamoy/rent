@@ -46,7 +46,7 @@ const Footer = () => {
 
                     <ul>
                         <li className="flex items-center gap-x-2 my-2"><BsTelephoneFill className="text-xl" /> +91, 7085650634</li>
-                        <li className="flex items-center gap-x-2"><MdEmail className="text-xl" /> rentaloo@info.com</li>
+                        <li className="flex items-center gap-x-2"><MdEmail className="text-xl" /> rentmeroominfo@gmail.com</li>
                     </ul>
                 </div>
                 <div className="flex justify-center">
