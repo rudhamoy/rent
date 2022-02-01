@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { useSelector, useDispatch } from 'react-redux';
-
+import { useRouter } from 'next/router'
 
 const MyBookings = () => {
-
+    const router = useRouter()
     const dispatch = useDispatch();
 
     const { bookings, error } = useSelector(state => state.bookings);
@@ -15,7 +15,7 @@ const MyBookings = () => {
 
     return (
         // <div className="px-[3%] sm:px-32 py-20">
-        <div className="py-6">
+        <div className={` ${router.pathname === '/bookings/me' ? 'py-20 px-[3%]' : 'py-6'}`}>
             <h1 className="font-semibold">My Bookings List</h1>
             <div className="my-6">
                 {bookings?.map(booking => (

@@ -35,22 +35,26 @@ const Register = ({ role }) => {
         e.preventDefault();
         window.scrollTo(0, 0)
         setLoading(true)
-
-        //firebase
-        const storage = getStorage()
-        const fileName = avatar.name + `-${user.name}` + `-${uuidv4()}`
-
-        const imageRef = ref(storage, 'images/' + fileName);
         let imageUrls = ''
+        if (avatar) {
 
-        await uploadString(imageRef, avatar, "data_url").then(async snapshot => {
-            const downloadURL = await getDownloadURL(imageRef)
-            imageUrls = downloadURL
-            const data = {
-                imageUrls
-            }
-            await addDoc(collection(db, "images"), data)
-        })
+            //firebase
+            const storage = getStorage()
+            const fileName = avatar.name + `-${user.name}` + `-${uuidv4()}`
+
+            const imageRef = ref(storage, 'images/' + fileName);
+
+
+            await uploadString(imageRef, avatar, "data_url").then(async snapshot => {
+                const downloadURL = await getDownloadURL(imageRef)
+                imageUrls = downloadURL
+                const data = {
+                    imageUrls
+                }
+                await addDoc(collection(db, "images"), data)
+            })
+        }
+
 
         const userData = {
             name, email, mobile, password, avatar: imageUrls, role
@@ -102,7 +106,7 @@ const Register = ({ role }) => {
 
     return (
         <div className="h-[90vh] flex justify-center items-center overflow-hidden">
-            {loading === true ? (
+            {createLoading === true || loading === true ? (
                 <div className="w-[340px] bg-gray-50 p-2 rounded-md py-20">
                     <h1>Please Wait!</h1>
                     <p>Creating your account...</p>
@@ -175,7 +179,6 @@ const Register = ({ role }) => {
                         </div>
                         <div className=''>
                             <input
-                                required
                                 type='file'
                                 name='avatar'
                                 className='custom-file-input'
@@ -184,7 +187,7 @@ const Register = ({ role }) => {
                                 onChange={onChange}
                             />
                             <label className='' htmlFor='customFile'>
-                                Choose Avatar
+                                Choose Avatar <span className="text-yellow-600">(optional)</span>
                             </label>
                         </div>
                     </div>
