@@ -34,8 +34,8 @@ const Featured = ({ rooms, newRooms, featuredRoom }) => {
                         <a className="text-[#7a0acf]">view all new listings</a>
                     </Link>
                 </div>
-                <div className={`${searchclass.search__filter} flex  pt-5 mb-10 `}>
-                    <div className={`${classes.container}  flex gap-x-1`}>
+                <div className={` flex  pt-5 mb-10 `}>
+                    <div className={`${classes.container} ${classes.featured__list} flex gap-x-1`}>
 
                         {newRooms && newRooms?.slice(0, 4).map(room => (
                             <div key={room._id} className={`${classes.child} px-[3%]`}>
@@ -54,8 +54,8 @@ const Featured = ({ rooms, newRooms, featuredRoom }) => {
                         <a className="text-[#7a0acf]">view all in featured list</a>
                     </Link>
                 </div>
-                <div className={`flex  pt-5 mb-10 ${classes.featured__list}`}>
-                    <div className={`${classes.container}  flex gap-x-1`}>
+                <div className={`flex  pt-5 mb-10 `}>
+                    <div className={`${classes.container} ${classes.featured__list} flex gap-x-1`}>
 
                         {featuredRoom && featuredRoom?.slice(0, 4).map(room => (
                             <div key={room._id} className={`${classes.child} px-[3%]`}>
@@ -72,8 +72,8 @@ const Featured = ({ rooms, newRooms, featuredRoom }) => {
                     <h1 className="flex items-center gap-x-5 text-lg font-semibold">Rentals with attached bathroom <span><HiOutlineArrowNarrowRight /></span></h1>
                     <p className="text-[#7a0acf]">view all list</p>
                 </div>
-                <div className={`flex  pt-5 mb-10 ${classes.featured__list}`}>
-                    <div className={`${classes.container}  flex gap-x-1`}>
+                <div className={`flex  pt-5 mb-10 `}>
+                    <div className={`${classes.container} ${classes.featured__list} flex gap-x-1`}>
 
                         {rooms && rooms?.map(room => (
                             <div key={room._id} className={`${classes.child} px-[3%]`}>

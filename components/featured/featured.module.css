@@ -4,6 +4,10 @@
   scrollbar-width: none;  /* Firefox */
 }
 
+.featured__list::-webkit-scrollbar {
+  display: none;
+}
+
 .container {
   scroll-snap-type: x mandatory;
   scroll-snap-stop: always;

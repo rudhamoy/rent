@@ -12,38 +12,45 @@ const Layout = ({ children }) => {
     const router = useRouter()
 
     console.log(width)
-    if (width > 425) {
-        return (
-            <div className='flex justify-center items-center  py-24'>
-                <div>
+    // if (width > 425) {
+    //     return (
 
-                    <h1 className="uppercase text-4xl font-semibold">Rentmeroom</h1>
-                    <div className="my-[20%]">
-
-                        <p>Currently, we are optimizing for pc version</p>
-                        <p>However, we are available at mobile version</p>
-                        <p>We request you to use your mobile device for browsing as of now!</p>
-                    </div>
-                    <h2 className="text-2xl text-yellow-700">Thank you!</h2>
-                </div>
-            </div>
-        )
-    }
+    //     )
+    // }
 
     return (
-        <div className={`bg-[#eeeeee] h-full relative  `}>
-            <Header />
-            <ToastContainer position="top-right" />
-            <div>
-                {children}
-            </div>
-            <div className={`${router.pathname === '/room/[id]' || router.pathname === '/search' || router.pathname === '/watch-list' ? 'hidden' : ''}`}>
-                <Footer />
-            </div>
+        <div className={`bg-[#eeeeee] h-full relative `}>
+            {width > 425 ? (
+                <div className='flex justify-center items-center  py-24'>
+                    <div>
 
-            <div className={`sticky bottom-[2px]`}>
-                <MobileNav />
-            </div>
+                        <h1 className="uppercase text-4xl font-semibold">Rentmeroom</h1>
+                        <div className="my-[20%]">
+
+                            <p>Currently, we are optimizing for pc version</p>
+                            <p>However, we are available at mobile version</p>
+                            <p>We request you to use your mobile device for browsing as of now!</p>
+                        </div>
+                        <h2 className="text-2xl text-yellow-700">Thank you!</h2>
+                    </div>
+                </div>
+            ) : (
+                <>
+                    <Header />
+                    <ToastContainer position="top-right" />
+                    <div>
+                        {children}
+                    </div>
+                    <div className={`${router.pathname === '/room/[id]' || router.pathname === '/search' || router.pathname === '/watch-list' ? 'hidden' : ''}`}>
+                        <Footer />
+                    </div>
+
+                    <div className={`sticky bottom-[2px]`}>
+                        <MobileNav />
+                    </div>
+                </>
+            )}
+
         </div >
     )
 }
