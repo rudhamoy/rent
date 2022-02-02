@@ -25,9 +25,9 @@ const Header = () => {
 
     useEffect(() => {
         //Header
-        // if (!user) {
-        // }
-        dispatch(loadUser())
+        if (!user) {
+            dispatch(loadUser())
+        }
         const scroll = window.addEventListener("scroll", () => {
             if (window.scrollY > 70) {
                 handleShow(true)
@@ -88,7 +88,7 @@ const Header = () => {
                             <GiHamburgerMenu onClick={openMenu} className="cursor-pointer hover:text-[blueviolet]" />
                         )}
 
-                        {user && user ? (
+                        {user ? (
                             <img src={user?.avatar} alt="user" className="w-[32px] h-[32px] rounded-full" />
                         ) : (
 
@@ -116,7 +116,7 @@ const Header = () => {
 
                             </ul>
                             <ul className="py-1 flex flex-col gap-y-2">
-                                {user && user?.role === 'owner' && (
+                                {user?.role === 'owner' && (
 
                                     <li>
                                         <Link href="/owner/room">
@@ -126,7 +126,7 @@ const Header = () => {
                                     </li>
                                 )}
                                 <li>
-                                    {user && user ? (
+                                    {user ? (
                                         <Link href="/" >
                                             <a onClick={logoutHandler} className="font-semibold">Logout</a>
                                         </Link>

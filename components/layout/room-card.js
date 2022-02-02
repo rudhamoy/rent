@@ -106,12 +106,16 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom, bookmarkList }) =>
         <div className={`flex flex-col gap-y-2 sm:gap-x-2 sm:flex-row bg-white ${pathname === '/' ? 'w-[75vw]' : 'w-[98%]'}  sm:w-[520px] h-[320px] sm:h-[174px] p-2 shadow-md rounded-md`}>
             {/**left */}
             <div className="w-[100%] sm:w-[260px] relative">
-                {/* <img src={images[0]} alt="" className="rounded-md h-[200px] sm:h-[165px] w-[100%]" /> */}
-                <Image src={images[0]} height={pathname === '/' ? (width < 390 ? 280 : 220) : (width > 390 ? 210 : 220)} width={400} blurDataURL='' className="rounded-md"></Image>
+                <img src={images[0]} alt="" className="rounded-md h-[200px] sm:h-[165px] w-[100%]" />
+                {/* <Image src={images[0]} height={pathname === '/' ? (width < 390 ? 280 : 220) : (width > 390 ? 210 : 220)} width={400} blurDataURL='' className="rounded-md"></Image> */}
                 <div className={`${pathname === "/me" || pathname === '/owner/room' ? 'hidden' : ""} absolute top-1 left-1 bg-[#00000066] p-2 rounded-full`}>
                     {clicked === true ? <BsFillBookmarkFill onClick={() => removeFromWatchlist(room._id)} className=" text-gray-50  text-lg cursor-pointer" /> : (
                         <BsBookmark className={` text-gray-50  text-lg cursor-pointer`} onClick={handleAddToWatchlist} />
                     )}
+                </div>
+                <div className='flex text-xs gap-x-1 text-gray-50 absolute left-1 bottom-2'>
+                    <p className="bg-[#00000066] p-1 rounded-md">{roomCategory}</p>
+                    <p className="bg-[#00000066] p-1 rounded-md">for {tenants} tenants</p>
                 </div>
             </div>
             {/**Right */}
@@ -125,10 +129,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom, bookmarkList }) =>
                         </Link>
                     </h1>
                 </div>
-                <div className='flex text-sm text-gray-500'>
-                    <p>{roomCategory}, </p>
-                    <p> for {tenants} tenants</p>
-                </div>
+
                 {/** price and action button */}
                 <div className="flex justify-between items-center absolute bottom-0 w-full">
                     {/* <div className={`${pathname === '/watch-list' ? '' : 'p-2 px-3  text-[#eee] bg-[#512d6d] rounded-lg'}`}> */}
