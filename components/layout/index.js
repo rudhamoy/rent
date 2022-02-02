@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
 
     return (
         <div className={`bg-[#eeeeee] h-full relative `}>
-            {width > 425 ? (
+            {/* {width > 425 ? (
                 <div className='flex justify-center items-center  py-24'>
                     <div>
 
@@ -36,21 +36,21 @@ const Layout = ({ children }) => {
                 </div>
             ) : (
                 <>
-                    <Header />
-                    <ToastContainer position="top-right" />
-                    <div>
-                        {children}
-                    </div>
-                    <div className={`${router.pathname === '/room/[id]' || router.pathname === '/search' || router.pathname === '/watch-list' ? 'hidden' : ''}`}>
-                        <Footer />
-                    </div>
-
-                    <div className={`sticky bottom-[2px]`}>
-                        <MobileNav />
-                    </div>
+                    
                 </>
-            )}
+            )} */}
+            <Header />
+            <ToastContainer position="top-right" />
+            <div>
+                {children}
+            </div>
+            <div className={`${router.pathname === '/room/[id]' || router.pathname === '/search' || router.pathname === '/watch-list' ? 'hidden' : ''}`}>
+                <Footer />
+            </div>
 
+            <div className={`sticky bottom-[2px]`}>
+                <MobileNav />
+            </div>
         </div >
     )
 }
