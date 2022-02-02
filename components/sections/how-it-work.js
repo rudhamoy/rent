@@ -17,9 +17,9 @@ const StepCard = ({ step, details }) => {
 const HowItWorks = () => {
     return (
         <div className="bg-[#eeeeee] py-6 px-[4%] sm:px-32 relative">
-            <div className="absolute bg-purple-200 mix-blend-multiply filter blur-3xl rounded-full w-36 h-36 top-8"></div>
+            {/* <div className="absolute bg-purple-200 mix-blend-multiply filter blur-3xl rounded-full w-36 h-36 top-8"></div>
             <div className="absolute bg-yellow-200 mix-blend-multiply filter blur-3xl rounded-full w-36 h-36 right-24 top-8"></div>
-            <div className="absolute bg-pink-200 mix-blend-multiply filter blur-3xl rounded-full w-36 h-36 left-16 top-10"></div>
+            <div className="absolute bg-pink-200 mix-blend-multiply filter blur-3xl rounded-full w-36 h-36 left-16 top-10"></div> */}
             <h1 className="text-center text-4xl sm:text-6xl my-3 font-semibold">How it works</h1>
             <p className="text-center text-sm text-gray-600">Now, search or book your new rent house easily with just these 6 Steps</p>
             <div className="my-[100px] flex">
