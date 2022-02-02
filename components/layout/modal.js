@@ -69,7 +69,7 @@ const Modal = ({ setShowModal, setShowRoom }) => {
                 </div>
                 <form onSubmit={newBooking}>
                     <div className="my-4 rounded-md border p-1">
-                        <p>Enter number of stay</p>
+                        <p>Enter number of people</p>
                         <input type="number" value={tenants} onChange={(e) => setTenants(e.target.value)} className="my-2 p-2 bg-gray-200 rounded-md" />
                     </div>
                     <div className="flex justify-between ">

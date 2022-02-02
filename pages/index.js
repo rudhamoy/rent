@@ -50,7 +50,7 @@ export async function getStaticProps() {
       newRooms: newRoom.rooms,
       featuredRoom: featuredRoom.rooms
     },
-    revalidate: 5, // In seconds
+    revalidate: 2, // In seconds
   }
 }
 

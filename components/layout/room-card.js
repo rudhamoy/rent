@@ -25,7 +25,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom, bookmarkList }) =>
     const { pathname } = router
 
 
-    const { name, address, pricePerMonth, images, } = room;
+    const { name, address, pricePerMonth, images, roomCategory, tenants } = room;
 
     let watchList = []
 
@@ -126,8 +126,8 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom, bookmarkList }) =>
                     </h1>
                 </div>
                 <div className='flex text-sm text-gray-500'>
-                    <p>1bhk, </p>
-                    <p> for Family tenants</p>
+                    <p>{roomCategory}, </p>
+                    <p> for {tenants} tenants</p>
                 </div>
                 {/** price and action button */}
                 <div className="flex justify-between items-center absolute bottom-0 w-full">

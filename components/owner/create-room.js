@@ -99,11 +99,19 @@ const CreateRoom = () => {
             })
         }
 
-        const imageUrls = await Promise.all(
-            [...images].map((image) => storeImage(image))
-        ).catch(() => {
-            return
-        })
+        let imageUrls
+        if (images.length === 0 || images.length <= 3) {
+            setLoading(false)
+            return toast.error("Please uplaod images or minimum 4 images")
+        } else {
+
+            imageUrls = await Promise.all(
+                [...images].map((image) => storeImage(image))
+            ).catch(() => {
+                return
+            })
+        }
+
 
         console.log(imageUrls)
 
