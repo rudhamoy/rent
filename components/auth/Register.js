@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-
 import { toast } from 'react-toastify';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +18,7 @@ const Register = ({ role }) => {
         mobile: "",
         password: "",
     })
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const { name, email, password, mobile } = user
 
@@ -31,6 +30,7 @@ const Register = ({ role }) => {
 
     const { success, loading: createLoading, error } = useSelector(state => state.auth);
 
+    //submit form onClick
     const submitHandler = async (e) => {
         e.preventDefault();
         window.scrollTo(0, 0)
@@ -95,15 +95,6 @@ const Register = ({ role }) => {
         }
     }, [dispatch, success, error, loading, router])
 
-    // if (loading) {
-    //     return (
-    //         <div className="bg-gray-50 p-2 rounded-md py-20">
-    //             <h1>Please Wait!</h1>
-    //             <p>Creating your account...</p>
-    //         </div>
-    //     )
-    // }
-
     return (
         <div className="h-[90vh] flex justify-center items-center overflow-hidden">
             {createLoading === true || loading === true ? (
@@ -112,7 +103,7 @@ const Register = ({ role }) => {
                     <p>Creating your account...</p>
                 </div>
             ) : (
-                <form className="w-[90vw] bg-gray-100 rounded-md shadow-md p-4 mt-14" onSubmit={submitHandler}>
+                <form onSubmit={submitHandler} className="w-[90vw] bg-gray-100 rounded-md shadow-md p-4 mt-14">
                     {/* name */}
                     <div className="flex flex-col my-3">
                         <label htmlFor="name">Name</label>
@@ -191,10 +182,13 @@ const Register = ({ role }) => {
                             </label>
                         </div>
                     </div>
+
+
                     {/* button */}
                     <button className="bg-[#512d6d] text-md p-2 rounded-md my-3 w-full text-gray-100">
                         {loading ? ' Registering..' : 'REGISTER'}
                     </button>
+
                 </form>
             )}
         </div>

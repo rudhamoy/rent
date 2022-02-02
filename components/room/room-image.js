@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Image from 'next/image'
 import { GoChevronRight, GoChevronLeft } from 'react-icons/go'
 
 const RoomImageContianer = ({ image }) => {
@@ -13,6 +14,7 @@ const RoomImageContianer = ({ image }) => {
 
     const selectImageHandler = (i) => {
         setPreview(i)
+        console.log('clciked', i)
     }
 
     const nextImageHandler = () => {
@@ -34,13 +36,15 @@ const RoomImageContianer = ({ image }) => {
     return (
         <div>
             {/** featured image */}
-            <div className="w-[100%] rounded-md">
-                <img src={preview} alt="" className="w-full h-[240px] object-cover rounded-lg" />
+            <div className="w-[100%] rounded-md ">
+                {/* <img src={preview} alt="" className="w-full h-[240px] object-cover rounded-lg" /> */}
+                <Image src={preview} height={240} width={400} className="rounded-md"></Image>
             </div>
             {/** gallery images */}
             <div className="flex justify-between my-2 relative">
                 {image?.slice(starting, ending).map((i, index) => (
-                    <img key={index} onClick={() => selectImageHandler(i)} src={i} alt="" className="w-[31.5%] h-[80px] cursor-pointer rounded-md" />
+                    // <img key={index} onClick={() => selectImageHandler(i)} src={i} alt="" className="w-[31.5%] h-[80px] cursor-pointer rounded-md" />
+                    <Image key={index} onClick={() => selectImageHandler(i)} src={i} height={80} width={120} className="rounded-md"></Image>
                 ))}
 
                 <div className="absolute flex justify-between items-center w-full text-xl top-[45%] ">

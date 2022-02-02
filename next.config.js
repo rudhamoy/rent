@@ -17,7 +17,7 @@ module.exports = {
     NEXT_PUBLIC_GOOGLE_ANALYTICS: 'G-HRLB2EJ8L1'
   },
   images: {
-    domains: ['res.cloudinary.com'],
+    domains: ['res.cloudinary.com', 'firebasestorage.googleapis.com'],
   },
 }
 
