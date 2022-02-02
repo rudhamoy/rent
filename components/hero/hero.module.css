@@ -1,6 +1,6 @@
 
 .background_svg {
-    background-image: url(../../pages/public/images/svg/building_background.svg);
+    background-image: url(/svg/building_background.svg);
     object-fit: contain;
     background-repeat: no-repeat;
     background-position: center ; 

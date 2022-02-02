@@ -8,9 +8,7 @@ import { getRooms } from "../redux/actions/roomActions"
 
 const Home = ({ rooms, newRooms, featuredRoom }) => {
   const [showSearch, setShowSearch] = useState(false)
-  const absolute = {
-    position: 'absolute'
-  }
+
   return (
     <>
       <Head>
