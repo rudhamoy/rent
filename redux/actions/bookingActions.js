@@ -29,7 +29,7 @@ export const myBookings = (authCookie, req) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: MY_BOOKINGS_FAIL,
-            payload: error.response.data.message
+            payload: error.message
         })
     }
 }

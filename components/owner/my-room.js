@@ -24,7 +24,7 @@ const MyRoom = () => {
                 </div>
             )}
             <div className='flex flex-col sm:flex-row flex-wrap gap-y-3 sm:gap-x-4'>
-                {rooms.length > 0 ? rooms?.map(room => {
+                {rooms?.length > 0 ? rooms?.map(room => {
                     return <RoomCard room={room} key={room._id} />
                 }) : (
                     <div className='p-2 bg-gray-100 rounded-md text-gray-500'>
