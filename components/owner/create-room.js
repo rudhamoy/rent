@@ -37,7 +37,7 @@ const CreateRoom = () => {
     const dispatch = useDispatch();
     const router = useRouter()
 
-    const { success, error } = useSelector(state => state.newRoom);
+    const { success, error, loading: createLoading } = useSelector(state => state.newRoom);
     const { user } = useSelector(state => state.loadedUser);
 
 
@@ -193,9 +193,9 @@ const CreateRoom = () => {
         if (success) {
             router.push('/me')
         }
-    }, [dispatch, success, error, router])
+    }, [dispatch, success, error, router, createLoading])
 
-    if (loading === true) {
+    if (loading === true || createLoading === true) {
         return (
             <div className="bg-gray-100 p-2 rounded-md">
                 <h1>Please Wait!</h1>
