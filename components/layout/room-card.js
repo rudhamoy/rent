@@ -11,7 +11,7 @@ import { DELETE_ROOM_RESET } from "../../redux/constants/roomConstants"
 import { addToWatchlist, getWatchList } from '../../redux/actions/watchListActions'
 import { toast } from 'react-toastify'
 import { deleteRoom } from '../../redux/actions/roomActions'
-
+import useWindowDimensions from './windowSize';
 import { MdDelete, MdModeEdit } from 'react-icons/md'
 
 const RoomCard = ({ room, clicked, setShowModal, setShowRoom, bookmarkList }) => {
@@ -19,6 +19,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom, bookmarkList }) =>
     const dispatch = useDispatch();
     const { error: deleteError, isDeleted } = useSelector(state => state.deleteRoom)
 
+    const { height, width } = useWindowDimensions()
 
     const router = useRouter()
     const { pathname } = router
@@ -106,7 +107,7 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom, bookmarkList }) =>
             {/**left */}
             <div className="w-[100%] sm:w-[260px] relative">
                 {/* <img src={images[0]} alt="" className="rounded-md h-[200px] sm:h-[165px] w-[100%]" /> */}
-                <Image src={images[0]} height={pathname === '/' ? 260 : 210} width={400} blurDataURL='' className="rounded-md"></Image>
+                <Image src={images[0]} height={pathname === '/' ? width > 390 ? 250 : 280 : width > 390 ? 210 : 220} width={400} blurDataURL='' className="rounded-md"></Image>
                 <div className={`${pathname === "/me" || pathname === '/owner/room' ? 'hidden' : ""} absolute top-1 left-1 bg-[#00000066] p-2 rounded-full`}>
                     {clicked === true ? <BsFillBookmarkFill onClick={() => removeFromWatchlist(room._id)} className=" text-gray-50  text-lg cursor-pointer" /> : (
                         <BsBookmark className={` text-gray-50  text-lg cursor-pointer`} onClick={handleAddToWatchlist} />
@@ -123,6 +124,10 @@ const RoomCard = ({ room, clicked, setShowModal, setShowRoom, bookmarkList }) =>
                             <a className="">{name}</a>
                         </Link>
                     </h1>
+                </div>
+                <div className='flex text-sm text-gray-500'>
+                    <p>1bhk, </p>
+                    <p> for Family tenants</p>
                 </div>
                 {/** price and action button */}
                 <div className="flex justify-between items-center absolute bottom-0 w-full">
