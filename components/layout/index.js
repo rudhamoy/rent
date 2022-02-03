@@ -11,6 +11,8 @@ const Layout = ({ children }) => {
     const { height, width } = useWindowDimensions()
     const router = useRouter()
 
+    const footerhiddenRoute = '/room/[id]' || '/search' || '/watch-list' || 'register' || '/register/[role]'
+
     return (
         <div className={`bg-[#eeeeee] h-full relative `}>
             {/* {width > 425 ? (
@@ -37,7 +39,7 @@ const Layout = ({ children }) => {
             <div>
                 {children}
             </div>
-            <div className={`${router.pathname === '/room/[id]' || router.pathname === '/search' || router.pathname === '/watch-list' ? 'hidden' : ''}`}>
+            <div className={`${router.pathname === footerhiddenRoute ? 'hidden' : ''}`}>
                 <Footer />
             </div>
 
