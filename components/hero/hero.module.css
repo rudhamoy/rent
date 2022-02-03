@@ -1,6 +1,8 @@
 
 .background_svg {
-    background-image: url(/svg/building_background.svg);
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/rentmeroom-c4a04.appspot.com/o/images%2Fundefined-Rudhamoy%20debbarma-5067b416-680d-4750-bc8a-89c10b8c289c?alt=media&token=40fb907a-f259-4ff3-aa5c-08cc8c5d8dadg");
+    /* background-image: url(/images/agartala.jpg); */
+    /* background-image: url(/svg/building_background.svg); */
     object-fit: contain;
     background-repeat: no-repeat;
     background-position: center ; 
@@ -9,7 +11,7 @@
 .hero_heading{
     /* text-shadow: 1px 0px 6px rgba(118,118,118,0.94); */
     font-weight: bold;
-  background-image: linear-gradient(75deg, #ff0798, #4354b8, #3f7eca);
+  background-image: linear-gradient(75deg, #ffffff,#dce3eb, #f3ebebc0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 

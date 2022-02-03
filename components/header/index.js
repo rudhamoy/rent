@@ -60,8 +60,8 @@ const Header = () => {
     return (
         <div className={`${classes.header, show && "bg-gray-50 shadow-md"} fixed z-10 w-full py-[10px] sm:py-3 px-3 sm:px-32 flex items-center  text-xl font-serif `}>
             {/** logo */}
-            <div className={`flex items-center ${classes.header__logo} text-3xl`} >
-                <AiFillHome onClick={() => router.push('/')} className={`${classes.logo__icon}`} />
+            <div className={`flex items-center  ${classes.header__logo} text-3xl`} >
+                <AiFillHome onClick={() => router.push('/')} className={`${classes.logo__icon} `} />
                 <Link href="/">
                     <a className="hidden sm:block text-1xl hover:no-underline">Rent Me Room</a>
                 </Link>
