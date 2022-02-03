@@ -106,11 +106,11 @@ const Register = ({ role }) => {
                     <p>Creating your account...</p>
                 </div>
             ) : (
-                <div className="mt-11">
+                <div className="mt-14">
                     <div className={`mb-6 ${pathname === `/register/[role]` ? 'hidden' : ''}`}>
                         <Link href="/register/owner" ><a className={` underline text-[#7a0acf]`}>Click here to register as a House Owner</a></Link>
                     </div>
-                    <form onSubmit={submitHandler} className="w-[90vw] bg-gray-100 rounded-md shadow-md p-4">
+                    <form onSubmit={submitHandler} className="w-[90vw] bg-gray-100 rounded-md shadow-md p-4 mt-5">
                         {/* name */}
                         <div className="flex flex-col my-3">
                             <label htmlFor="name">Name</label>
