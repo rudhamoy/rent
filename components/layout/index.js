@@ -11,13 +11,6 @@ const Layout = ({ children }) => {
     const { height, width } = useWindowDimensions()
     const router = useRouter()
 
-    console.log(width)
-    // if (width > 425) {
-    //     return (
-
-    //     )
-    // }
-
     return (
         <div className={`bg-[#eeeeee] h-full relative `}>
             {/* {width > 425 ? (

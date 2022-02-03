@@ -29,7 +29,6 @@ const Register = ({ role }) => {
     const dispatch = useDispatch();
     const router = useRouter();
     const { pathname } = router
-    console.log(pathname)
 
     const { success, loading: createLoading, error } = useSelector(state => state.auth);
 
@@ -99,7 +98,7 @@ const Register = ({ role }) => {
     }, [dispatch, success, error, loading, router])
 
     return (
-        <div className="h-[90vh] flex justify-center items-center overflow-hidden">
+        <div className="h-[100vh] flex justify-center items-center overflow-hidden py-[15%]">
             {createLoading === true || loading === true ? (
                 <div className="w-[340px] bg-gray-50 p-2 rounded-md py-20">
                     <h1>Please Wait!</h1>
@@ -110,7 +109,7 @@ const Register = ({ role }) => {
                     <div className={`mb-6 ${pathname === `/register/[role]` ? 'hidden' : ''}`}>
                         <Link href="/register/owner" ><a className={` underline text-[#7a0acf]`}>Click here to register as a House Owner</a></Link>
                     </div>
-                    <form onSubmit={submitHandler} className="w-[90vw] bg-gray-100 rounded-md shadow-md p-4 mt-5">
+                    <form onSubmit={submitHandler} className="w-[90vw]  p-4 mt-5 overflow-hidden">
                         {/* name */}
                         <div className="flex flex-col my-3">
                             <label htmlFor="name">Name</label>
