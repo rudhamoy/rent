@@ -31,9 +31,9 @@ const HeroSection = ({ setShowSearch, showSearch }) => {
 
     return (
         <div className={`${classes.background_svg} ${showSearch === true ? 'h-[100%]' : 'h-[65vh]'}   sm:h-[85vh] relative`}>
-            <div className="absolute bg-white mix-blend-multiply filter blur-xl rounded-full w-[30%] h-[100%] "></div>
+            {/* <div className="absolute bg-white mix-blend-multiply filter blur-xl rounded-full w-[30%] h-[100%] "></div>
             <div className="absolute bg-yellow-50 mix-blend-multiply filter blur-xl rounded-full w-[30%] h-[100%] right-4"></div>
-            <div className="absolute bg-gray-100 mix-blend-multiply filter blur-xl rounded-full w-[30%] h-[100%] right-44 "></div>
+            <div className="absolute bg-gray-100 mix-blend-multiply filter blur-xl rounded-full w-[30%] h-[100%] right-44 "></div> */}
             <div className="px-[5%] sm:px-32 backdrop-blur-[3px] h-full w-full flex flex-col justify-center pt-[14vh] relative">
                 <h1 className={`text-base text-gray-700  font-bold uppercase text-center`}><span className={`text-3xl font-sans `}>Searching a rent</span> <br /> is tiring, Say no more!</h1>
                 <p className="my-2 text-center font-semibold text-gray-500">Let us find a perfect room for you</p>
