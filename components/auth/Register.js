@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import Link from 'next/link'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser, clearErrors } from '../../redux/actions/userActions'
@@ -27,6 +28,8 @@ const Register = ({ role }) => {
 
     const dispatch = useDispatch();
     const router = useRouter();
+    const { pathname } = router
+    console.log(pathname)
 
     const { success, loading: createLoading, error } = useSelector(state => state.auth);
 
@@ -103,93 +106,99 @@ const Register = ({ role }) => {
                     <p>Creating your account...</p>
                 </div>
             ) : (
-                <form onSubmit={submitHandler} className="w-[90vw] bg-gray-100 rounded-md shadow-md p-4 mt-14">
-                    {/* name */}
-                    <div className="flex flex-col my-3">
-                        <label htmlFor="name">Name</label>
-                        <input
-                            type="text"
-                            placeholder='Enter Your Name'
-                            id="name_field"
-                            name="name"
-                            value={name}
-                            onChange={onChange}
-                            className="bg-gray-300 h-10 px-2 rounded-md outline-none"
-                        />
+                <div className="mt-11">
+                    <div className={`mb-6 ${pathname === `/register/[role]` ? 'hidden' : ''}`}>
+                        <Link href="/register/owner" ><a className={` underline text-[#7a0acf]`}>Click here to register as a House Owner</a></Link>
                     </div>
-                    {/* email */}
-                    <div className="flex flex-col my-3">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="text"
-                            placeholder='Enter Your Email Address'
-                            id="email_field"
-                            name="email"
-                            value={email}
-                            onChange={onChange}
-                            className="bg-gray-300 h-10 px-2 rounded-md outline-none"
-                        />
-                    </div>
-                    {/* Phone */}
-                    <div className="flex flex-col my-3">
-                        <label htmlFor="mobile">Mobile</label>
-                        <input
-                            type="number"
-                            placeholder='Enter Your Mobile Number'
-                            id="mobile_field"
-                            name="mobile"
-                            value={mobile}
-                            onChange={onChange}
-                            className="bg-gray-300 h-10 px-2 rounded-md outline-none"
-                        />
-                    </div>
-                    {/* Password */}
-                    <div className="flex flex-col my-3">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            placeholder='Enter Your Password'
-                            id="password_field"
-                            name="password"
-                            value={password}
-                            onChange={onChange}
-                            className="bg-gray-300 h-10 px-2 rounded-md outline-none"
-                        />
-                    </div>
-                    {/* avatar */}
-                    <div className='flex gap-x-2 items-center'>
-                        <div>
-                            <figure className='w-[60px] rounded-full'>
-                                <img
-                                    src={avatarPreview}
-                                    className='h-[60px]'
-                                    alt='image'
-                                // className="rounded-full"
-                                />
-                            </figure>
-                        </div>
-                        <div className=''>
+                    <form onSubmit={submitHandler} className="w-[90vw] bg-gray-100 rounded-md shadow-md p-4">
+                        {/* name */}
+                        <div className="flex flex-col my-3">
+                            <label htmlFor="name">Name</label>
                             <input
-                                type='file'
-                                name='avatar'
-                                className='custom-file-input'
-                                id='customFile'
-                                accept='images/*'
+                                type="text"
+                                placeholder='Enter Your Name'
+                                id="name_field"
+                                name="name"
+                                value={name}
                                 onChange={onChange}
+                                className="bg-gray-300 h-10 px-2 rounded-md outline-none"
                             />
-                            <label className='' htmlFor='customFile'>
-                                Choose Avatar <span className="text-yellow-600">(optional)</span>
-                            </label>
                         </div>
-                    </div>
+                        {/* email */}
+                        <div className="flex flex-col my-3">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="text"
+                                placeholder='Enter Your Email Address'
+                                id="email_field"
+                                name="email"
+                                value={email}
+                                onChange={onChange}
+                                className="bg-gray-300 h-10 px-2 rounded-md outline-none"
+                            />
+                        </div>
+                        {/* Phone */}
+                        <div className="flex flex-col my-3">
+                            <label htmlFor="mobile">Mobile</label>
+                            <input
+                                type="number"
+                                placeholder='Enter Your Mobile Number'
+                                id="mobile_field"
+                                name="mobile"
+                                value={mobile}
+                                onChange={onChange}
+                                className="bg-gray-300 h-10 px-2 rounded-md outline-none"
+                            />
+                        </div>
+                        {/* Password */}
+                        <div className="flex flex-col my-3">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                type="password"
+                                placeholder='Enter Your Password'
+                                id="password_field"
+                                name="password"
+                                value={password}
+                                onChange={onChange}
+                                className="bg-gray-300 h-10 px-2 rounded-md outline-none"
+                            />
+                        </div>
+                        {/* avatar */}
+                        <div className='flex gap-x-2 items-center'>
+                            <div>
+                                <figure className='w-[60px] rounded-full'>
+                                    <img
+                                        src={avatarPreview}
+                                        className='h-[60px]'
+                                        alt='image'
+                                    // className="rounded-full"
+                                    />
+                                </figure>
+                            </div>
+                            <div className=''>
+                                <input
+                                    type='file'
+                                    name='avatar'
+                                    className='custom-file-input'
+                                    id='customFile'
+                                    accept='images/*'
+                                    onChange={onChange}
+                                />
+                                <label className='' htmlFor='customFile'>
+                                    Choose Avatar <span className="text-yellow-600">(optional)</span>
+                                </label>
+                            </div>
+                        </div>
 
 
-                    {/* button */}
-                    <button className="bg-[#512d6d] text-md p-2 rounded-md my-3 w-full text-gray-100">
-                        {loading ? ' Registering..' : 'REGISTER'}
-                    </button>
+                        {/* button */}
+                        <button className="bg-[#512d6d] text-md p-2 rounded-md my-3 w-full text-gray-100">
+                            {loading ? ' Registering..' : 'REGISTER'}
+                        </button>
 
-                </form>
+                    </form>
+                </div>
+
             )}
         </div>
     )
