@@ -8,10 +8,18 @@ import { useRouter } from 'next/router'
 import useWindowDimensions from './windowSize';
 
 const Layout = ({ children }) => {
+    const [pathnameValue, setPathnameValue] = useState(false)
     const { height, width } = useWindowDimensions()
     const router = useRouter()
 
-    const footerhiddenRoute = '/room/[id]' || '/search' || '/watch-list' || 'register' || '/register/[role]'
+    // useEffect(() => {
+
+    //     if (router.pathname = '/room/[id]' || '/search' || '/watch-list' || 'register' || '/register/[role]') {
+
+    //         setPathnameValue(true)
+    //     }
+    // }, [router])
+
 
     return (
         <div className={`bg-[#eeeeee] h-full relative `}>
@@ -39,7 +47,7 @@ const Layout = ({ children }) => {
             <div>
                 {children}
             </div>
-            <div className={`${router.pathname === footerhiddenRoute ? 'hidden' : ''}`}>
+            <div className={`${router.pathname === '/room/[id]' || '/search' ? 'hidden' : 'inline-block'}`}>
                 <Footer />
             </div>
 

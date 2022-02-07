@@ -193,7 +193,7 @@ const Search = () => {
             ) : (
                 null
             )}
-            <div className="px-[3%] sm:px-32 flex flex-col sm:flex-row flex-wrap justify-between">
+            <div className="px-[3%] sm:px-32 flex flex-col sm:flex-row flex-wrap justify-center">
                 {/* fetch room list */}
                 {/* {rooms && rooms.slice(skip, end).map(room => (
                     <div key={room._id} className="my-3 mb-5">

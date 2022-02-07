@@ -5,6 +5,7 @@ import { getSession } from 'next-auth/client'
 import Account from '../../components/user/Account'
 import { wrapper } from '../../redux/store'
 import { myBookings } from '../../redux/actions/bookingActions'
+import Footer from '../../components/layout/footer'
 // import { getOwnerRooms } from '../../redux/actions/roomActions'
 
 
@@ -17,6 +18,7 @@ const MyProfilePage = () => {
             </Head>
             <div>
                 <Account />
+                <Footer />
             </div>
         </>
     )

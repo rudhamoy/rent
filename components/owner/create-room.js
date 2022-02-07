@@ -112,7 +112,11 @@ const CreateRoom = () => {
             })
         }
 
-
+        // const imageUrls = await Promise.all(
+        //     [...images].map((image) => storeImage(image))
+        // ).catch(() => {
+        //     return
+        // })
         console.log(imageUrls)
 
 
@@ -197,7 +201,7 @@ const CreateRoom = () => {
 
     if (loading === true || createLoading === true) {
         return (
-            <div className="bg-gray-100 p-2 rounded-md">
+            <div className="bg-gray-100 p-2 rounded-md h-[100vh]">
                 <h1>Please Wait!</h1>
                 <p>Creating your room...</p>
             </div>

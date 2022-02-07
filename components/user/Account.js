@@ -25,7 +25,7 @@ const Account = () => {
     }
 
     return (
-        <div className="py-20">
+        <div className="py-20 ">
             <h1 className="px-[3%] font-semibold">My Account</h1>
             <div className={`${classes.account__btn} flex gap-x-4 my-4 px-[3%]`}>
                 <button onClick={ProfileClickHandler} className={`${showProfile === true ? "bg-gray-800 text-gray-50 shadow-xl" : "bg-gray-50 text-gray-500"}  rounded-xl p-2 font-semibold px-5 outline-none`}>

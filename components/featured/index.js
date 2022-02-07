@@ -35,7 +35,7 @@ const Featured = ({ rooms, newRooms, featuredRoom }) => {
                     </Link>
                 </div>
                 <div className={` flex  pt-5 mb-10 `}>
-                    <div className={`${classes.container} ${classes.featured__list} flex gap-x-1`}>
+                    <div className={`${classes.container} ${classes.featured__list} flex `}>
 
                         {newRooms && newRooms?.slice(0, 4).map(room => (
                             <div key={room._id} className={`${classes.child} px-[3%]`}>
@@ -55,7 +55,7 @@ const Featured = ({ rooms, newRooms, featuredRoom }) => {
                     </Link>
                 </div>
                 <div className={`flex  pt-5 mb-10 `}>
-                    <div className={`${classes.container} ${classes.featured__list} flex gap-x-1`}>
+                    <div className={`${classes.container} ${classes.featured__list} flex`}>
 
                         {featuredRoom && featuredRoom?.slice(0, 4).map(room => (
                             <div key={room._id} className={`${classes.child} px-[3%]`}>
@@ -73,7 +73,7 @@ const Featured = ({ rooms, newRooms, featuredRoom }) => {
                     <p className="text-[#7a0acf]">view all list</p>
                 </div>
                 <div className={`flex  pt-5 mb-10 `}>
-                    <div className={`${classes.container} ${classes.featured__list} flex gap-x-1`}>
+                    <div className={`${classes.container} ${classes.featured__list} flex`}>
 
                         {rooms && rooms?.map(room => (
                             <div key={room._id} className={`${classes.child} px-[3%]`}>
@@ -90,5 +90,3 @@ const Featured = ({ rooms, newRooms, featuredRoom }) => {
 }
 
 export default Featured
-
-

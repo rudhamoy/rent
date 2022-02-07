@@ -3,6 +3,7 @@ import Head from 'next/head'
 import HeroSection from "../components/hero"
 import Featured from '../components/featured'
 import HowItWorks from "../components/sections/how-it-work"
+import Footer from '../components/layout/footer'
 import { wrapper } from "../redux/store"
 import { getRooms } from "../redux/actions/roomActions"
 
@@ -21,6 +22,7 @@ const Home = ({ rooms, newRooms, featuredRoom }) => {
         </div>
         <Featured rooms={rooms} newRooms={newRooms} featuredRoom={featuredRoom} />
         <HowItWorks />
+        <Footer />
       </div>
     </>
   )
