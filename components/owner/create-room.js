@@ -33,6 +33,8 @@ const CreateRoom = () => {
     const [latitude, setLatitude] = useState(0)
     const [coordinate, setCoordinate] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [uploadProgress, setUploadProgress] = useState(0)
+    const [imageNum, setImageNum] = useState([])
 
     const dispatch = useDispatch();
     const router = useRouter()
@@ -86,6 +88,7 @@ const CreateRoom = () => {
                     (snapshot) => {
                         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                         console.log("Upload is " + progress + "% done")
+                        setUploadProgress(progress)
                     },
                     (error) => {
                         reject(error)
@@ -118,6 +121,7 @@ const CreateRoom = () => {
         //     return
         // })
         console.log(imageUrls)
+        setImageNum(imageUrls)
 
 
         const formDataCopy = {
@@ -201,9 +205,15 @@ const CreateRoom = () => {
 
     if (loading === true || createLoading === true) {
         return (
-            <div className="bg-gray-100 p-2 rounded-md h-[100vh]">
-                <h1>Please Wait!</h1>
-                <p>Creating your room...</p>
+            <div className="bg-gray-100 p-2 rounded-md h-[90vh] flex justify-center ">
+                <div>
+                    <h1>Please Wait!</h1>
+                    <p>Creating your room...</p>
+                    <div className="my-[20%]">
+                        <p>Upload is <br></br> <span className="text-6xl text-green-600">{parseFloat(uploadProgress).toFixed(2)}</span> % done</p>
+                        <p>Total {imageNum.length} images</p>
+                    </div>
+                </div>
             </div>
         )
     }
