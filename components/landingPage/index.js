@@ -31,7 +31,7 @@ const Landing = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3000/api/landing', data)
+        axios.post('https://rentmeroom.com/api/landing', data)
         toast.success(`${msg} is submitted`)
         setMsg('')
         dispatch(getLandingList())

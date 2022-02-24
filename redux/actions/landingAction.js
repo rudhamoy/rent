@@ -11,7 +11,7 @@ export const getLandingList = () => async (dispatch) => {
         // const { origin } = absoluteUrl(req)
         // let link = `${origin}/api/landing`
 
-        const { data } = await axios.get('http://localhost:3000/api/landing')
+        const { data } = await axios.get('https://rentmeroom.com/api/landing')
 
         dispatch({
             type: ALL_LANDING_SUCCESS,
