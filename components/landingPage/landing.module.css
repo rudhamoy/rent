@@ -1,0 +1,28 @@
+/* .landing__bg {
+    background-image: url("https://media.tripinvites.com/places/agartala/kunjaban-palace/beautiful-architecture-of-kunjaban-palace.jpg");
+    object-fit: contain;
+    background-repeat: no-repeat;
+    height: 100vh;
+} */
+
+.landing_heading{
+    text-shadow: 1px 0px 6px rgba(241, 238, 238, 0.199);
+    font-weight: bold;
+  background-image: linear-gradient(75deg, #810eec,#bd1fec, #ee2ae4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+.landing__scroll {
+   height: 100vh;
+  scroll-snap-type: y mandatory;
+  scroll-snap-stop: always;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.child {
+   height: 100vh;
+  scroll-snap-align: start;
+}

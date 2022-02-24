@@ -22,9 +22,10 @@ function MyApp({ Component, pageProps }) {
         `}
       </Script>
 
-      <Layout>
+      {/* <Layout>
         <Component {...pageProps} />
-      </Layout>
+      </Layout> */}
+      <Layout />
     </>
   )
 }

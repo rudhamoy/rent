@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/router'
 import useWindowDimensions from './windowSize';
+import Landing from '../landingPage';
 
 const Layout = ({ children }) => {
     const [pathnameValue, setPathnameValue] = useState(false)
@@ -23,7 +24,7 @@ const Layout = ({ children }) => {
 
     return (
         <div className={`bg-[#eeeeee] h-full relative `}>
-            {/* {width > 425 ? (
+            {width > 425 ? (
                 <div className='flex justify-center items-center  py-24'>
                     <div>
 
@@ -39,10 +40,13 @@ const Layout = ({ children }) => {
                 </div>
             ) : (
                 <>
-                    
+                    <ToastContainer position="top-right" />
+                    <Landing />
                 </>
-            )} */}
-            <Header />
+            )}
+
+
+            {/* <Header />
             <ToastContainer position="top-right" />
             <div>
                 {children}
@@ -53,7 +57,7 @@ const Layout = ({ children }) => {
 
             <div className={`sticky bottom-[2px]`}>
                 <MobileNav />
-            </div>
+            </div> */}
         </div >
     )
 }

@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import { addBookingReducer, bookingsReducer } from './bookingReducers';
+import { allLandingReducer } from './landingReducer';
 import { notificationReducer } from './notificationReducers';
 import { allRoomsReducer, newRoomsListReducer, newRoomReducer, roomDetailsReducer, myRoomlistReducer, deleteRoomReducer, roomUpdateReducer } from './roomReducers'
 import { authReducer, loadedUserReducer, updateUserReducer, forgotPasswordReducer } from './userReducers';
 import { allWatchListReducer, watchListReducer } from './watchListReducers';
+
 
 const reducers = combineReducers({
     allRooms: allRoomsReducer,
@@ -22,6 +24,7 @@ const reducers = combineReducers({
     addBooking: addBookingReducer,
     bookings: bookingsReducer,
     notification: notificationReducer,
+    allLanding: allLandingReducer
 })
 
 export default reducers

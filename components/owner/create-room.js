@@ -105,7 +105,7 @@ const CreateRoom = () => {
         let imageUrls
         if (images.length === 0 || images.length <= 3) {
             setLoading(false)
-            return toast.error("Please uplaod images or minimum 4 images")
+            return toast.error("Please upload minimum 4 images")
         } else {
 
             imageUrls = await Promise.all(
@@ -113,6 +113,7 @@ const CreateRoom = () => {
             ).catch(() => {
                 return
             })
+            setImageNum(imageUrls)
         }
 
         // const imageUrls = await Promise.all(
@@ -121,7 +122,7 @@ const CreateRoom = () => {
         //     return
         // })
         console.log(imageUrls)
-        setImageNum(imageUrls)
+        // setImageNum(imageUrls)
 
 
         const formDataCopy = {
@@ -154,7 +155,7 @@ const CreateRoom = () => {
 
         if (images.length === 0 || images.length <= 3) {
             setLoading(false)
-            return toast.error("Please uplaod images or minimum 4 images")
+            return toast.error("Please upload minimum 4 images")
         }
 
         dispatch(newRoom(roomData))
