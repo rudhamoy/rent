@@ -76,7 +76,7 @@ const Landing = () => {
                     </div>
                 </div>
                 <div className="px-[5%] pt-10">
-                    <p className="text-gray-700 font-semibold">Tell us which area/locality you'd like to find a room, at what price range?</p>
+                    <p className="text-gray-700 font-semibold">Tell us which area/locality you would like to find a room, at what price range?</p>
                     <div className='py-2'>
                         <input type="text" value={msg} onChange={e => setMsg(e.target.value)} placeholder='enter area/locality, price range' className="bg-gray-50 py-2 px-1 rounded-md w-full" />
                         <button onClick={submitHandler} className="bg-gray-700 rounded-md text-gray-100 p-2 px-6 mt-4">Enter</button>
@@ -109,7 +109,7 @@ const Landing = () => {
                     <p className="text-gray-600"><span className="text-[300%] uppercase font-bold">rentmeroom</span> </p>
                     <div className="py-4 flex flex-col px-[3%] gap-y-4">
                         <div className="flex ">
-                            <p>We've been there too, struggling to find a rent house of choice.</p>
+                            <p>We have been there too, struggling to find a rent house of choice.</p>
                             <Struggle />
                         </div>
                         <div className="flex items-center gap-x-[5%]">
