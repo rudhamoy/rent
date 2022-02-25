@@ -13,6 +13,7 @@ import useWindowDimensions from '../layout/windowSize';
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import { getLandingList } from '../../redux/actions/landingAction'
+import absoluteUrl from 'next-absolute-url';
 
 const Landing = () => {
     const [msg, setMsg] = useState('')
@@ -29,9 +30,12 @@ const Landing = () => {
         queryName: msg
     }
 
+    // const { origin } = absoluteUrl(req)
+    // let link = `${origin}/api/landing`
+
     const submitHandler = (e) => {
         e.preventDefault()
-        axios.post('https://rentmeroom.com/api/landing', data)
+        axios.post('https://www.rentmeroom.com/api/landing', data)
         toast.success(`${msg} is submitted`)
         setMsg('')
         dispatch(getLandingList())
@@ -40,7 +44,7 @@ const Landing = () => {
 
     // let arr = ['mango', 'apple', 'mango', 'orange', 'pine', 'orange']
     let realData = {}
-    for (let i = 0; i < landings.length; i++) {
+    for (let i = 0; i < landings?.length; i++) {
         let data = landings[i].queryName
 
         realData[data] = realData[data] ? realData[data] + 1 : 1
@@ -89,7 +93,7 @@ const Landing = () => {
                         <p className="p-2 rounded-md bg-gray-300 text-xs">Krishna Nagar <span className="text-yellow-900 ml-2">7</span></p>
                         <p className="p-2 rounded-md bg-gray-300 text-xs">Bijoy Kumar <span className="text-yellow-900 ml-2">1</span></p>
                         <p className="p-2 rounded-md bg-gray-300 text-xs">5000-7000</p> */}
-                        {enteries.map((data, index) => (
+                        {enteries?.map((data, index) => (
                             <p key={index} className="p-2 rounded-md bg-gray-300 text-xs">{data[0]} <span className="text-yellow-900 ml-2">{data[1]}</span></p>
                         ))}
                     </div>

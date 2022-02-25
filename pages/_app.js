@@ -2,11 +2,15 @@ import 'tailwindcss/tailwind.css'
 import Layout from '../components/layout'
 import { wrapper } from '../redux/store'
 import Script from 'next/script'
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-
+      <Head>
+        <title>RentmeRoom </title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Script
         // strategy="lazyOnload"
         strategy="afterInteractive"
