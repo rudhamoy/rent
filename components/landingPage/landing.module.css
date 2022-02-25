@@ -1,9 +1,10 @@
-/* .landing__bg {
-    background-image: url("https://media.tripinvites.com/places/agartala/kunjaban-palace/beautiful-architecture-of-kunjaban-palace.jpg");
+.landing__bg {
+    /* background-image: url("https://media.tripinvites.com/places/agartala/kunjaban-palace/beautiful-architecture-of-kunjaban-palace.jpg");
     object-fit: contain;
     background-repeat: no-repeat;
-    height: 100vh;
-} */
+    height: 100vh; */
+    background-color: rgba(241, 253, 253, 0.397);
+}
 
 .landing_heading{
     text-shadow: 1px 0px 6px rgba(241, 238, 238, 0.199);
