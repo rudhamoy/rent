@@ -16,6 +16,7 @@ import { getLandingList, createLanding } from '../../redux/actions/landingAction
 import absoluteUrl from 'next-absolute-url';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer'
+import Rentmeroom from './Rentmeroom';
 
 const Landing = () => {
     const [msg, setMsg] = useState('')
@@ -86,8 +87,8 @@ const Landing = () => {
 
             {/* first landing page */}
             <div className={`${classes.landing__bg} ${classes.child} flex flex-col justify-center items-center relative`}>
-                <div className="absolute -left-5 -top-6 flex items-center">
-                    <Logo />
+                <div className="absolute -left-4 -top-5 flex items-center">
+                    <Rentmeroom />
                 </div>
                 <div>
                     <div className="absolute bg-yellow-200 mix-blend-multiply filter blur-xl rounded-full w-[30%] h-[30%] -right-3 top-0"></div>
