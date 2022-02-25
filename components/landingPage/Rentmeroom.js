@@ -6,8 +6,8 @@ const Rentmeroom = () => {
             <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 1920 1080">
                 <defs>
                     <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
-                        <stop offset="0" stop-color="#512d6d" />
-                        <stop offset="1" stop-color="#512d6d" stop-opacity="0.949" />
+                        <stop offset="0" stopColor="#512d6d" />
+                        <stop offset="1" stopColor="#512d6d" stopOpacity="0.949" />
                     </linearGradient>
                     <clipPath id="clip-Web_1920_5">
                         <rect width="1920" height="1080" />
