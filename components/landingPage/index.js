@@ -12,7 +12,7 @@ import Register from '../auth/Register'
 import useWindowDimensions from '../layout/windowSize';
 import axios from 'axios'
 import { toast } from 'react-toastify';
-import { getLandingList } from '../../redux/actions/landingAction'
+import { getLandingList, createLanding } from '../../redux/actions/landingAction'
 import absoluteUrl from 'next-absolute-url';
 
 const Landing = () => {
@@ -25,17 +25,18 @@ const Landing = () => {
     const dispatch = useDispatch()
     const { landings } = useSelector(state => state.allLanding)
 
-
     const data = {
         queryName: msg
     }
 
-    // const { origin } = absoluteUrl(req)
-    // let link = `${origin}/api/landing`
 
-    const submitHandler = (e) => {
+
+    const submitHandler = (e, req) => {
         e.preventDefault()
-        axios.post('https://www.rentmeroom.com/api/landing', data)
+        const { origin } = absoluteUrl(req)
+        let link = `${origin}/api/landing`
+        axios.post(link, data)
+        // dispatch(createLanding(data))
         toast.success(`${msg} is submitted`)
         setMsg('')
         dispatch(getLandingList())

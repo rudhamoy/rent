@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { addBookingReducer, bookingsReducer } from './bookingReducers';
-import { allLandingReducer } from './landingReducer';
+import { allLandingReducer, createLandingReducer } from './landingReducer';
 import { notificationReducer } from './notificationReducers';
 import { allRoomsReducer, newRoomsListReducer, newRoomReducer, roomDetailsReducer, myRoomlistReducer, deleteRoomReducer, roomUpdateReducer } from './roomReducers'
 import { authReducer, loadedUserReducer, updateUserReducer, forgotPasswordReducer } from './userReducers';
@@ -24,7 +24,8 @@ const reducers = combineReducers({
     addBooking: addBookingReducer,
     bookings: bookingsReducer,
     notification: notificationReducer,
-    allLanding: allLandingReducer
+    allLanding: allLandingReducer,
+    createLanding: createLandingReducer,
 })
 
 export default reducers
