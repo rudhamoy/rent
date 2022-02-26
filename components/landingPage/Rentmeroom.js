@@ -1,10 +1,39 @@
-import React from 'react'
+import { useEffect } from 'react'
+import { motion, useAnimation } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
 
 const Rentmeroom = () => {
+
+    const { ref, inView } = useInView()
+
+    const animation = useAnimation()
+
+    useEffect(() => {
+        if (inView) {
+            animation.start({
+                y: 0,
+                opacity: 1,
+                transition: {
+                    type: 'spring',
+                    duration: 1,
+                    bounce: 0.2,
+
+                }
+            })
+        }
+        if (!inView) {
+            animation.start({
+                y: '-10vh',
+                opacity: 0
+            })
+        }
+    }, [inView])
+
     return (
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 1920 1080">
-                <defs>
+        <div ref={ref}>
+            <motion.svg animate={animation} xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 1920 1080">
+                <defs
+                >
                     <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
                         <stop offset="0" stopColor="#512d6d" />
                         <stop offset="1" stopColor="#512d6d" stopOpacity="0.949" />
@@ -33,7 +62,7 @@ const Rentmeroom = () => {
                         </g>
                     </g>
                 </g>
-            </svg>
+            </motion.svg>
         </div>
     )
 }

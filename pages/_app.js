@@ -3,6 +3,7 @@ import Layout from '../components/layout'
 import { wrapper } from '../redux/store'
 import Script from 'next/script'
 import Head from 'next/head'
+import Pixel from '../components/Pixel'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -10,6 +11,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>RentmeRoom </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
       </Head>
       <Script
         // strategy="lazyOnload"
@@ -29,6 +31,7 @@ function MyApp({ Component, pageProps }) {
       {/* <Layout>
         <Component {...pageProps} />
       </Layout> */}
+      <Pixel name='FACEBOOK_PIXEL_1' />
       <Layout />
     </>
   )

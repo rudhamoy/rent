@@ -105,7 +105,7 @@ const Landing = () => {
                     </div>
                 </div>
                 <div className="px-[5%] pt-10 h-[50%] ">
-                    <p className="text-gray-600 text-sm font-semibold">Tell us which area/locality you would like to find a room, at what price range?</p>
+                    <p className="text-gray-600 text-sm font-semibold">Tell us at which area/locality you would like to find a room, at what price range?</p>
                     <div className='py-2'>
                         <input type="text" value={msg} onChange={e => setMsg(e.target.value)} placeholder='enter area/locality, price range' className="bg-gray-50 border  py-2 px-1 rounded-md w-full" />
                         <button onClick={submitHandler} className="bg-gray-600 shadow-lg border rounded-md text-gray-100 p-2 px-6 mt-4">Enter</button>
