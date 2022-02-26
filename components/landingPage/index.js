@@ -70,7 +70,7 @@ const Landing = () => {
                     type: 'spring',
                     duration: 1,
                     bounce: 0.1,
-
+                    ease: 'easeIn'
                 }
             })
         }
@@ -87,8 +87,8 @@ const Landing = () => {
 
             {/* first landing page */}
             <div className={`${classes.landing__bg} ${classes.child} flex flex-col justify-center items-center relative`}>
-                <div className="absolute -left-4 -top-5 flex items-center">
-                    <Rentmeroom />
+                <div className="absolute top-0 left-2 flex items-center">
+                    <h1 className="font-mono text-xl text-[#512d6d] font-bold uppercase m-1">Rentmeroom</h1>
                 </div>
                 <div>
                     <div className="absolute bg-yellow-200 mix-blend-multiply filter blur-xl rounded-full w-[30%] h-[30%] -right-3 top-0"></div>

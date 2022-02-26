@@ -193,7 +193,7 @@ const Register = ({ role }) => {
 
 
                         {/* button */}
-                        <button className="bg-[#512d6d] text-md p-2 rounded-md my-3 w-full text-gray-100">
+                        <button className="bg-gray-600 text-md p-2 rounded-md my-3 w-full text-gray-100">
                             {loading ? ' Registering..' : 'REGISTER'}
                         </button>
 
