@@ -1,13 +1,13 @@
 import axios from 'axios';
 import absoluteUrl from 'next-absolute-url';
-import { ALL_LANDING_FAIL, ALL_LANDING_SUCCESS, NEW_LANDING_REQUEST, NEW_LANDING_SUCCESS, NEW_LANDING_FAIL, CLEAR_ERRORS } from "../constants/landingConstant"
+import { ALL_LANDING_REQUEST, ALL_LANDING_FAIL, ALL_LANDING_SUCCESS, NEW_LANDING_REQUEST, NEW_LANDING_SUCCESS, NEW_LANDING_FAIL, CLEAR_ERRORS } from "../constants/landingConstant"
 
 //get all landing list
 export const getLandingList = (req) => async (dispatch) => {
     try {
-        // dispatch({
-        //     type: ALL_LANDING_REQUEST,
-        // })
+        dispatch({
+            type: ALL_LANDING_REQUEST,
+        })
         const { origin } = absoluteUrl(req)
         let link = `${origin}/api/landing`
 

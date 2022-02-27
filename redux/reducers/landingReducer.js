@@ -4,19 +4,22 @@ import { ALL_LANDING_FAIL, ALL_LANDING_SUCCESS, ALL_LANDING_REQUEST, NEW_LANDING
 //All landing reducers
 export const allLandingReducer = (state = { landings: [] }, action) => {
     switch (action.type) {
-        // case ALL_LANDING_REQUEST:
-        //     return { loading: true, landings: [] };
+        case ALL_LANDING_REQUEST:
+            return { loading: true, landings: [] };
         case ALL_LANDING_SUCCESS:
             return {
+                loading: false,
                 landings: action.payload
             }
         case ALL_LANDING_FAIL:
             return {
+                loading: false,
                 error: action.payload
             }
         case CLEAR_ERRORS:
             return {
                 ...state,
+                loading: false,
                 error: null
             }
         default:

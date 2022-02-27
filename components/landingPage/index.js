@@ -2,13 +2,11 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import classes from './landing.module.css'
-import Typewriter from 'typewriter-effect';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs'
 import Struggle from './Struggle'
 import Hardwork from './Hardwork'
 import Comfortable from './Comfortable'
 import Register from '../auth/Register'
-import Logo from './Logo'
 import useWindowDimensions from '../layout/windowSize';
 import axios from 'axios'
 import { toast } from 'react-toastify';
@@ -16,7 +14,7 @@ import { getLandingList, createLanding } from '../../redux/actions/landingAction
 import absoluteUrl from 'next-absolute-url';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer'
-import Rentmeroom from './Rentmeroom';
+import Loader from './Loader'
 
 const Landing = () => {
     const [msg, setMsg] = useState('')
@@ -26,7 +24,7 @@ const Landing = () => {
     const { height, width } = useWindowDimensions();
 
     const dispatch = useDispatch()
-    const { landings } = useSelector(state => state.allLanding)
+    const { landings, loading } = useSelector(state => state.allLanding)
 
     const data = {
         queryName: msg
@@ -112,11 +110,18 @@ const Landing = () => {
                     </div>
                     <p className="text-xs my-2">People are interested on :</p>
                     <div className=" py-1  h-[55%] overflow-y-scroll">
-                        <div className="flex gap-1.5 flex-wrap">
-                            {enteries?.map((data, index) => (
-                                <p key={index} className="p-2 rounded-md border bg-white text-xs">{data[0]} <span className="text-yellow-900 ml-2">{data[1]}</span></p>
-                            ))}
-                        </div>
+                        {loading === true ? (
+                            <div className="h-[100%] flex justify-center items-center">
+                                <Loader />
+                            </div>
+                        ) : (
+
+                            <div className="flex gap-1.5 flex-wrap">
+                                {enteries?.map((data, index) => (
+                                    <p key={index} className="p-2 rounded-md border bg-white text-xs">{data[0]} <span className="text-yellow-900 ml-2">{data[1]}</span></p>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
                 {/* arrow down */}
@@ -170,7 +175,7 @@ const Landing = () => {
             <div className={` flex flex-col justify-center items-center px-[3%] bg-gray-50 relative ${classes.child}`}>
                 <div className=" text-center">
                     <p animate={animation} className="uppercase font-semibold">Sign up now </p>
-                    <p animate={animation}>To get <span className="font-semibold text-yellow-700">personal recommendation</span> from us on searching rent house</p>
+                    <p animate={animation}>And get <span className="font-semibold text-yellow-700">free recommendation</span> from us on searching rent house</p>
                 </div>
                 <div
                     animate={animation}
