@@ -175,7 +175,7 @@ const Landing = () => {
             <div className={` flex flex-col justify-center items-center px-[3%] bg-gray-50 relative ${classes.child}`}>
                 <div className=" text-center">
                     <p animate={animation} className="uppercase font-semibold">Sign up now </p>
-                    <p animate={animation}>And get <span className="font-semibold text-yellow-700">free recommendation</span> from us on searching rent house</p>
+                    <p animate={animation}>for <span className="font-bold text-yellow-700">free recommendation & help</span> from our team on searching your rent house anywhere in Agartala</p>
                 </div>
                 <div
                     animate={animation}
