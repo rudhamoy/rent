@@ -186,6 +186,7 @@ const Landing = () => {
                         </div>
                     )}
                     <Register />
+                    <p className="text-center text-sm text-yellow-700">hurry! only 14 sign up left for free help</p>
                 </div>
                 {/* arrow down */}
                 <div className="mt-10">
