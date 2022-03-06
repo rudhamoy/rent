@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux'
 import classes from './landing.module.css'
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs'
@@ -7,6 +8,7 @@ import Struggle from './Struggle'
 import Hardwork from './Hardwork'
 import Comfortable from './Comfortable'
 import Register from '../auth/Register'
+import Login from '../auth/Login'
 import useWindowDimensions from '../layout/windowSize';
 import axios from 'axios'
 import { toast } from 'react-toastify';
@@ -19,8 +21,19 @@ import Loader from './Loader'
 const Landing = () => {
     const [msg, setMsg] = useState('')
     const [datas, setDatas] = useState([])
+    const [userView, setUserView] = useState(true)
+    const [ownerView, setOwnerView] = useState(false)
+
+    //router
     const router = useRouter();
     const { pathname } = router
+
+    let role
+    if (pathname === '/register/[role]') {
+        role = 'owner'
+    }
+
+    //gettting the current height and width of the device
     const { height, width } = useWindowDimensions();
 
     const dispatch = useDispatch()
@@ -58,6 +71,17 @@ const Landing = () => {
     const { ref, inView } = useInView()
     const animation = useAnimation()
 
+    //sign up toggle 0wner - User
+    const showUserView = () => {
+        setUserView(true)
+        setOwnerView(false)
+    }
+
+    const showOwnerView = () => {
+        setUserView(false)
+        setOwnerView(true)
+    }
+
     useEffect(() => {
         dispatch(getLandingList())
         if (inView) {
@@ -85,9 +109,9 @@ const Landing = () => {
 
             {/* first landing page */}
             <div className={`${classes.landing__bg} ${classes.child} flex flex-col justify-center items-center relative`}>
-                <div className="absolute top-0 left-2 flex items-center">
+                {/* <div className="absolute top-0 left-2 flex items-center">
                     <h1 className="font-sans text-xl text-[#512d6d] font-bold  m-1">rentmeroom.com</h1>
-                </div>
+                </div> */}
                 <div>
                     <div className="absolute bg-yellow-200 mix-blend-multiply filter blur-xl rounded-full w-[30%] h-[30%] -right-3 top-0"></div>
                     <div className="absolute bg-pink-200 mix-blend-multiply filter blur-xl rounded-full w-[30%] h-[30%] -left-3 top-0"></div>
@@ -172,24 +196,41 @@ const Landing = () => {
             </div>
 
             {/* Third landing page */}
-            <div className={` flex flex-col justify-center items-center px-[3%] bg-gray-50 relative ${classes.child}`}>
-                <div className=" text-center">
-                    <p animate={animation} className="uppercase font-semibold">Sign up now </p>
-                    <p animate={animation}>for <span className="font-bold text-yellow-700">free recommendation & help</span> from our team on searching your rent house anywhere in Agartala</p>
+            <div className={`px-[3%] flex flex-col justify-center bg-gray-50 pt-4 relative ${classes.child}`}>
+                <div className="text-sm text-center">
+                    <p className="uppercase text-3xl font-semibold">Sign up now </p>
                 </div>
-                <div
-                    animate={animation}
-                >
-                    {pathname === '/login' && (
-                        <div className="p-2 bg-gray-300 rounded-md text-center mt-2">
-                            <p>You have successfully sign up with us</p>
+
+                {/* switch/toggle button for mobile */}
+                <div className="flex gap-x-1 my-6 p-1 bg-[lightgrey] rounded-lg shadow-sm w-[100%]">
+                    <button onClick={showUserView} className={`p-2 px-3  w-[100%] rounded-lg font-semibold outline-none ${userView === true ? 'bg-gray-50' : 'text-gray-500'}`}>as User (tenants)</button>
+                    <button onClick={showOwnerView} className={`p-2 px-3  w-[100%] rounded-lg font-semibold outline-none ${ownerView === true ? 'bg-gray-50' : 'text-gray-500'}`}>as Owner</button>
+                </div>
+                <div className="flex justify-center items-center">
+                    {userView === true && (
+                        <div>
+                            <p>And get <span className="text-yellow-700 font-semibold">free recommendatoin & help</span> from our team on searching your rent house anywhere in <span className="text-lg font-semibold">Agartala</span></p>
+                            <div className="my-5 flex gap-x-2 items-center">
+                                <button onClick={() => router.push('/register')} className="text-gray-100 bg-[#512d6d] rounded-md p-2 px-4 outline-none">Sign Up Now</button>
+                                <p>or</p>
+                                <button onClick={() => router.push('/login')} className="text-gray-100 bg-[#512d6d] rounded-md p-2 px-4 outline-none">Sign In</button>
+                            </div>
                         </div>
                     )}
-                    <Register />
-                    <p className="text-center text-sm text-yellow-700 -mt-2">hurry up! only <span className="font-bold text-gray-600">14</span> sign up left for free help</p>
+                    {ownerView === true && (
+                        <div>
+                            <p>And start listing your room absolutly free with us</p>
+                            <div className="my-5 flex gap-x-2 items-center">
+                                <button onClick={() => router.push('/register/owner')} className="text-gray-100 bg-[#512d6d] rounded-md p-2 px-3 outline-none">Sign Up Now</button>
+                                <p>or</p>
+                                <button onClick={() => router.push('/login')} className="text-gray-100 bg-[#512d6d] rounded-md p-2 px-4 outline-none">Sign In</button>
+                            </div>
+                        </div>
+                    )}
                 </div>
+
                 {/* arrow down */}
-                <div className="mt-10">
+                <div className="mt-10 flex justify-center">
                     <BsArrowUp className="p-2 rounded-full bg-[#00000038] text-[40px] text-gray-600" />
                 </div>
             </div>

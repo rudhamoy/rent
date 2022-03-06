@@ -18,10 +18,11 @@ const Register = ({ role }) => {
         email: "",
         mobile: "",
         password: "",
+        broker: ""
     })
     const [loading, setLoading] = useState(false);
 
-    const { name, email, password, mobile } = user
+    const { name, email, password, mobile, broker } = user
 
     const [avatar, setAvatar] = useState(null)
     const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg');
@@ -39,7 +40,6 @@ const Register = ({ role }) => {
         setLoading(true)
         let imageUrls = ''
         if (avatar) {
-
             //firebase
             const storage = getStorage()
             const fileName = avatar.name + `-${user.name}` + `-${uuidv4()}`
@@ -59,7 +59,7 @@ const Register = ({ role }) => {
 
 
         const userData = {
-            name, email, mobile, password, avatar: imageUrls, role
+            broker, name, email, mobile, password, avatar: imageUrls, role
         }
 
         dispatch(registerUser(userData))
@@ -85,6 +85,14 @@ const Register = ({ role }) => {
 
     }
 
+    let userType
+
+    if (pathname === '/register/[role]') {
+        userType = 'Owner'
+    } else {
+        userType = 'User'
+    }
+
     useEffect(() => {
         if (error) {
             toast.error(error)
@@ -95,23 +103,28 @@ const Register = ({ role }) => {
         if (success) {
             router.push('/login')
         }
-    }, [dispatch, success, error, loading, router])
+    }, [dispatch, success, error, router])
 
     return (
-        <div className="flex justify-center items-center overflow-hidden ">
-            {/* <div className="h-[100vh] flex justify-center items-center overflow-hidden py-[15%]"> */}
+        // <div className="flex justify-center items-center overflow-hidden ">
+        <div className="h-[100vh] flex justify-center items-center overflow-hidden py-[15%]">
             {createLoading === true || loading === true ? (
                 <div className="w-[340px] bg-gray-50 p-2 rounded-md py-20">
                     <h1>Please Wait!</h1>
                     <p>Creating your account...</p>
                 </div>
             ) : (
-                <div className="">
-                    {/* <div className="mt-14"> */}
+                // <div className="">
+                <div className="mt-14">
                     {/* <div className={`mb-6 ${pathname === `/register/[role]` ? 'hidden' : ''}`}>
                         <Link href="/register/owner" ><a className={` underline text-[#7a0acf]`}>Click here to register as a House Owner</a></Link>
                     </div> */}
-                    <form onSubmit={submitHandler} className="w-[90vw]  p-4 mt-5 overflow-hidden">
+
+                    <div className={`mb-6 `}>
+                        <p className="text-gray-700 text-2xl text-center">{userType} Registration</p>
+                    </div>
+
+                    <form onSubmit={submitHandler} className="w-[90vw] p-4 overflow-hidden">
                         {/* name */}
                         <div className="flex flex-col my-3">
                             <label htmlFor="name">Name</label>
@@ -164,8 +177,23 @@ const Register = ({ role }) => {
                                 className="bg-gray-300 h-10 px-2 rounded-md outline-none"
                             />
                         </div>
+                        {/* Broker Name*/}
+                        {pathname === '/register/[role]' ? (
+                            <div className="flex flex-col my-3">
+                                <label htmlFor="name">Affiliated With <span className="text-yellow-600">(optional)</span></label>
+                                <input
+                                    type="text"
+                                    placeholder='Affiliator Name'
+                                    id="broker_field"
+                                    name="broker"
+                                    value={broker}
+                                    onChange={onChange}
+                                    className="bg-gray-300 h-10 px-2 rounded-md outline-none"
+                                />
+                            </div>
+                        ) : null}
                         {/* avatar */}
-                        {/* <div className='flex gap-x-2 items-center'>
+                        <div className='flex gap-x-2 items-center'>
                             <div>
                                 <figure className='w-[60px] rounded-full'>
                                     <img
@@ -189,7 +217,7 @@ const Register = ({ role }) => {
                                     Choose Avatar <span className="text-yellow-600">(optional)</span>
                                 </label>
                             </div>
-                        </div> */}
+                        </div>
 
 
                         {/* button */}
@@ -201,7 +229,7 @@ const Register = ({ role }) => {
                 </div>
 
             )}
-        </div>
+        </div >
     )
 }
 

@@ -14,7 +14,7 @@ module.exports = {
 
     mapbox_key: 'pk.eyJ1IjoicmVudG1lcm9vbSIsImEiOiJja3oxYnp6OGowMHIzMndvZG04ZWl0MWExIn0.rkqimVUoF4Mu1rURwq5iQQ',
 
-    NEXT_PUBLIC_GOOGLE_ANALYTICS: 'G-HRLB2EJ8L1'
+    NEXT_PUBLIC_GOOGLE_ANALYTICS: 'UA-221883292-1'
   },
   images: {
     domains: ['res.cloudinary.com', 'firebasestorage.googleapis.com'],

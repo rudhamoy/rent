@@ -25,9 +25,10 @@ const registerUser = catchAsyncErrors(async (req, res) => {
     //     scale: "scale"
     // });
 
-    const { name, email, mobile, password, role, avatar } = req.body;
+    const { name, email, mobile, password, role, avatar, broker } = req.body;
 
     const user = await User.create({
+        broker,
         name,
         email,
         mobile,

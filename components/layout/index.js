@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
 
     return (
         <div className={`bg-[#eeeeee] h-full relative `}>
-            {width > 425 ? (
+            {/* {width > 425 ? (
                 <div className='flex justify-center items-center  py-24'>
                     <div>
 
@@ -43,21 +43,41 @@ const Layout = ({ children }) => {
                     <ToastContainer position="top-right" />
                     <Landing />
                 </>
+            )} */}
+
+            {width > 425 ? (
+                <div className='flex justify-center items-center  py-20'>
+                    <div>
+                        <h1 className="uppercase text-4xl font-semibold">Rentmeroom</h1>
+                        <div className="my-[20%]">
+
+                            <p>Currently, we are optimizing for pc version</p>
+                            <p>However, we are available at mobile version</p>
+                            <p>We request you to use your mobile device for browsing as of now!</p>
+                        </div>
+                        <h2 className="text-2xl text-yellow-700">Thank you!</h2>
+                    </div>
+                </div>
+            ) : (
+                <>
+                    <div className={`${router.pathname === '/landing' && 'hidden'}`}>
+                        <Header />
+                    </div>
+                    <ToastContainer position="top-right" />
+                    <div>
+                        {children}
+                    </div>
+                    <div className={`${router.pathname === '/room/[id]' || '/search' ? 'hidden' : 'inline-block'}`}>
+                        <Footer />
+                    </div>
+
+                    <div className={`sticky bottom-[2px] ${router.pathname === '/landing' && 'hidden'}`}>
+                        <MobileNav />
+                    </div>
+                </>
             )}
 
 
-            {/* <Header />
-            <ToastContainer position="top-right" />
-            <div>
-                {children}
-            </div>
-            <div className={`${router.pathname === '/room/[id]' || '/search' ? 'hidden' : 'inline-block'}`}>
-                <Footer />
-            </div>
-
-            <div className={`sticky bottom-[2px]`}>
-                <MobileNav />
-            </div> */}
         </div >
     )
 }

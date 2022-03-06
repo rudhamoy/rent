@@ -7,7 +7,6 @@ export default function RegisterPage() {
     const router = useRouter()
 
     const { role } = router.query
-
     console.log(role)
 
     return (

@@ -19,6 +19,8 @@ const Header = () => {
 
     const dispatch = useDispatch();
     const router = useRouter()
+    //for landing page
+    const { pathname } = router
 
     // Get user from state => redux
     const { user, loading } = useSelector(state => state.loadedUser);
@@ -58,12 +60,13 @@ const Header = () => {
     }
 
     return (
-        <div className={`${classes.header, show && "bg-gray-50 shadow-md"} fixed z-10 w-full py-[10px] sm:py-3 px-3 sm:px-32 flex items-center  text-xl font-serif `}>
+        <div className={`${classes.header, show && "bg-gray-50 shadow-md"}  fixed z-10 w-[100vw] py-[10px] sm:py-3 px-3 sm:px-32 flex items-center  text-xl font-serif `}>
             {/** logo */}
             <div className={`flex items-center  ${classes.header__logo} text-3xl`} >
-                <AiFillHome onClick={() => router.push('/')} className={`${classes.logo__icon} `} />
+                {/* <AiFillHome onClick={() => router.push('/')} className={`${classes.logo__icon} `} /> */}
+
                 <Link href="/">
-                    <a className="hidden sm:block text-1xl hover:no-underline">Rent Me Room</a>
+                    <a className=" text-sm hover:no-underline">rentmeroom</a>
                 </Link>
             </div>
 
@@ -82,7 +85,7 @@ const Header = () => {
 
             {/** profile */}
             <div className="relative">
-                <div className={`${classes.burger_conatainer} ml-[40vw] sm:ml-12 sm:m-0`}>
+                <div className={`${classes.burger_conatainer} ml-[30vw] sm:ml-12 sm:m-0`}>
                     <div className={`${classes.header__profile} bg-gray-100 px-[12px;] text-[16px]`}>
                         {showModal === true ? (<CgClose onClick={closeMenu} className="font-bold cursor-pointer hover:text-[blueviolet]" />) : (
                             <GiHamburgerMenu onClick={openMenu} className="cursor-pointer hover:text-[blueviolet]" />

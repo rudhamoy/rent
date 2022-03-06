@@ -4,6 +4,10 @@ import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 
 const userSchema = new mongoose.Schema({
+    broker: {
+        type: String,
+        default: "admin"
+    },
     name: {
         type: String,
         requires: [true, "Please Enter your email"],

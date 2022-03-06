@@ -21,18 +21,18 @@ function MyApp({ Component, pageProps }) {
       <Script id="google_analytics" strategy="afterInteractive">
         {`
             window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
     gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS});
         `}
       </Script>
 
-      {/* <Layout>
+      <Layout>
         <Component {...pageProps} />
-      </Layout> */}
+      </Layout>
       <Pixel name='FACEBOOK_PIXEL_1' />
-      <Layout />
+      {/* <Layout /> */}
     </>
   )
 }

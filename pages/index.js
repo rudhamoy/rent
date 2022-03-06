@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import HeroSection from "../components/hero"
 import Featured from '../components/featured'
@@ -7,8 +7,28 @@ import Footer from '../components/layout/footer'
 import { wrapper } from "../redux/store"
 import { getRooms } from "../redux/actions/roomActions"
 
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
+import { getSession } from 'next-auth/client';
+
 const Home = ({ rooms, newRooms, featuredRoom }) => {
   const [showSearch, setShowSearch] = useState(false)
+  const router = useRouter()
+  // const { user } = useSelector(state => state.loadedUser)
+
+  async function myFunction() {
+    const session = await getSession()
+    console.log(session)
+    if (!session) {
+      router.push('/landing')
+    }
+  }
+
+  useEffect(() => {
+    myFunction()
+  }, [])
+
+
 
   return (
     <>
@@ -53,5 +73,7 @@ export async function getStaticProps() {
     revalidate: 2, // In seconds
   }
 }
+
+
 
 export default Home
