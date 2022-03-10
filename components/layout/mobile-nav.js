@@ -15,7 +15,7 @@ const MobileNav = () => {
             <section className={`${router.pathname === '/search' ? 'mb-3 relative w-[100%] flex justify-end' : 'hidden'} `}>
                 <button onClick={() => router.push(`/map`)} className="p-2 rounded-md bg-gray-800 text-gray-50 outline-none sticky right-2 text-xs">explore map</button>
             </section>
-            <footer className={`${router.pathname === '/room/[id]' ? 'hidden' : 'block sm:hidden bg-gray-100 border py-[6px] mx-1 rounded-md'} ${router.pathname === '/login' && 'hidden'} ${router.pathname === '/register' || '/register/owner' ? 'hidden' : ''}`}>
+            <footer className={`${router.pathname === '/room/[id]' ? 'hidden' : 'block sm:hidden bg-gray-100 border py-[6px] mx-1 rounded-md'} ${router.pathname === '/login' && 'hidden'} ${router.pathname === '/register' && 'hidden'} ${router.pathname === '/register/[role]' && 'hidden'}`}>
                 <ul className='flex justify-between items-center px-6  text-2xl'>
                     <li className={`${router.pathname === '/' && 'bg-[#512d6d] text-[#eeeeee] p-1 px-2 rounded-lg shadow-md'}  flex flex-col justify-center items-center`}>
                         <AiFillHome onClick={() => router.push('/')} />

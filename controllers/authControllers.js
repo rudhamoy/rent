@@ -6,7 +6,7 @@ import crypto from 'crypto'
 import ErrorHandler from '../utils/errorHandler';
 import sendEmail from '../utils/sendEmail';
 import catchAsyncErrors from '../middlewares/catchAsyncErrors';
-
+import { generateOTP, fastTwosms } from '../utils/otp'
 
 // Setting up cloudinary config
 cloudinary.config({
@@ -16,18 +16,19 @@ cloudinary.config({
 })
 
 //Register user => /api/auth/register
-const registerUser = catchAsyncErrors(async (req, res) => {
-
-    //image upload to cloudianry and get the url
-    // const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    //     folder: "rentaloo/avatars",
-    //     width: "150",
-    //     scale: "scale"
-    // });
+const registerUser = catchAsyncErrors(async (req, res, next) => {
 
     const { name, email, mobile, password, role, avatar, broker } = req.body;
 
-    const user = await User.create({
+    //check if mobile already exist
+    const mobileExist = await User.findOne({ mobile })
+
+    if (mobileExist) {
+        next({ status: 400, message: "Phone number already exist" })
+        return
+    }
+
+    const createUser = new User({
         broker,
         name,
         email,
@@ -35,17 +36,66 @@ const registerUser = catchAsyncErrors(async (req, res) => {
         password,
         role,
         avatar,
-        // avatar: {
-        //     public_id: result.public_id,
-        //     url: result.secure_url
-        // }
     });
+
+    //save user
+    const user = await createUser.save()
 
     res.status(200).json({
         success: true,
-        message: "Account Registered Successfully"
+        message: "OTP has sent to your mobile number",
+        data: {
+            userId: user._id
+        }
     })
+
+    //gemnerate otp
+    const otp = generateOTP(6)
+
+    //save otp to user collection
+    user.mobileOtp = otp
+    await user.save()
+
+    //send otp to mobile number
+    await fastTwosms(
+        {
+            message: `Your OTP is ${otp}`,
+            contactNumber: user.mobile
+        },
+        next
+    )
 });
+
+const verifyOtp = async (req, res, next) => {
+    try {
+        const { otp, userId } = req.body
+        const user = await User.findById(userId);
+
+        if (!user) {
+            next({ status: 400, message: USER_NOT_FOUND_ERR });
+            return
+        }
+
+        if (user.mobileOtp !== otp) {
+            next({ status: 400, message: 'Incorrect OTP' })
+            return
+        }
+
+        user.mobileOtp = ''
+        await user.save()
+
+        res.status(201).json({
+            type: 'success',
+            message: 'OTP verified successfully',
+            data: {
+                userId: user._id
+            }
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
 
 //get current user => /api/me
 const currentUserProfile = catchAsyncErrors(async (req, res) => {
@@ -159,4 +209,4 @@ const resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 
 
-export { registerUser, currentUserProfile, updateProfile, forgotPassword, resetPassword }
+export { registerUser, verifyOtp, currentUserProfile, updateProfile, forgotPassword, resetPassword }

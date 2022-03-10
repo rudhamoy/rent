@@ -3,7 +3,7 @@ import validator from 'validator';
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 
-const userSchema = new mongoose.Schema({
+const otpUserSchema = new mongoose.Schema({
     broker: {
         type: String,
         default: "admin"
@@ -13,11 +13,7 @@ const userSchema = new mongoose.Schema({
         requires: [true, "Please Enter your email"],
         maxlength: [30, "Your name cannot exceed 30 characters"]
     },
-    email: {
-        type: String,
-        unique: true,
-        // validate: [validator.isEmail, "Please enter valid email address"]
-    },
+
     mobile: {
         type: Number,
         required: [true, "Please enter your mobile Number"],
@@ -35,7 +31,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        default: "user"
+        default: "owner"
     },
     createdAt: {
         type: Date,
@@ -45,8 +41,8 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpire: Date
 })
 
-//encrytping password before saving user
-userSchema.pre("save", async function (next) {
+// encrytping password before saving user
+otpUserSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
         next()
     }
@@ -54,8 +50,8 @@ userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, 10)
 })
 
-//compare user password
-userSchema.methods.comparePassword = async function (enteredPassword) {
+// compare user password
+otpUserSchema.methods.comparePassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password)
 }
 
@@ -74,5 +70,4 @@ userSchema.methods.getResetPasswordToken = function () {
     return resetToken;
 }
 
-
-export default mongoose.models.User || mongoose.model("User", userSchema)
+export default mongoose.models.OtpUser || mongoose.model("OtpUser", otpUserSchema)

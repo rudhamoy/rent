@@ -12,6 +12,7 @@
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.27.1",
     "crypto": "^1.0.1",
+    "fast-two-sms": "^3.0.0",
     "firebase": "^9.6.1",
     "framer-motion": "^6.2.8",
     "geolib": "^3.3.3",

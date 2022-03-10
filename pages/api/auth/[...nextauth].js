@@ -14,25 +14,25 @@ export default NextAuth({
             async authorize(credentials) {
                 dbConnect();
 
-                const { email, password } = credentials;
+                const { mobile, password } = credentials;
 
                 //Check if email and password is entered
-                if (!email || !password) {
-                    throw new Error("Please enter email or password")
+                if (!mobile || !password) {
+                    throw new Error("Please enter mobile or password")
                 }
 
                 //find user in database
-                const user = await User.findOne({ email }).select("+password")
+                const user = await User.findOne({ mobile }).select("+password")
 
                 if (!user) {
-                    throw new Error("Invalid email and password")
+                    throw new Error("Invalid mobile and password")
                 }
 
                 //Check if password is correct or not
                 const isPasswordMatched = await user.comparePassword(password);
 
                 if (!isPasswordMatched) {
-                    throw new Error("Invalid email and password")
+                    throw new Error("Invalid name and password")
                 }
 
                 return Promise.resolve(user)
