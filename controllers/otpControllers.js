@@ -81,4 +81,4 @@ const createOtpUser = async (req, res, next) => {
 //     }
 // }
 
-export { createOtpUser, verifyOtp }
+export { createOtpUser }
