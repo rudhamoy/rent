@@ -12,6 +12,8 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL, uploadString } f
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../../firebase.config'
 import { v4 as uuidv4 } from 'uuid'
+import absoluteUrl from 'next-absolute-url'
+
 
 const Register = ({ role }) => {
 
@@ -39,8 +41,11 @@ const Register = ({ role }) => {
 
     const { success, loading: createLoading, error } = useSelector(state => state.auth);
 
+    // const { origin } = absoluteUrl()
+    // const apiURL = `${origin}/api/auth/register`
+
     //submit form onClick
-    const submitHandler = async (e) => {
+    const submitHandler = async (e, req) => {
         e.preventDefault();
         window.scrollTo(0, 0)
         // setLoading(true)
@@ -68,8 +73,11 @@ const Register = ({ role }) => {
             broker, name, email, mobile, password, avatar: imageUrls, role
         }
 
+        const { origin } = absoluteUrl(req)
+        const apiURL = `${origin}/api/auth/register`
+
         // dispatch(registerUser(userData))
-        const data = await axios.post("https://www.rentmeroom.com/api/auth/register", userData).then(res => {
+        const data = await axios.post(apiURL, userData).then(res => {
             console.log(res)
             const { data } = res
             setUserId(data.data.userId)
@@ -82,7 +90,7 @@ const Register = ({ role }) => {
         // setLoading(false)
     }
 
-    const verfiyHandler = async (e) => {
+    const verfiyHandler = async (e, req) => {
         e.preventDefault()
 
         const userData = {
@@ -90,7 +98,9 @@ const Register = ({ role }) => {
             userId: userId
         }
 
-        const data = await axios.post("/api/auth/verify", userData).then(res => {
+        const { origin } = absoluteUrl(req)
+        const apiURL = `${origin}/api/auth/verify`
+        const data = await axios.post(apiURL, userData).then(res => {
             const data = res
             console.log(data)
             setConfirm(true)
