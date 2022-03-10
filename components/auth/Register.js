@@ -178,7 +178,7 @@ const Register = ({ role }) => {
                                         <label htmlFor="otp">Enter OTP</label>
                                         <input type="number" placeholder="Enter OTP" value={verify} onChange={e => setVerify(e.target.value)} className="p-2 rounded-md outline-none " />
                                     </div>
-                                    <button className="p-2 px-3 w-[100%] rounded-md outline-none bg-gray-600 text-gray-100">Verify</button>
+                                    <button onClick={verfiyHandler} className="p-2 px-3 w-[100%] rounded-md outline-none bg-gray-600 text-gray-100">Verify</button>
                                 </form >
                             )}
                         </>
@@ -280,7 +280,7 @@ const Register = ({ role }) => {
 
 
                             {/* button */}
-                            <button className="bg-gray-600 text-md p-2 rounded-md my-3 w-full text-gray-100">
+                            <button onClick={submitHandler} className="bg-gray-600 text-md p-2 rounded-md my-3 w-full text-gray-100">
                                 {loading ? ' Registering..' : 'REGISTER'}
                             </button>
 
