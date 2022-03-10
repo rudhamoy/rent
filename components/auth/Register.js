@@ -69,7 +69,7 @@ const Register = ({ role }) => {
         }
 
         // dispatch(registerUser(userData))
-        const data = await axios.post("/api/auth/register", userData).then(res => {
+        const data = await axios.post("https://www.rentmeroom.com/api/auth/register", userData).then(res => {
             console.log(res)
             const { data } = res
             setUserId(data.data.userId)
