@@ -16,55 +16,60 @@ cloudinary.config({
 })
 
 //Register user => /api/auth/register
-const registerUser = catchAsyncErrors(async (req, res, next) => {
+const registerUser = async (req, res, next) => {
 
-    const { name, email, mobile, password, role, avatar, broker } = req.body;
+    try {
+        const { name, email, mobile, password, role, avatar, broker } = req.body;
 
-    //check if mobile already exist
-    const mobileExist = await User.findOne({ mobile })
+        //check if mobile already exist
+        const mobileExist = await User.findOne({ mobile })
 
-    if (mobileExist) {
-        next({ status: 400, message: "Phone number already exist" })
-        return
-    }
-
-    const createUser = new User({
-        broker,
-        name,
-        email,
-        mobile,
-        password,
-        role,
-        avatar,
-    });
-
-    //save user
-    const user = await createUser.save()
-
-    res.status(200).json({
-        success: true,
-        message: "OTP has sent to your mobile number",
-        data: {
-            userId: user._id
+        if (mobileExist) {
+            next({ status: 400, message: "Phone number already exist" })
+            return
         }
-    })
 
-    //gemnerate otp
-    const otp = generateOTP(6)
+        const createUser = new User({
+            broker,
+            name,
+            email,
+            mobile,
+            password,
+            role,
+            avatar,
+        });
 
-    //save otp to user collection
-    user.mobileOtp = otp
-    await user.save()
+        //save user
+        const user = await createUser.save()
 
-    //send otp to mobile number
-    await fastTwosms(
-        {
-            message: `Your OTP is ${otp}`,
-            contactNumber: user.mobile
-        },
-        next
-    )
-});
+        res.status(200).json({
+            success: true,
+            message: "OTP has sent to your mobile number",
+            data: {
+                userId: user._id
+            }
+        })
+
+        //gemnerate otp
+        const otp = generateOTP(6)
+
+        //save otp to user collection
+        user.mobileOtp = otp
+        await user.save()
+
+        //send otp to mobile number
+        await fastTwosms(
+            {
+                message: `Your OTP is ${otp}`,
+                contactNumber: user.mobile
+            },
+            next
+        )
+    } catch (error) {
+        next(error);
+        console.log(error);
+    }
+};
 
 const verifyOtp = async (req, res, next) => {
     try {

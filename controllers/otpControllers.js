@@ -7,47 +7,51 @@ import catchAsyncErrors from '../middlewares/catchAsyncErrors';
 import { generateOTP, fastTwosms } from '../utils/otp'
 
 const createOtpUser = async (req, res, next) => {
-    const { name, mobile, password } = req.body;
+    try {
+        const { name, mobile, password } = req.body;
 
-    //check if mobile already exist
-    const mobileExist = await OtpUser.findOne({ mobile })
+        //check if mobile already exist
+        const mobileExist = await OtpUser.findOne({ mobile })
 
-    if (mobileExist) {
-        next({ status: 400, message: "Phone number already exist" })
-        return
-    }
-
-    //create user
-    const createUser = new OtpUser({
-        name, mobile, password
-    })
-
-    //save user
-    const user = await createUser.save()
-
-    res.status(200).json({
-        success: true,
-        message: "OTP has sent to your mobile number",
-        data: {
-            userId: user._id
+        if (mobileExist) {
+            next({ status: 400, message: "Phone number already exist" })
+            return
         }
-    })
 
-    //gemnerate otp
-    const otp = generateOTP(6)
+        //create user
+        const createUser = new OtpUser({
+            name, mobile, password
+        })
 
-    //save otp to user collection
-    user.mobileOtp = otp
-    await user.save()
+        //save user
+        const user = await createUser.save()
 
-    //send otp to mobile number
-    await fastTwosms(
-        {
-            message: `Your OTP is ${otp}`,
-            contactNumber: user.mobile
-        },
-        next
-    )
+        res.status(200).json({
+            success: true,
+            message: "OTP has sent to your mobile number",
+            data: {
+                userId: user._id
+            }
+        })
+
+        //gemnerate otp
+        const otp = generateOTP(6)
+
+        //save otp to user collection
+        user.mobileOtp = otp
+        await user.save()
+
+        //send otp to mobile number
+        await fastTwosms(
+            {
+                message: `Your OTP is ${otp}`,
+                contactNumber: user.mobile
+            },
+            next
+        )
+    } catch (error) {
+        next(error);
+    }
 }
 
 // const verifyOtp = async (req, res, next) => {
