@@ -70,7 +70,7 @@ const Register = ({ role }) => {
 
 
         const userData = {
-            broker, name, email, mobile: parseInt(mobile), password, avatar: imageUrls, role
+            broker, name, email, mobile: mobile, password, avatar: imageUrls, role
         }
 
         const { origin } = absoluteUrl(req)

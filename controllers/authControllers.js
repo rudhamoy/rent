@@ -73,14 +73,6 @@ cloudinary.config({
 
 //Register user => /api/auth/register
 const registerUser = catchAsyncErrors(async (req, res) => {
-
-    //image upload to cloudianry and get the url
-    // const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    //     folder: "rentaloo/avatars",
-    //     width: "150",
-    //     scale: "scale"
-    // });
-
     const { name, email, mobile, password, role, avatar } = req.body;
 
     const user = await User.create({
@@ -90,10 +82,7 @@ const registerUser = catchAsyncErrors(async (req, res) => {
         password,
         role,
         avatar,
-        // avatar: {
-        //     public_id: result.public_id,
-        //     url: result.secure_url
-        // }
+
     });
 
     res.status(200).json({

@@ -16,14 +16,14 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
-        // validate: [validator.isEmail, "Please enter valid email address"]
+        validate: [validator.isEmail, "Please enter valid email address"]
     },
     mobile: {
         type: Number,
         required: [true, "Please enter your mobile Number"],
         unique: true
     },
-    mobileOtp: String,
+    // mobileOtp: String,
     password: {
         type: String,
         required: [true, "Please enter your password"],
