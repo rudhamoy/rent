@@ -76,17 +76,17 @@ const Register = ({ role }) => {
         const { origin } = absoluteUrl(req)
         const apiURL = `${origin}/api/auth/register`
 
-        // dispatch(registerUser(userData))
-        const data = await axios.post(apiURL, userData).then(res => {
-            console.log(res)
-            const { data } = res
-            setUserId(data.data.userId)
-            console.log(data.data.userId)
-            setOtp(true)
-        }).catch(error => {
-            console.log(error);
-            // setLoading(false)
-        })
+        dispatch(registerUser(userData))
+        // const data = await axios.post(apiURL, userData).then(res => {
+        //     console.log(res)
+        //     const { data } = res
+        //     setUserId(data.data.userId)
+        //     console.log(data.data.userId)
+        //     setOtp(true)
+        // }).catch(error => {
+        //     console.log(error);
+        //     // setLoading(false)
+        // })
         // setLoading(false)
     }
 
