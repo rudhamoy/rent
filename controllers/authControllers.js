@@ -6,7 +6,7 @@ import crypto from 'crypto'
 import ErrorHandler from '../utils/errorHandler';
 import sendEmail from '../utils/sendEmail';
 import catchAsyncErrors from '../middlewares/catchAsyncErrors';
-import { generateOTP, fastTwosms } from '../utils/otp'
+
 
 // Setting up cloudinary config
 cloudinary.config({
@@ -76,8 +76,6 @@ const updateProfile = catchAsyncErrors(async (req, res) => {
         success: true,
     })
 })
-
-
 
 // Forgot password   =>   /api/password/forgot
 const forgotPassword = catchAsyncErrors(async (req, res, next) => {

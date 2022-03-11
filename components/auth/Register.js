@@ -226,6 +226,10 @@ const Register = ({ role }) => {
                         </button>
 
                     </form>
+
+                    <div className={`mb-6 px-[3%] ${pathname === `/register/[role]` ? 'hidden' : ''}`}>
+                        <Link href="/register/owner" ><a className={` underline text-[#7a0acf]`}>Click here to register as a House Owner</a></Link>
+                    </div>
                 </div>
 
             )}

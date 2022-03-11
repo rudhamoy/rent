@@ -1,5 +1,4 @@
 import axios from 'axios'
-import absoluteUrl from 'next-absolute-url';
 import {
     CLEAR_ERRORS,
     LOAD_USER_FAIL,
@@ -21,7 +20,7 @@ import {
 
 
 //Register user
-export const registerUser = (userData, req) => async (dispatch) => {
+export const registerUser = (userData) => async (dispatch) => {
     try {
 
         dispatch({
@@ -34,10 +33,7 @@ export const registerUser = (userData, req) => async (dispatch) => {
             }
         }
 
-        const { origin } = absoluteUrl(req)
-        let link = `${origin}/api/auth/register`
-
-        const { data } = await axios.post(link, userData, config);
+        const { data } = await axios.post("/api/auth/register", userData, config);
 
         dispatch({
             type: REGISTER_USER_SUCCESS,
