@@ -10,7 +10,10 @@ const RoomDetailPage = ({ room }) => {
                 <title>{room.name}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <RoomDetails room={room} />
+            {/* <RoomDetails room={room} /> */}
+            <div>
+                <h1>Single room details</h1>
+            </div>
         </>
     )
 }
