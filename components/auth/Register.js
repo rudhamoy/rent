@@ -208,7 +208,8 @@ const Register = ({ role }) => {
                                 />
                             </div>
                             {/* email */}
-                            <div className={`flex flex-col my-3 ${pathname === '/register/[role]' && 'hidden'}`}>
+                            {/* <div className={`flex flex-col my-3 ${pathname === '/register/[role]' && 'hidden'}`}> */}
+                            <div className={`flex flex-col my-3`}>
                                 <label htmlFor="email">Email</label>
                                 <input
                                     type="text"
