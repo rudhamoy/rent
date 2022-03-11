@@ -73,9 +73,10 @@ cloudinary.config({
 
 //Register user => /api/auth/register
 const registerUser = catchAsyncErrors(async (req, res) => {
-    const { name, email, mobile, password, role, avatar } = req.body;
+    const { name, email, mobile, password, role, avatar, broker } = req.body;
 
     const user = await User.create({
+        broker,
         name,
         email,
         mobile,
