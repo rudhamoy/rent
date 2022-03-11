@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        required: [true, "Please enter your email id"],
         unique: true,
         validate: [validator.isEmail, "Please enter valid email address"]
     },
@@ -23,7 +24,6 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please enter your mobile Number"],
         unique: true
     },
-    // mobileOtp: String,
     password: {
         type: String,
         required: [true, "Please enter your password"],
