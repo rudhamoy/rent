@@ -161,4 +161,4 @@ const resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 
 
-export { registerUser, verifyOtp, currentUserProfile, updateProfile, forgotPassword, resetPassword }
+export { registerUser, currentUserProfile, updateProfile, forgotPassword, resetPassword }
