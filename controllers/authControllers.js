@@ -16,60 +16,91 @@ cloudinary.config({
 })
 
 //Register user => /api/auth/register
-const registerUser = async (req, res, next) => {
+// const registerUser = async (req, res, next) => {
 
-    try {
-        const { name, email, mobile, password, role, avatar, broker } = req.body;
+//     try {
+//         const { name, email, mobile, password, role, avatar, broker } = req.body;
 
-        //check if mobile already exist
-        const mobileExist = await User.findOne({ mobile })
+//         //check if mobile already exist
+//         const mobileExist = await User.findOne({ mobile })
 
-        if (mobileExist) {
-            next({ status: 400, message: "Phone number already exist" })
-            return
-        }
+//         if (mobileExist) {
+//             next({ status: 400, message: "Phone number already exist" })
+//             return
+//         }
 
-        const createUser = new User({
-            broker,
-            name,
-            email,
-            mobile,
-            password,
-            role,
-            avatar,
-        });
+//         const createUser = new User({
+//             broker,
+//             name,
+//             email,
+//             mobile,
+//             password,
+//             role,
+//             avatar,
+//         });
 
-        //save user
-        const user = await createUser.save()
+//         //save user
+//         const user = await createUser.save()
 
-        res.status(200).json({
-            success: true,
-            message: "OTP has sent to your mobile number",
-            data: {
-                userId: user._id
-            }
-        })
+//         res.status(200).json({
+//             success: true,
+//             message: "OTP has sent to your mobile number",
+//             data: {
+//                 userId: user._id
+//             }
+//         })
 
-        //gemnerate otp
-        const otp = generateOTP(6)
+//         //gemnerate otp
+//         const otp = generateOTP(6)
 
-        //save otp to user collection
-        user.mobileOtp = otp
-        await user.save()
+//         //save otp to user collection
+//         user.mobileOtp = otp
+//         await user.save()
 
-        //send otp to mobile number
-        await fastTwosms(
-            {
-                message: `Your OTP is ${otp}`,
-                contactNumber: user.mobile
-            },
-            next
-        )
-    } catch (error) {
-        next(error);
-        console.log(error);
-    }
-};
+//         //send otp to mobile number
+//         await fastTwosms(
+//             {
+//                 message: `Your OTP is ${otp}`,
+//                 contactNumber: user.mobile
+//             },
+//             next
+//         )
+//     } catch (error) {
+//         next(error);
+//         console.log(error);
+//     }
+// };
+
+//Register user => /api/auth/register
+const registerUser = catchAsyncErrors(async (req, res) => {
+
+    //image upload to cloudianry and get the url
+    // const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    //     folder: "rentaloo/avatars",
+    //     width: "150",
+    //     scale: "scale"
+    // });
+
+    const { name, email, mobile, password, role, avatar } = req.body;
+
+    const user = await User.create({
+        name,
+        email,
+        mobile,
+        password,
+        role,
+        avatar,
+        // avatar: {
+        //     public_id: result.public_id,
+        //     url: result.secure_url
+        // }
+    });
+
+    res.status(200).json({
+        success: true,
+        message: "Account Registered Successfully"
+    })
+});
 
 const verifyOtp = async (req, res, next) => {
     try {
@@ -131,6 +162,8 @@ const updateProfile = catchAsyncErrors(async (req, res) => {
         success: true,
     })
 })
+
+
 
 // Forgot password   =>   /api/password/forgot
 const forgotPassword = catchAsyncErrors(async (req, res, next) => {
