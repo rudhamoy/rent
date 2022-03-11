@@ -16,17 +16,17 @@ const Home = ({ rooms, newRooms, featuredRoom }) => {
   const router = useRouter()
   // const { user } = useSelector(state => state.loadedUser)
 
-  async function myFunction() {
-    const session = await getSession()
-    console.log(session)
-    if (!session) {
-      router.push('/landing')
-    }
-  }
+  // async function myFunction() {
+  //   const session = await getSession()
+  //   console.log(session)
+  //   if (!session) {
+  //     router.push('/landing')
+  //   }
+  // }
 
-  useEffect(() => {
-    myFunction()
-  }, [])
+  // useEffect(() => {
+  //   myFunction()
+  // }, [])
 
 
 
