@@ -52,27 +52,27 @@ const Home = ({ rooms, newRooms, featuredRoom }) => {
 //   await store.dispatch(getRooms(req))
 // })
 
-// export async function getStaticProps() {
-//   const res = await fetch('https://rentmeroom.com/api/rooms?min=1000&max=30000')
-//   const { rooms } = await res.json()
+export async function getStaticProps() {
+  const res = await fetch('https://rentmeroom.com/api/rooms?min=1000&max=30000')
+  const { rooms } = await res.json()
 
-//   //fetch new Room list
-//   const newRoomRes = await fetch(`https://www.rentmeroom.com/api/rooms/featured`)
-//   const newRoom = await newRoomRes.json()
+  //fetch new Room list
+  const newRoomRes = await fetch(`https://www.rentmeroom.com/api/rooms/featured`)
+  const newRoom = await newRoomRes.json()
 
-//   //featured room list
-//   const featuredRoomres = await fetch('https://rentmeroom.com/api/rooms?min=1000&max=30000&featured=true')
-//   const featuredRoom = await featuredRoomres.json()
+  //featured room list
+  const featuredRoomres = await fetch('https://rentmeroom.com/api/rooms?min=1000&max=30000&featured=true')
+  const featuredRoom = await featuredRoomres.json()
 
-//   return {
-//     props: {
-//       rooms,
-//       newRooms: newRoom.rooms,
-//       featuredRoom: featuredRoom.rooms
-//     },
-//     revalidate: 2, // In seconds
-//   }
-// }
+  return {
+    props: {
+      rooms,
+      newRooms: newRoom.rooms,
+      featuredRoom: featuredRoom.rooms
+    },
+    revalidate: 2, // In seconds
+  }
+}
 
 
 

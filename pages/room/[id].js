@@ -7,13 +7,11 @@ const RoomDetailPage = ({ room }) => {
     return (
         <>
             <Head>
-                {/* <title>{room.name}</title> */}
+                <title>{room.name}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            {/* <RoomDetails room={room} /> */}
-            <div>
-                <h1>Single room details</h1>
-            </div>
+            <RoomDetails room={room} />
+
         </>
     )
 }
@@ -22,26 +20,26 @@ const RoomDetailPage = ({ room }) => {
 //     await store.dispatch(getRoomDetails(req, params.id))
 // })
 
-// export async function getStaticPaths() {
-//     const res = await fetch('https://rentmeroom.com/api/rooms')
-//     const { rooms } = await res.json()
+export async function getStaticPaths() {
+    const res = await fetch('https://rentmeroom.com/api/rooms')
+    const { rooms } = await res.json()
 
-//     const paths = rooms.map((room) => ({
-//         params: { id: room._id },
-//     }))
+    const paths = rooms.map((room) => ({
+        params: { id: room._id },
+    }))
 
-//     return { paths, fallback: 'blocking' }
-// }
+    return { paths, fallback: 'blocking' }
+}
 
 
-// export async function getStaticProps({ params }) {
-//     const res = await fetch(`https://rentmeroom.com/api/rooms/${params.id}`)
-//     const { room } = await res.json()
+export async function getStaticProps({ params }) {
+    const res = await fetch(`https://rentmeroom.com/api/rooms/${params.id}`)
+    const { room } = await res.json()
 
-//     return {
-//         props: { room },
-//         revalidate: 1,
-//     }
-// }
+    return {
+        props: { room },
+        revalidate: 1,
+    }
+}
 
 export default RoomDetailPage;
