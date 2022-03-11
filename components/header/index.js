@@ -85,14 +85,14 @@ const Header = () => {
 
             {/** profile */}
             <div className="relative">
-                <div className={`${classes.burger_conatainer} ml-[30vw] sm:ml-12 sm:m-0`}>
+                <div className={`${classes.burger_conatainer} ml-[24vw] sm:ml-12 sm:m-0`}>
                     <div className={`${classes.header__profile} bg-gray-100 px-[12px;] text-[16px]`}>
                         {showModal === true ? (<CgClose onClick={closeMenu} className="font-bold cursor-pointer hover:text-[blueviolet]" />) : (
                             <GiHamburgerMenu onClick={openMenu} className="cursor-pointer hover:text-[blueviolet]" />
                         )}
 
                         {user ? (
-                            <img src={user?.avatar} alt="user" className="w-[32px] h-[32px] rounded-full" />
+                            <img src={!user?.avatar ? '/images/default_avatar.jpg' : user?.avatar} alt="user" className="w-[32px] h-[32px] rounded-full" />
                         ) : (
 
                             <CgProfile className="text-3xl cursor-pointer hover:text-[blueviolet]" />

@@ -5,7 +5,7 @@ import { signIn } from 'next-auth/client'
 import { toast } from 'react-toastify';
 
 const Login = () => {
-    const [email, setEmail] = useState("");
+    const [mobile, setMobile] = useState();
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false)
 
@@ -15,7 +15,7 @@ const Login = () => {
 
         const result = await signIn("credentials", {
             redirect: false,
-            email,
+            mobile,
             password
         });
 
@@ -41,8 +41,8 @@ const Login = () => {
                     <form onSubmit={submitHandler} className="p-4">
 
                         <div className="flex flex-col my-4">
-                            <label htmlFor="email_field">Email</label>
-                            <input type="email" id="email_field" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-300 py-3 px-2 rounded-md outline-none" />
+                            <label htmlFor="mobile_field">Mobile</label>
+                            <input type="number" id="mobile_field" value={mobile} onChange={e => setMobile(e.target.value)} className="bg-gray-300 py-3 px-2 rounded-md outline-none" />
                         </div >
                         <div className="flex flex-col my-4">
                             <label htmlFor="password_field">Password</label>
