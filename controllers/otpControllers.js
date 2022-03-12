@@ -19,12 +19,19 @@ const createOtpUser = async (req, res, next) => {
         }
 
         //create user
-        const createUser = new OtpUser({
-            name, mobile, password
-        })
+        // const createUser = new OtpUser({
+        //     name, mobile, password
+        // })
+
+        const user = await OtpUser.create({
+            name,
+            mobile,
+            password,
+
+        });
 
         //save user
-        const user = await createUser.save()
+        // const user = await createUser.save()
 
         res.status(200).json({
             success: true,
@@ -54,35 +61,36 @@ const createOtpUser = async (req, res, next) => {
     }
 }
 
-// const verifyOtp = async (req, res, next) => {
-//     try {
-//         const { otp, userId } = req.body
-//         const user = await OtpUser.findById(userId);
+const verifyOtp = catchAsyncErrors(async (req, res, next) => {
+    try {
+        const { otp, userId } = req.body
+        const user = await OtpUser.findById(userId);
 
-//         if (!user) {
-//             next({ status: 400, message: USER_NOT_FOUND_ERR });
-//             return
-//         }
+        if (!user) {
+            next({ status: 400, message: 'User not found' });
+            return
+        }
 
-//         if (user.mobileOtp !== otp) {
-//             next({ status: 400, message: 'Incorrect OTP' })
-//             return
-//         }
+        if (user.mobileOtp !== otp) {
+            next({ status: 400, message: 'Incorrect OTP' })
+            return
+        }
 
-//         user.mobileOtp = ''
-//         await user.save()
+        user.mobileOtp = ""
+        await user.save()
 
-//         res.status(201).json({
-//             type: 'success',
-//             message: 'OTP verified successfully',
-//             data: {
-//                 userId: user._id
-//             }
-//         })
+        res.status(201).json({
+            type: 'success',
+            message: 'OTP verified successfully',
+            data: {
+                userId: user._id
+            }
+        })
 
-//     } catch (error) {
-//         next(error)
-//     }
-// }
+    } catch (error) {
+        // next(error)
+        console.log(error)
+    }
+})
 
-export { createOtpUser }
+export { createOtpUser, verifyOtp }
