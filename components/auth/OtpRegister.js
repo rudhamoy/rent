@@ -28,7 +28,8 @@ const OtpRegister = () => {
             const { data } = res
             setUserId(data.data.userId)
             console.log(data.data.userId)
-            setOtp(true)
+            // setOtp(true)
+            router.push('/login')
         })
 
         console.log(data)

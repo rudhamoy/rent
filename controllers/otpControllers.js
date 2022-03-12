@@ -41,21 +41,21 @@ const createOtpUser = async (req, res, next) => {
             }
         })
 
-        //gemnerate otp
-        const otp = generateOTP(6)
+        // //gemnerate otp
+        // const otp = generateOTP(6)
 
-        //save otp to user collection
-        user.mobileOtp = otp
-        await user.save()
+        // //save otp to user collection
+        // user.mobileOtp = otp
+        // await user.save()
 
-        //send otp to mobile number
-        await fastTwosms(
-            {
-                message: `Your OTP is ${otp}`,
-                contactNumber: user.mobile
-            },
-            next
-        )
+        // //send otp to mobile number
+        // await fastTwosms(
+        //     {
+        //         message: `Your OTP is ${otp}`,
+        //         contactNumber: user.mobile
+        //     },
+        //     next
+        // )
     } catch (error) {
         next(error);
     }
