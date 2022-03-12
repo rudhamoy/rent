@@ -18,7 +18,7 @@ const OtpRegister = () => {
             password
         }
 
-        const data = await axios.post("/api/trialuser", userData).then(res => {
+        const data = await axios.post("https://www.rentmeroom.com/api/trialuser", userData).then(res => {
             console.log(res)
 
             router.push('/login')
