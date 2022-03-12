@@ -14,6 +14,7 @@ const trialUserSchema = new mongoose.Schema({
         required: [true, "Please enter your mobile Number"],
         unique: true
     },
+    phoneOtp: String,
     password: {
         type: String,
         required: [true, "Please enter your password"],
