@@ -1,4 +1,5 @@
 import OtpUser from '../models/otpuser'
+import TrialUser from '../models/trialuser'
 import absoluteUrl from 'next-absolute-url'
 import crypto from 'crypto'
 
@@ -93,4 +94,21 @@ const verifyOtp = catchAsyncErrors(async (req, res, next) => {
     }
 })
 
-export { createOtpUser, verifyOtp }
+
+const registerTrialUser = catchAsyncErrors(async (req, res) => {
+
+    const { name, mobile, password } = req.body;
+
+    const user = await TrialUser.create({
+        name,
+        mobile,
+        password,
+    });
+
+    res.status(200).json({
+        success: true,
+        message: "Account Registered Successfully"
+    })
+});
+
+export { createOtpUser, verifyOtp, registerTrialUser }

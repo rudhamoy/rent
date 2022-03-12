@@ -26,8 +26,8 @@ const OtpRegister = () => {
         const data = await axios.post("/api/auth/otpuser", userData).then(res => {
             console.log(res)
             const { data } = res
-            setUserId(data.data.userId)
-            console.log(data.data.userId)
+            // setUserId(data.data.userId)
+            // console.log(data.data.userId)
             // setOtp(true)
             router.push('/login')
         })
