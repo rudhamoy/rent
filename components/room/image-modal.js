@@ -4,13 +4,6 @@ import OutsideClickHandler from 'react-outside-click-handler';
 import { RiCloseCircleLine } from 'react-icons/ri'
 
 
-
-// const ImageContainer = ({ i, index }) => {
-//     return (
-//         <img src={i} key={index} alt="image" className={`${classes.child} w-[95%]`} />
-//     )
-// }
-
 const ImageModal = ({ image, closeMenu }) => {
     // const [indexNum, setIndexNum] = useState(1)
     const length = image.length

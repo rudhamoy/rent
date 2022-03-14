@@ -15,7 +15,9 @@ const SearchPage = () => {
     )
 }
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res, query }) => {
+
+    res.setHeader('Cache-Control', 's-maxage=5, stale-while-revalidate')
     await store.dispatch(getRooms(req, query.page, query.location, query.roomCategory, query.tenants, query.min, query.max, query.bathroomType, query.electricBil, query.petsFriendly, query.parking, query.waterSupply, query.furnish, query.featured))
 })
 
