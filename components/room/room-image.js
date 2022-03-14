@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { GoChevronRight, GoChevronLeft } from 'react-icons/go'
 
-const RoomImageContianer = ({ image }) => {
+const RoomImageContianer = ({ image, clickToView }) => {
     const featuredImage = image[0]
     const [preview, setPreview] = useState(featuredImage);
     const [starting, setStarting] = useState(0)
@@ -38,23 +38,26 @@ const RoomImageContianer = ({ image }) => {
             {/** featured image */}
             <div className="w-[100%] rounded-md ">
                 {/* <img src={preview} alt="" className="w-full h-[240px] object-cover rounded-lg" /> */}
-                <Image src={preview} height={240} width={400} className="rounded-md"></Image>
+                <Image onClick={clickToView} src={preview} height={240} width={400} className="rounded-md"></Image>
             </div>
             {/** gallery images */}
             <div className="flex justify-between gap-x-1 my-1 relative ">
                 {image?.slice(starting, ending).map((i, index) => (
                     // <img key={index} onClick={() => selectImageHandler(i)} src={i} alt="" className="w-[31.5%] h-[80px] cursor-pointer rounded-md" />
-                    <Image key={index} onClick={() => selectImageHandler(i)} src={i} height={80} width={125} className="rounded-md"></Image>
+                    <>
+                        <Image key={index} onClick={() => selectImageHandler(i)} src={i} height={80} width={125} className="rounded-md"></Image>
+                    </>
                 ))}
 
-                <div className="absolute flex justify-between items-center w-full text-xl top-[45%] ">
+                {/* <div className="absolute flex justify-between items-center w-full text-xl top-[45%] ">
                     <div className="bg-white w-5 h-5 flex justify-center items-center rounded-full cursor-pointer">
                         <GoChevronLeft onClick={prevImageHandler} />
                     </div>
                     <div className="bg-white w-5 h-5 flex justify-center items-center rounded-full cursor-pointer">
                         <GoChevronRight onClick={nextImageHandler} />
                     </div>
-                </div>
+                </div> */}
+                <button onClick={clickToView} className="absolute top-[18%] bg-[#0000003b] right-3 w-[80px] text-white">view all {imageLength} images</button>
             </div>
         </div>
     )

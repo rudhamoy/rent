@@ -1,0 +1,20 @@
+.image__list {
+  overflow-x: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.image__list::-webkit-scrollbar {
+  display: none;
+}
+
+.container {
+  scroll-snap-type: x mandatory;
+  scroll-snap-stop: always;
+  overflow-y: scroll;
+  
+}
+
+.child {
+  scroll-snap-align: start;
+}

@@ -11,10 +11,12 @@ import { BsBookmark } from 'react-icons/bs'
 import RoomOverview from './room-overview';
 import FullDetails from './room-fullDetails';
 import SingleRoomMap from './single-roomMap'
+import ImageModal from './image-modal'
 
 const RoomDetails = ({ room }) => {
     const [overview, setOverview] = useState(true)
     const [details, setDetails] = useState(false)
+    const [clickView, setClickView] = useState(false)
 
     const dispatch = useDispatch()
     // const { room, error } = useSelector(state => state.roomDetails)
@@ -56,8 +58,25 @@ const RoomDetails = ({ room }) => {
         }
     }
 
+    const clickToView = () => {
+        console.log('Click to view')
+        setClickView(true)
+    }
+
+    const closeMenu = () => {
+        setClickView(false)
+    }
+
     return (
         <div className=" sm:px-32 pt-20 sm:py-32 relative">
+            {/* Image modal when click on the image */}
+            {
+                clickView === true && (
+                    <div className="absolute top-0 bottom-0 left-0 right-0 bg-[#000000cc] z-50 flex justify-center py-[20%]">
+                        <ImageModal image={room.images} closeMenu={closeMenu} />
+                    </div>
+                )
+            }
             {/* for pc */}
             <div className=" hidden">
                 <h1 className="text-2xl sm:text-3xl font-semibold uppercase">{room.name} </h1>
@@ -67,7 +86,7 @@ const RoomDetails = ({ room }) => {
 
                 {/** Left room details */}
                 <div className="w-[100%]">
-                    <RoomImageContianer image={room.images} />
+                    <RoomImageContianer clickToView={clickToView} image={room.images} />
                 </div>
                 {/* for mobile  -- title and location */}
                 <div className="px-[3%] my-2">
