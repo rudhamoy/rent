@@ -5,11 +5,11 @@ import { RiCloseCircleLine } from 'react-icons/ri'
 
 
 
-const ImageContainer = ({ i, index }) => {
-    return (
-        <img src={i} key={index} alt="image" className={`${classes.child} w-[95%]`} />
-    )
-}
+// const ImageContainer = ({ i, index }) => {
+//     return (
+//         <img src={i} key={index} alt="image" className={`${classes.child} w-[95%]`} />
+//     )
+// }
 
 const ImageModal = ({ image, closeMenu }) => {
     // const [indexNum, setIndexNum] = useState(1)
@@ -24,7 +24,7 @@ const ImageModal = ({ image, closeMenu }) => {
                 <div className={`flex gap-x-1  overflow-x-scroll ${classes.container}`}>
                     {image.map((i, index) => {
                         return (
-                            <ImageContainer i={i} index={index} />
+                            <img src={i} key={index} alt="image" className={`${classes.child} w-[95%]`} />
                         )
                     })}
                 </div >
